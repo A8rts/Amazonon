@@ -1,0 +1,181 @@
+.login-main {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.login {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+}
+
+.login-from {
+  width: 33%;
+  float: right;
+  background-color: #fea004;
+  border-radius: 10px;
+  border: black solid 4px;
+}
+
+.login-txt {
+  font-family: Lalezar Regular;
+  font-size: 3.1rem;
+  display: block;
+}
+
+.login-icon {
+  width: 10rem;
+  height: 10rem;
+}
+
+.phone-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.phone-txt-login {
+  font-family: Vazirmatn;
+  font-size: 1.2rem;
+  margin: 0rem 1rem 0rem 1rem;
+}
+
+.phone-number-input {
+  border-radius: 10px;
+  border: none;
+  background-color: #ffc312;
+  border: #fff200 solid 3px;
+  padding: 0.5rem 1.3rem 0.5rem 1.3rem;
+}
+
+.phone-number-input:focus {
+  outline: none !important;
+  border: #fff200 dashed 3px;
+}
+
+.register-btn {
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: #ff3838;
+  color: white;
+  font-family: Vazirmatn;
+  font-size: 1rem;
+  width: 8rem;
+  border: #bb2020 solid 3px;
+}
+
+.login-btn {
+  margin: 1rem;
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: #009432;
+  color: white;
+  font-family: Vazirmatn;
+  font-size: 1rem;
+  width: 8rem;
+  border: #016b25 solid 3px;
+}
+
+.register-btn:hover {
+  border: #bb2020 dashed 3px;
+}
+
+.login-btn:hover {
+  border: #016b25 dashed 3px;
+}
+
+@media screen and (max-width: 1669px) {
+  .login-from {
+    width: 38%;
+  }
+}
+
+@media screen and (max-width: 1555px) {
+  .login-from {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .login-from {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 1110px) {
+  .login-from {
+    width: 55%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .login-from {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .login-icon {
+    width: 9rem;
+    height: 9rem;
+  }
+
+  .login-txt {
+    font-size: 2.6rem;
+  }
+
+  .phone-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .phone-txt-login {
+    font-size: 1rem;
+  }
+
+  .phone-number-input {
+    padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+  }
+
+  .register-btn {
+    padding: 0.6rem 0rem 0.6rem 0rem;
+    font-size: 0.9rem;
+    width: 8rem;
+  }
+
+  .login-btn {
+    margin: 1rem;
+    padding: 0.6rem 0rem 0.6rem 0rem;
+    font-size: 0.9rem;
+    width: 8rem;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .login-from {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 369px) {
+  .login-from {
+    width: 99%;
+  }
+
+  .phone-txt-login {
+    font-size: 0.9rem;
+  }
+
+  .phone-number-input {
+    padding: 0rem 0rem 0rem 0rem;
+    width: 60%;
+    margin-left: 0.5rem;
+  }
+
+  .register-btn {
+    margin-bottom: 1rem;
+  }
+}

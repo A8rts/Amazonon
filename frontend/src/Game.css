@@ -1,0 +1,6 @@
+@font-face {
+  font-family: "Lalezar Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Lalezar Regular"), url("Lalezar-Regular.woff") format("woff");
+}

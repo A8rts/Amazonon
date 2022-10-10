@@ -1,0 +1,258 @@
+.register-main {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.register {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+}
+
+.register-from {
+  width: 33%;
+  float: right;
+  background-color: #fea004;
+  border-radius: 10px;
+  border: black solid 4px;
+}
+
+.register-txt {
+  font-family: Lalezar Regular;
+  font-size: 3.1rem;
+  display: block;
+}
+
+.register-icon {
+  width: 12rem;
+  height: 12rem;
+}
+
+.user-info-register {
+  margin: auto;
+}
+
+.phone-register {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.phone-txt-register {
+  font-family: Vazirmatn;
+  font-size: 1.2rem;
+  margin: 0rem 1rem 0rem 1rem;
+}
+
+.phone-number-input {
+  border-radius: 10px;
+  border: none;
+  background-color: #ffc312;
+  border: #fff200 solid 3px;
+  padding: 0.5rem 1.3rem 0.5rem 1.3rem;
+}
+
+.phone-number-input:focus {
+  outline: none !important;
+  border: #fff200 dashed 3px;
+}
+
+.name-txt-register {
+  font-family: Vazirmatn;
+  font-size: 1.2rem;
+  margin: 0rem 1rem 0rem 1rem;
+}
+
+.name-input {
+  border-radius: 10px;
+  border: none;
+  background-color: #ffc312;
+  border: #fff200 solid 3px;
+  padding: 0.5rem 1.3rem 0.5rem 1.3rem;
+}
+
+.name-input:focus {
+  outline: none !important;
+  border: #fff200 dashed 3px;
+}
+
+.user-gender {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  margin: auto;
+  background-color: #ffc312;
+  border: #fff200 solid 3px;
+  width: 18rem;
+  border-radius: 10px;
+  display: flex;
+}
+
+.register-btn {
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 1rem;
+  color: white;
+  font-family: Vazirmatn;
+  font-size: 1rem;
+  width: 8rem;
+  background-color: #009432;
+  border: #016b25 solid 3px;
+}
+
+.login-btn {
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: #ff3838;
+  border: #bb2020 solid 3px;
+  color: white;
+  font-family: Vazirmatn;
+  font-size: 1rem;
+  width: 8rem;
+}
+
+.register-btn:hover {
+  border: #016b25 dashed 3px;
+}
+
+.login-btn:hover {
+  border: #bb2020 dashed 3px;
+}
+
+.user-gender label {
+  font-family: Vazirmatn;
+}
+
+.man-gender {
+  margin: 0.4rem 0rem 0.4rem 4rem;
+}
+
+.gender-input {
+  margin: 0.3rem;
+}
+
+@media screen and (max-width: 1669px) {
+  .register-from {
+    width: 38%;
+  }
+}
+
+@media screen and (max-width: 1555px) {
+  .register-from {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .register-from {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 1110px) {
+  .register-from {
+    width: 55%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .register-from {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .register-icon {
+    width: 9rem;
+    height: 9rem;
+  }
+
+  .register-txt {
+    font-size: 2.6rem;
+  }
+
+  .phone-register {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .phone-txt-register {
+    font-size: 1rem;
+  }
+
+  .phone-number-input {
+    padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+  }
+
+  .name-txt-register {
+    font-size: 1rem;
+  }
+
+  .name-input {
+    padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+  }
+
+  .register-btn {
+    padding: 0.6rem 0rem 0.6rem 0rem;
+    font-size: 0.9rem;
+    width: 8rem;
+  }
+
+  .login-btn {
+    margin: 1rem;
+    padding: 0.6rem 0rem 0.6rem 0rem;
+    font-size: 0.9rem;
+    width: 8rem;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .register-from {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 369px) {
+  .register-from {
+    width: 99%;
+  }
+
+  .phone-txt-register {
+    font-size: 0.9rem;
+  }
+
+  .phone-number-input {
+    padding: 0rem 0rem 0rem 0rem;
+    width: 60%;
+    margin-left: 0.5rem;
+  }
+
+  .name-txt-register {
+    font-size: 0.9rem;
+  }
+
+  .name-input {
+    padding: 0rem 0rem 0rem 0rem;
+    width: 60%;
+    margin-left: 0.5rem;
+  }
+
+  .register-btn {
+    margin-bottom: 0rem;
+  }
+
+  .user-gender {
+    width: 85%;
+  }
+
+  .man-gender {
+    margin: 0rem 0rem 0rem 4rem;
+  }
+
+  .gender-input {
+    margin: 0.3rem;
+  }
+}

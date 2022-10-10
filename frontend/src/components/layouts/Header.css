@@ -1,0 +1,31 @@
+.header {
+  background-color: #232523;
+  color: white;
+}
+
+.not-authenticated-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+}
+
+.not-authenticated-header p {
+  font-size: 1.9rem;
+  font-family: Lalezar Regular;
+  padding: 0rem;
+  margin: 0rem;
+}
+
+@media screen and (max-width: 700px) {
+  .not-authenticated-header p {
+    font-size: 1.6rem;
+  }
+}
+
+@media screen and (max-width: 306px) {
+    .not-authenticated-header p {
+      font-size: 1.4rem;
+    }
+  }
+  
