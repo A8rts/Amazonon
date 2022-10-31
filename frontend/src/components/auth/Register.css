@@ -133,6 +133,11 @@
   margin: 0.3rem;
 }
 
+.name-error {
+  color: #ee3434;
+  font-family: Vazirmatn;
+}
+
 @media screen and (max-width: 1669px) {
   .register-from {
     width: 38%;
@@ -210,6 +215,10 @@
 }
 
 @media screen and (max-width: 544px) {
+  .name-error {
+    font-size: 0.9rem;
+  }
+
   .register-from {
     width: 90%;
   }
