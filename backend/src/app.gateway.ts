@@ -3,7 +3,7 @@ import {
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
-import { VerificationCodeService } from './verification_code/verification_code.service';
+import { VerificationCodeService } from './authentication/verification_code/verification_code.service';
 
 @WebSocketGateway(8001, { cors: '*' })
 export class AppGateway {

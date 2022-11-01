@@ -3,11 +3,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AppGateway } from './app.gateway';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersModule } from './users/users.module';
-import { VerificationCodeModule } from './verification_code/verification_code.module';
-import { User } from './users/users.entity';
-import { VerificationCode } from './verification_code/verification_code.entity';
-import { AuthModule } from './auth/auth.module';
+import { VerificationCodeModule } from './authentication/verification_code/verification_code.module';
+import { VerificationCode } from './authentication/verification_code/verification_code.entity';
+import { User } from './authentication/users/users.entity';
+import { UsersModule } from './authentication/users/users.module';
+import { AuthModule } from './authentication/auth/auth.module';
 
 @Module({
   imports: [
