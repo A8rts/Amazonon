@@ -54,6 +54,18 @@ function Login() {
       })
       .then((res) => {
         setUserData(res.data); // userData on useState is just for VerifyCode Component!
+      })
+      .catch(() => {
+        MySwal.fire({
+          title: <strong style={{ fontFamily: "Vazirmatn" }}>خطا</strong>,
+          html: (
+            <p style={{ fontFamily: "Vazirmatn" }}>
+              یک مشکلی به وجود امده است! دوباره تلاش کنید
+            </p>
+          ),
+          icon: "error",
+          confirmButtonText: "باشه",
+        });
       });
     setCodeSended(true);
   }

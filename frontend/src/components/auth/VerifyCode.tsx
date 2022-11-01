@@ -3,6 +3,7 @@ import "./VerifyCode.css";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import axios from "axios";
+const MySwal = withReactContent(Swal);
 
 function VerifyCode({ userData }: { userData: any }) {
   const [verifyCode, setVerifyCode] = useState("");
@@ -16,47 +17,70 @@ function VerifyCode({ userData }: { userData: any }) {
     const diff = now_date.getTime() - code_date.getTime();
 
     if (verifyCode == userData.code && diff < 30000) {
-      axios
-        .post("http://localhost:3001/users/create", {
-          userData: userData,
-        })
-        .then((res) => {
-          if (res.data) {
-            const MySwal = withReactContent(Swal);
-
-            MySwal.fire({
-              title: (
-                <strong style={{ fontFamily: "Vazirmatn" }}>ثبت شد!</strong>
-              ),
-              html: (
-                <p style={{ fontFamily: "Vazirmatn" }}>
-                  شما با موفقیت ثبت نام کردید
-                </p>
-              ),
-              icon: "success",
-              confirmButtonText: "برو به بازی",
-            }).then(() => {
-              axios
-                .post(
-                  "http://localhost:3001/login",
-                  {
-                    username: "arta",
-                    phonenumber: "09011929717",
-                  },
-                  { withCredentials: true }
-                )
-                .then((res) => {
-                  window.location.href = "http://localhost:3000/main";
-                });
-            });
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      createUser();
     } else {
       setError("کد اشتباه است یا زمان آن تمام شده است");
     }
+  }
+
+  function createUser() {
+    axios
+      .post("http://localhost:3001/users/create", {
+        userData: userData,
+      })
+      .then((res) => {
+        if (res.data) {
+          MySwal.fire({
+            title: <strong style={{ fontFamily: "Vazirmatn" }}>ثبت شد!</strong>,
+            html: (
+              <p style={{ fontFamily: "Vazirmatn" }}>
+                شما با موفقیت ثبت نام کردید
+              </p>
+            ),
+            icon: "success",
+            confirmButtonText: "برو به بازی",
+          }).then(() => {
+            axios
+              .post(
+                "http://localhost:3001/login",
+                {
+                  username: userData.username,
+                  phonenumber: userData.phonenumber,
+                },
+                { withCredentials: true }
+              )
+              .then((res) => {
+                window.location.href = "http://localhost:3000/main";
+              })
+              .catch((err) => {
+                MySwal.fire({
+                  title: (
+                    <strong style={{ fontFamily: "Vazirmatn" }}>خطا</strong>
+                  ),
+                  html: (
+                    <p style={{ fontFamily: "Vazirmatn" }}>
+                      یک مشکلی به وجود امده است! دوباره تلاش کنید
+                    </p>
+                  ),
+                  icon: "error",
+                  confirmButtonText: "باشه",
+                });
+              });
+          });
+        }
+      })
+      .catch((err) => {
+        MySwal.fire({
+          title: <strong style={{ fontFamily: "Vazirmatn" }}>خطا</strong>,
+          html: (
+            <p style={{ fontFamily: "Vazirmatn" }}>
+              یک مشکلی به وجود امده است! دوباره تلاش کنید
+            </p>
+          ),
+          icon: "error",
+          confirmButtonText: "باشه",
+        });
+      });
   }
 
   return (

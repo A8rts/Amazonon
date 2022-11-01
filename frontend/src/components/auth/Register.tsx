@@ -2,14 +2,17 @@ import "./Register.css";
 import "animate.css";
 import { useState } from "react";
 import VerifyCode from "./VerifyCode";
+import withReactContent from "sweetalert2-react-content";
 import axios from "axios";
+import Swal from "sweetalert2";
+const MySwal = withReactContent(Swal);
 
 function Register() {
   const [error, setError] = useState("");
   const [codeSended, setCodeSended] = useState(false);
   const [userData, setUserData] = useState<any>([]);
 
-  function sendUserData(e: any) {
+  function registerUser(e: any) {
     e.preventDefault();
 
     const username = e.target.username.value;
@@ -40,11 +43,34 @@ function Register() {
             })
             .then((res) => {
               setUserData(res.data);
+            })
+            .catch(() => {
+              MySwal.fire({
+                title: <strong style={{ fontFamily: "Vazirmatn" }}>خطا</strong>,
+                html: (
+                  <p style={{ fontFamily: "Vazirmatn" }}>
+                    یک مشکلی به وجود امده است! دوباره تلاش کنید
+                  </p>
+                ),
+                icon: "error",
+                confirmButtonText: "باشه",
+              });
             });
           setCodeSended(true);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        MySwal.fire({
+          title: <strong style={{ fontFamily: "Vazirmatn" }}>خطا</strong>,
+          html: (
+            <p style={{ fontFamily: "Vazirmatn" }}>
+              یک مشکلی به وجود امده است! دوباره تلاش کنید
+            </p>
+          ),
+          icon: "error",
+          confirmButtonText: "باشه",
+        });
+      });
   }
 
   return (
@@ -57,7 +83,7 @@ function Register() {
         {codeSended ? (
           <VerifyCode userData={userData} />
         ) : (
-          <form onSubmit={(e) => sendUserData(e)}>
+          <form onSubmit={(e) => registerUser(e)}>
             <div className="register">
               <div className="register-from mt-3">
                 <p className="register-txt">فرم ثبت نام</p>
