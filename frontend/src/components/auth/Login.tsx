@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../layouts/Header";
 import "./Login.css";
 import Register from "./Register";
@@ -13,6 +13,33 @@ function Login() {
   const [register, setRegister] = useState(false);
   const [codeSended, setCodeSended] = useState(false);
   const [userData, setUserData] = useState<any>([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/authorization", { withCredentials: true })
+      .then(() => {
+        MySwal.fire({
+          title: (
+            <strong style={{ fontFamily: "Vazirmatn" }}>
+              شما وارد شده اید!
+            </strong>
+          ),
+          html: (
+            <p style={{ fontFamily: "Vazirmatn" }}>
+              نیازی به ورود نیست شما قبلا وارد شده اید!
+            </p>
+          ),
+          icon: "success",
+          confirmButtonText: "برو به خانه",
+          footer: (
+            <p style={{ fontFamily: "Vazirmatn", textAlign: "center" }}>
+              اگر میخواهید اکانت خود را تغییر دهید به خانه بروید و روی (خروج)
+              بزنید
+            </p>
+          ),
+        }).then(() => (window.location.href = "/home"));
+      });
+  });
 
   function loginUser(e: any) {
     e.preventDefault();

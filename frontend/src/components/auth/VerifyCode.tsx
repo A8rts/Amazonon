@@ -34,7 +34,7 @@ function VerifyCode({ userData }: { userData: any }) {
             title: <strong style={{ fontFamily: "Vazirmatn" }}>ثبت شد!</strong>,
             html: (
               <p style={{ fontFamily: "Vazirmatn" }}>
-                شما با موفقیت ثبت نام کردید
+                حالا شما رو میشناسیم :)
               </p>
             ),
             icon: "success",
@@ -50,7 +50,7 @@ function VerifyCode({ userData }: { userData: any }) {
                 { withCredentials: true }
               )
               .then((res) => {
-                window.location.href = "http://localhost:3000/main";
+                window.location.href = "http://localhost:3000/home";
               })
               .catch((err) => {
                 MySwal.fire({

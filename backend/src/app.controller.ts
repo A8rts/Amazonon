@@ -1,5 +1,6 @@
-import { Controller, Get, Post, Res, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Req, UseGuards , Res , Next } from '@nestjs/common';
 import { AppService } from './app.service';
+import { AuthenticatedGuard } from './authentication/guards/authenticated.guard';
 import { LoginGuard } from './authentication/guards/login.guard';
 
 @Controller()
@@ -15,5 +16,21 @@ export class AppController {
   @Post('/login')
   login(@Req() req) {
     return req.body;
+  }
+
+  @UseGuards(AuthenticatedGuard)
+  @Get('/authorization') // for know user authicated or no
+  authorization(@Req() req) {
+    return req.user;
+  }
+
+  @Post('/logout')
+  logOut(@Req() req, @Res() res, @Next() next) {
+    req.logout(function (err) {
+      if (err) {
+        return next(err);
+      }
+      res.redirect('/');
+    });
   }
 }

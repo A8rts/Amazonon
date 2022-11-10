@@ -12,6 +12,7 @@
     "@socket.io/cluster-adapter": "^0.2.1",
     "animate.css": "^4.1.1",
     "axios": "^1.1.3",
+    "hover.css": "^2.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.2",
