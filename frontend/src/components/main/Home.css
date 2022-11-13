@@ -1,0 +1,253 @@
+.parent-home-content:after {
+  display: table;
+  clear: both;
+}
+
+.main-box {
+  width: 99%;
+  height: 99%;
+}
+
+.home-icon {
+  float: left;
+  margin: 5rem 7rem 5rem 7rem;
+  width: 35%;
+}
+
+.room-box {
+  background-color: #feac01;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 3px solid black;
+}
+
+.room-controller-box {
+  float: right;
+  margin: 10rem 10rem 5rem 14rem;
+  width: 33%;
+}
+
+.room-box-txt {
+  font-family: Lalezar Regular;
+  font-size: 2.7rem;
+}
+
+.find-game-button {
+  font-family: Lalezar Regular;
+  background-color: #ffcf00;
+  border-radius: 10px;
+  border: 2px solid black;
+  width: 60%;
+  height: 4.2rem;
+  font-size: 1.2rem;
+  display: block;
+  margin: auto;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+
+.find-game-button:hover,
+.find-game-button:focus,
+.find-game-button:active {
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+  -webkit-transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
+  transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
+}
+
+@media screen and (max-width: 1919px) {
+  .room-controller-box {
+    float: right;
+    margin: 9rem 10rem 5rem 7rem;
+    width: 33%;
+  }
+}
+
+@media screen and (max-width: 1633px) {
+  .home-icon {
+    float: left;
+    width: 33%;
+  }
+  .room-controller-box {
+    float: right;
+    margin: 9rem 10rem 5rem 0rem;
+    width: 35%;
+  }
+
+  .find-game-button {
+    width: 70%;
+    height: 4.5rem;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .home-icon {
+    float: left;
+    width: 33%;
+  }
+
+  .room-controller-box {
+    float: right;
+    margin: 9rem 5rem 5rem 0rem;
+    width: 35%;
+  }
+
+  .find-game-button {
+    height: 4.3rem;
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 1350px) {
+  .home-icon {
+    float: left;
+    margin: 5rem 7rem 5rem 10rem;
+    width: 33%;
+  }
+
+  .room-controller-box {
+    float: right;
+    margin: 9rem 5rem 5rem 0rem;
+    width: 37%;
+  }
+
+  .find-game-button {
+    font-family: Lalezar Regular;
+    background-color: #ffcf00;
+    border-radius: 10px;
+    border: 2px solid black;
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 1193px) {
+  .home-icon {
+    float: left;
+    margin: 5rem 7rem 5rem 7rem;
+    width: 33%;
+  }
+
+  .home-game-icon {
+    width: 28rem;
+    height: 28rem;
+  }
+
+  .room-controller-box {
+    float: right;
+    margin: 7rem 5rem 5rem 0rem;
+    width: 37%;
+  }
+
+  .find-game-button {
+    font-family: Lalezar Regular;
+    background-color: #ffcf00;
+    border-radius: 10px;
+    border: 2px solid black;
+    height: 4rem;
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .home-icon {
+    float: left;
+    margin: 5rem 7rem 5rem 8rem;
+    width: 33%;
+  }
+
+  .room-controller-box {
+    float: right;
+    margin: 7rem 2rem 5rem 0rem;
+    width: 37%;
+  }
+}
+
+@media screen and (max-width: 1010px) {
+  .home-icon {
+    float: none;
+    margin: 0rem;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-top: 2rem;
+  }
+
+  .home-game-icon {
+    width: 20rem;
+    height: 20rem;
+  }
+
+  .room-controller-box {
+    float: none;
+    margin: 0rem;
+    width: 70%;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .home-icon {
+    margin-top: 0.5rem;
+  }
+
+  .home-game-icon {
+    width: 18rem;
+    height: 18rem;
+  }
+
+  .room-controller-box {
+    float: none;
+    margin: 0rem;
+    width: 85%;
+    margin: auto;
+  }
+
+  .room-box-txt {
+    font-size: 2.2rem;
+  }
+
+  .find-game-button {
+    width: 80%;
+    height: 3.1rem;
+    font-size: 1.1rem;
+  }
+}
+
+@media screen and (max-width: 385px) {
+  .room-controller-box {
+    width: 87%;
+  }
+
+  .find-game-button {
+    width: 80%;
+    height: 3.1rem;
+    font-size: 1.1rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .home-game-icon {
+    width: 16rem;
+    height: 16rem;
+  }
+
+  .room-box-txt {
+    font-size: 2.1rem;
+  }
+
+  .room-controller-box {
+    width: 90%;
+  }
+
+  .find-game-button {
+    width: 80%;
+    height: 3.1rem;
+    font-size: 1.1rem;
+  }
+}

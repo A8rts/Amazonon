@@ -18,7 +18,7 @@ function Header({ authenticated }: { authenticated: boolean }) {
       {authenticated ? (
         <div className="authenticated-header">
           <div className="main-of-header">
-            <img src="../../../public/book.png" className="header-icon"></img>
+            <img src="../../../public/book.png" className="header-icon animate__animated animate__jello"></img>
             <div className="header-lables">
               <Link className="header-lable" to="/home">
                 خانه

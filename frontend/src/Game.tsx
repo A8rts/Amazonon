@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/auth/Login";
 import "./assets/fonts/Lalezar-Regular.woff";
-import Home from "./components/Home";
+import Home from "./components/main/Home";
 import NotFound from "./components/NotFound";
-import Profile from "./components/Profile";
+import Profile from "./components/main/Profile";
 
 function Game() {
   return (

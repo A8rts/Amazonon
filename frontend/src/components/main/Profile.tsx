@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Header from "./layouts/Header";
+import Header from "../layouts/Header";
 import "./Profile.css";
 
 function Profile() {
@@ -30,7 +30,7 @@ function Profile() {
     <main className="mb-4">
       <Header authenticated={true} />
       <div className="profile">
-        <img src="../../public/profile.png" className="profile-icon mt-4"></img>
+        <img src="../../public/profile.png" className="profile-icon mt-4 animate__animated animate__jackInTheBox"></img>
         <div className="profile-box mt-4">
           <div className="profile-content">
             <p className="profile-txt">پروفایل شما</p>
