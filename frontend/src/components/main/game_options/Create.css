@@ -1,5 +1,4 @@
 .create-icon-box {
-  background-color: #905efd1e;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,7 +10,7 @@
 }
 
 .create-box {
-  background-color: orange;
+  background-color: #feac01;
   width: 40%;
   float: right;
   margin: 1rem;
@@ -33,4 +32,326 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.radio-button {
+  background-color: #ffc312;
+  border: 3px dashed black;
+  width: 70%;
+  border-radius: 10px;
+  list-style-type: none;
+  margin: auto;
+}
+
+.game-title-groups {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.title-game-group {
+  list-style: none;
+  display: flex;
+  text-align: center;
+  font-family: Lalezar Regular;
+}
+
+.q-buttons {
+  visibility: hidden;
+}
+
+.label-q-buttons {
+  cursor: pointer;
+}
+
+.label-q-buttons:hover {
+  border: 2px black dashed;
+}
+
+.inp-public {
+  border: 2px black solid;
+  padding: 1rem 2rem 1rem 2rem;
+  border-radius: 5px;
+}
+
+.inp-private {
+  border: 2px black solid;
+  padding: 1rem 2rem 1rem 2rem;
+  border-radius: 5px;
+}
+
+.inp-public:checked + .label-q-buttons {
+  background: #2980b9;
+}
+
+.inp-private:checked + .label-q-buttons {
+  background: #e84118;
+}
+
+.game-question-groups {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.question-game-group {
+  list-style: none;
+  display: flex;
+  text-align: center;
+  font-family: Lalezar Regular;
+}
+
+.q-buttons {
+  visibility: hidden;
+}
+
+.label-q-buttons {
+  cursor: pointer;
+}
+
+.label-q-buttons:hover {
+  border: 2px black dashed;
+}
+
+.q-inp {
+  border: 2px black solid;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border-radius: 20px;
+}
+
+.q-inp:checked + .label-q-buttons {
+  background-color: rgb(56, 170, 27);
+}
+
+.num-of-players {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.num-of-players-buttons {
+  list-style: none;
+  display: flex;
+  text-align: center;
+  font-family: Lalezar Regular;
+}
+
+.q-buttons {
+  visibility: hidden;
+}
+
+.label-q-buttons {
+  cursor: pointer;
+}
+
+.label-q-buttons:hover {
+  border: 2px black dashed;
+}
+
+.inp-players {
+  border: 2px black solid;
+  padding: 0.7rem 1.3rem 0.7rem 1.3rem;
+  border-radius: 10px;
+}
+
+.inp-players:checked + .label-q-buttons {
+  background-color: #ed4c67;
+}
+
+.end-create-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-game-btn {
+  font-family: Lalezar Regular;
+  padding: 0.8rem 2rem 0.8rem 2rem;
+  border-radius: 5px;
+  font-size: 1.3rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  background-color: #009432;
+  margin-bottom: 1rem;
+  border: 2px solid black;
+}
+
+.create-game-btn:hover {
+  border: 2px dashed black;
+}
+
+.guide-btn {
+  background-color: #9b59b6;
+}
+
+.about-radio-group {
+  display: flex;
+  justify-content: center;
+  font-family: Lalezar Regular;
+  font-size: 1.1rem;
+}
+
+@media screen and (max-width: 2033px) {
+  .game-question-groups {
+    margin-top: -1rem;
+  }
+}
+
+@media screen and (max-width: 1650px) {
+  .create-box {
+    width: 45%;
+  }
+
+  .create-icon-box {
+    width: 45%;
+  }
+}
+
+@media screen and (max-width: 1441px) {
+  .radio-button {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 1320px) {
+  .create-box {
+    width: 50%;
+    margin: 1rem;
+    margin-right: 2rem;
+  }
+
+  .create-icon-box {
+    width: 40%;
+    margin: 1rem;
+  }
+}
+
+@media screen and (max-width: 1160px) {
+  .create-box {
+    margin-right: 1rem;
+  }
+
+  .create-icon {
+    width: 30rem;
+    height: 30rem;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .create-icon-box {
+    font-size: 2rem;
+    width: 100%;
+    float: none;
+    margin: 0rem;
+  }
+
+  .create-icon {
+    width: 21rem;
+    height: 21rem;
+  }
+
+  .create-box {
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    float: none;
+    margin-right: 0rem;
+    margin: auto;
+    margin-top: 1rem;
+  }
+
+  .create-box-txt {
+    font-size: 2.3rem;
+  }
+
+  .game-question-groups {
+    margin-top: 0rem;
+  }
+}
+
+@media screen and (max-width: 805px) {
+  .create-icon {
+    width: 18rem;
+    height: 18rem;
+  }
+
+  .create-box {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .create-box-txt {
+    font-size: 2.1rem;
+  }
+
+  .inp-public {
+    padding: 0.5rem 1rem 0.5rem 1rem;
+  }
+
+  .inp-private {
+    padding: 0.5rem 1rem 0.5rem 1rem;
+  }
+
+  .q-inp {
+    padding: 0.3rem 0.6rem 0.3rem 0.6rem;
+  }
+
+  .inp-players {
+    padding: 0.5rem 0.9rem 0.5rem 0.9rem;
+  }
+
+  .create-game-btn {
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    font-size: 1.1rem;
+  }
+}
+
+@media screen and (max-width: 586px) {
+  .create-box {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .radio-button {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .create-box {
+    width: 98%;
+  }
+
+  .q-inp {
+    padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .create-box {
+    width: 99%;
+  }
+
+  .q-inp {
+    padding: 0.3rem 0.4rem 0.3rem 0.4rem;
+  }
+}
+
+@media screen and (max-width: 374px) {
+  .radio-button {
+    width: 95%;
+  }
+
+  .q-inp {
+    padding: 0.3rem 0.3rem 0.3rem 0.3rem;
+  }
+
+  .inp-players {
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  }
 }

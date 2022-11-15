@@ -71,6 +71,7 @@
   background-color: #ffc312;
   border: #fff200 solid 3px;
   padding: 0.5rem 1.3rem 0.5rem 1.3rem;
+  width: 35%;
 }
 
 .name-input:focus {
@@ -85,7 +86,7 @@
   margin: auto;
   background-color: #ffc312;
   border: #fff200 solid 3px;
-  width: 18rem;
+  width: 47%;
   border-radius: 10px;
   display: flex;
 }
@@ -166,6 +167,10 @@
   .register-from {
     width: 70%;
   }
+
+  .name-input {
+    width: 45%;
+  }
 }
 
 @media screen and (max-width: 700px) {
@@ -192,12 +197,12 @@
     padding: 0.2rem 0.5rem 0.2rem 0.5rem;
   }
 
-  .name-txt-register {
-    font-size: 1rem;
-  }
-
   .name-input {
     padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+  }
+
+  .name-txt-register {
+    font-size: 1rem;
   }
 
   .register-btn {
@@ -222,9 +227,17 @@
   .register-from {
     width: 90%;
   }
+
+  .user-gender {
+    width: 70%;
+  }
 }
 
 @media screen and (max-width: 369px) {
+  .name-input {
+    width: 55%;
+  }
+
   .register-from {
     width: 99%;
   }
@@ -233,20 +246,8 @@
     font-size: 0.9rem;
   }
 
-  .phone-number-input {
-    padding: 0rem 0rem 0rem 0rem;
-    width: 60%;
-    margin-left: 0.5rem;
-  }
-
   .name-txt-register {
     font-size: 0.9rem;
-  }
-
-  .name-input {
-    padding: 0rem 0rem 0rem 0rem;
-    width: 60%;
-    margin-left: 0.5rem;
   }
 
   .register-btn {
