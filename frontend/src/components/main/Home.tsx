@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Swal from "sweetalert2";
 import Header from "../layouts/Header";
 import Create from "./game_options/Create";
 import PublicGames from "./game_options/PublicGames";
 import "./Home.css";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
+const MySwal = withReactContent(Swal);
 
 function Home() {
   const [create, setCreate] = useState(false);
@@ -33,6 +35,25 @@ function Home() {
     } else if (e_name == "join") {
       setJoin(true);
     }
+  }
+
+  function joinGame() {
+    MySwal.fire({
+      title: (
+        <strong style={{ fontFamily: "Vazirmatn" }}>الحاق شدن به بازی</strong>
+      ),
+      input: "text",
+      html: (
+        <p style={{ fontFamily: "Vazirmatn" }}>
+          کد الحاق بازیه مورد نظر خود را وارد کنید
+        </p>
+      ),
+      confirmButtonText: "برو بریم",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = `/game/${result.value}`;
+      }
+    });
   }
 
   return (
@@ -70,7 +91,11 @@ function Home() {
                 >
                   بازی های عمومی
                 </button>
-                <button className="find-game-button mb-4" name="join">
+                <button
+                  className="find-game-button mb-4"
+                  name="join"
+                  onClick={() => joinGame()}
+                >
                   الحاق شدن به بازی
                 </button>
               </div>
