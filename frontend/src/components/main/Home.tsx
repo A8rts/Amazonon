@@ -8,11 +8,14 @@ function Home() {
   const [create, setCreate] = useState(false);
   const [games, setGames] = useState(false); // for show public games
   const [join, setJoin] = useState(false);
+  const [name, setName] = useState("");
 
   useEffect(() => {
     axios
       .get("http://localhost:3001/authorization", { withCredentials: true })
-      .then(() => {})
+      .then((res) => {
+        setName(res.data.username);
+      })
       .catch(() => {
         window.location.href = "/";
       });
@@ -23,15 +26,9 @@ function Home() {
 
     if (e_name == "create") {
       setCreate(true);
-      setGames(false);
-      setJoin(false);
     } else if (e_name == "games") {
-      setCreate(false);
       setGames(true);
-      setJoin(false);
     } else if (e_name == "join") {
-      setCreate(false);
-      setGames(false);
       setJoin(true);
     }
   }
@@ -40,7 +37,7 @@ function Home() {
     <main className="home">
       <Header authenticated={true} />
       {create ? (
-        <Create />
+        <Create name={name}/>
       ) : games ? (
         <>game</>
       ) : join ? (

@@ -8,6 +8,8 @@ import { VerificationCode } from './authentication/verification_code/verificatio
 import { User } from './authentication/users/users.entity';
 import { UsersModule } from './authentication/users/users.module';
 import { AuthModule } from './authentication/auth/auth.module';
+import { GameModule } from './game/game.module';
+import { Game } from './game/game.entity';
 
 @Module({
   imports: [
@@ -18,12 +20,13 @@ import { AuthModule } from './authentication/auth/auth.module';
       username: 'root',
       password: '',
       database: 'amazonon',
-      entities: [User, VerificationCode],
+      entities: [User, VerificationCode, Game],
       synchronize: true,
     }),
     UsersModule,
     VerificationCodeModule,
     AuthModule,
+    GameModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppGateway],

@@ -3,8 +3,9 @@ import "./Create.css";
 const MySwal = withReactContent(Swal);
 import withReactContent from "sweetalert2-react-content";
 import { useState } from "react";
+import axios from "axios";
 
-function Create() {
+function Create({ name }: { name: string }) {
   const [topics, setTopics] = useState<string[]>([]);
 
   function guideMessage() {
@@ -42,7 +43,31 @@ function Create() {
       e.target.numOfPlayers.value !== "" &&
       topics.length > 0
     ) {
-      MySwal.fire({ title: "ثبت", text: "بازی شما ساخته شد", icon: "success" });
+      axios
+        .post("http://localhost:3001/game/create", {
+          creator: name,
+          type: e.target.gameTitle.value,
+          subjects: topics,
+          capacity: e.target.numOfPlayers.value,
+        })
+        .then(() =>
+          MySwal.fire({
+            title: (
+              <strong style={{ fontFamily: "Vazirmatn" }}>بازی ایجاد شد</strong>
+            ),
+            html: <p style={{ fontFamily: "Vazirmatn" }}>بروید به بازی خود</p>,
+            icon: "success",
+            confirmButtonText: "برو",
+          })
+        )
+        .catch(() => {
+          MySwal.fire({
+            title: <strong style={{ fontFamily: "Vazirmatn" }}>خطا</strong>,
+            html: <p style={{ fontFamily: "Vazirmatn" }}>یه مشکلی هست</p>,
+            icon: "error",
+            confirmButtonText: "برو",
+          });
+        });
     } else {
       MySwal.fire({ title: "خطا", text: "کامل نی", icon: "error" });
     }
@@ -52,7 +77,10 @@ function Create() {
     <div className="create">
       <div className="main-box mt-3">
         <div className="create-icon-box">
-          <img src="../../../../public/video-game (1).png" className="create-icon"></img>
+          <img
+            src="../../../../public/video-game (1).png"
+            className="create-icon"
+          ></img>
         </div>
         <form onSubmit={(e) => createGame(e)}>
           <div className="create-box mb-5">
@@ -187,7 +215,7 @@ function Create() {
                   <li>
                     <input
                       type="radio"
-                      value="three_player"
+                      value="3"
                       name="numOfPlayers"
                       id="three_player"
                       className="q-buttons inp-players"
@@ -202,7 +230,7 @@ function Create() {
                   <li>
                     <input
                       type="radio"
-                      value="six-player"
+                      value="6"
                       name="numOfPlayers"
                       id="six-player"
                       className="q-buttons inp-players"
@@ -218,7 +246,7 @@ function Create() {
                   <li>
                     <input
                       type="radio"
-                      value="nine-player"
+                      value="9"
                       name="numOfPlayers"
                       id="nine-player"
                       className="q-buttons inp-players"
