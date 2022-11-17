@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import Header from "../layouts/Header";
 import Create from "./game_options/Create";
+import PublicGames from "./game_options/PublicGames";
 import "./Home.css";
 
 function Home() {
@@ -37,9 +39,9 @@ function Home() {
     <main className="home">
       <Header authenticated={true} />
       {create ? (
-        <Create name={name}/>
+        <Create name={name} />
       ) : games ? (
-        <>game</>
+        <PublicGames />
       ) : join ? (
         <>join</>
       ) : (
@@ -68,11 +70,7 @@ function Home() {
                 >
                   بازی های عمومی
                 </button>
-                <button
-                  className="find-game-button mb-4"
-                  name="join"
-                  onClick={(e) => clickedButton(e)}
-                >
+                <button className="find-game-button mb-4" name="join">
                   الحاق شدن به بازی
                 </button>
               </div>

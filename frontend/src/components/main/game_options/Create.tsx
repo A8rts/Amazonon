@@ -50,7 +50,7 @@ function Create({ name }: { name: string }) {
           subjects: topics,
           capacity: e.target.numOfPlayers.value,
         })
-        .then(() =>
+        .then((res) =>
           MySwal.fire({
             title: (
               <strong style={{ fontFamily: "Vazirmatn" }}>بازی ایجاد شد</strong>
@@ -58,7 +58,7 @@ function Create({ name }: { name: string }) {
             html: <p style={{ fontFamily: "Vazirmatn" }}>بروید به بازی خود</p>,
             icon: "success",
             confirmButtonText: "برو",
-          })
+          }).then(() => (window.location.href = `/game/${res.data.key}`))
         )
         .catch(() => {
           MySwal.fire({
@@ -69,7 +69,16 @@ function Create({ name }: { name: string }) {
           });
         });
     } else {
-      MySwal.fire({ title: "خطا", text: "کامل نی", icon: "error" });
+      MySwal.fire({
+        title: <strong style={{ fontFamily: "Vazirmatn" }}>یه چیزی کمه</strong>,
+        html: (
+          <p style={{ fontFamily: "Vazirmatn" }}>
+            مطمئن شوید که همه ی موارد را انتخاب کردید
+          </p>
+        ),
+        icon: "error",
+        confirmButtonText: "باشه",
+      });
     }
   }
 

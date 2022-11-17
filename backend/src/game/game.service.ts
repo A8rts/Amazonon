@@ -10,8 +10,9 @@ export class GameService {
     private gameRepository: Repository<Game>,
   ) {}
 
-  getAllGame() { // for test
-    return this.gameRepository.find();
+  getAllPublicGames(type: string) {
+    // for test
+    return this.gameRepository.findBy({ type: type });
   }
 
   createGame(gameData: any) {
@@ -25,5 +26,6 @@ export class GameService {
     game.capacity = gameData.capacity;
 
     this.gameRepository.save(game);
+    return game;
   }
 }

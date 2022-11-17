@@ -5,9 +5,9 @@ import { GameService } from './game.service';
 export class GameController {
   constructor(readonly gameService: GameService) {}
 
-  @Get()
-  getAllGame() {
-    return this.gameService.getAllGame();
+  @Get('public')
+  getAllPublicGames() {
+    return this.gameService.getAllPublicGames('public');
   }
 
   @Post('/create')

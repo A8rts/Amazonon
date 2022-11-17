@@ -1,0 +1,274 @@
+.public-games-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  float: left;
+}
+
+.public-games-box {
+  background-color: #feac01;
+  width: 40%;
+  float: right;
+  margin: 1rem;
+  border-radius: 10px;
+  border: 3px solid black;
+  margin-right: 5rem;
+}
+
+.public-games-txt {
+  font-family: Lalezar Regular;
+  font-size: 2.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.join-public-games {
+  background-color: #ffc312;
+  border: 3px solid black;
+  width: 70%;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  list-style-type: none;
+  margin: auto;
+  max-height: 25rem;
+  overflow: auto;
+}
+
+.p-game {
+  width: 80%;
+  background-color: #ffd32a;
+  border: 3px dashed black;
+  border-radius: 10px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.p-game:hover {
+  background-color: #eec41c;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(255, 255, 166);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar {
+  width: 0.3rem;
+}
+
+.p-game-icon {
+  float: right;
+  width: 50%;
+}
+
+.p-game-img {
+  margin: 0.5rem;
+  width: 5rem;
+  height: 5rem;
+}
+
+.p-game-butons {
+  float: left;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-family: Lalezar Regular;
+}
+
+.go-public-game-btn {
+  background-color: #019c35;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  border-radius: 5px;
+  padding: 0.5rem;
+  border: 2px black solid;
+}
+
+.about-public-game-btn {
+  background-color: #aa3e91;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  border-radius: 5px;
+  padding: 0.5rem;
+  border: 2px black solid;
+}
+
+@media screen and (max-width: 1669px) {
+  .public-games-icon-box {
+    width: 40%;
+  }
+
+  .public-games-box {
+    width: 45%;
+  }
+}
+
+@media screen and (max-width: 1454px) {
+  .p-game {
+    width: 90%;
+  }
+
+  .join-public-games {
+    width: 80%;
+  }
+
+  .public-games-box {
+    margin-right: 2rem;
+  }
+}
+
+@media screen and (max-width: 1290px) {
+  .public-games-icon-box {
+    width: 45%;
+  }
+}
+
+@media screen and (max-width: 1175px) {
+  .public-games-icon-box {
+    width: 47%;
+  }
+
+  .public-games-box {
+    margin-right: 1rem;
+  }
+
+  .join-public-games {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 1079px) {
+  .public-games-icon-box {
+    width: 100%;
+    float: none;
+  }
+
+  .public-games-box {
+    width: 100%;
+    float: none;
+    margin: 0rem;
+    margin-right: 0rem;
+  }
+
+  .public-games-icon {
+    width: 21rem;
+    height: 21rem;
+  }
+
+  .public-games-box {
+    width: 70%;
+    float: none;
+    margin-right: 0rem;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 895px) {
+  .public-games-txt {
+    font-size: 2.3rem;
+  }
+
+  .join-public-games {
+    width: 80%;
+  }
+
+  .public-games-box {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .public-games-box {
+    width: 90%;
+  }
+
+  .public-games-icon {
+    width: 18rem;
+    height: 18rem;
+  }
+
+  .p-game {
+    width: 85%;
+  }
+
+  .p-game-icon {
+    float: right;
+    width: 40%;
+  }
+
+  .p-game-img {
+    margin: 0.3rem;
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .join-public-games {
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .p-game-icon {
+    float: right;
+    width: 40%;
+  }
+
+  .p-game-img {
+    margin: 0.3rem;
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .join-public-games {
+    width: 90%;
+  }
+
+  .go-public-game-btn {
+    padding: 0.3rem;
+  }
+
+  .about-public-game-btn {
+    padding: 0.3rem;
+  }
+
+  .public-games-box {
+    width: 95%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .p-game-icon {
+    float: right;
+    width: 40%;
+  }
+
+  .p-game-img {
+    margin: 0.3rem;
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .join-public-games {
+    width: 95%;
+  }
+
+  .p-game {
+    width: 95%;
+  }
+
+  .public-games-box {
+    width: 98%;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .p-game-icon {
+    width: 30%;
+  }
+}
