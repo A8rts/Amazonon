@@ -28,4 +28,8 @@ export class GameService {
     this.gameRepository.save(game);
     return game;
   }
+
+  validKey(key: string) {
+    return this.gameRepository.findBy({ key: key });
+  }
 }

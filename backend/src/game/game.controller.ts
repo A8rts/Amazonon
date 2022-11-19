@@ -14,4 +14,9 @@ export class GameController {
   createGame(@Req() req) {
     return this.gameService.createGame(req.body);
   }
+
+  @Post('/valid_key') // for validate key when users join games
+  validKey(@Req() req) {
+    return this.gameService.validKey(req.body.key);
+  }
 }
