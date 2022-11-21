@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AppGateway } from './app.gateway';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { VerificationCodeModule } from './authentication/verification_code/verification_code.module';
 import { VerificationCode } from './authentication/verification_code/verification_code.entity';
@@ -29,6 +28,6 @@ import { Game } from './game/game.entity';
     GameModule,
   ],
   controllers: [AppController],
-  providers: [AppService, AppGateway],
+  providers: [AppService],
 })
 export class AppModule {}

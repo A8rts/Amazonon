@@ -1,38 +1,53 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import withReactContent from "sweetalert2-react-content";
-import Swal from "sweetalert2";
-const MySwal = withReactContent(Swal);
+import io, { Socket } from "socket.io-client";
 
-function GamePage() {
-  const { key } = useParams(); // this is game key
-  const [show, setShow] = useState(false);
+function GamePage({ userData, gameKey }: { userData: any; gameKey: any }) {
+  const [socket, setSocket] = useState<Socket>();
+  const [allUsers, setAllUsers] = useState<any[]>([]);
 
   useEffect(() => {
-    axios
-      .post("http://localhost:3001/game/valid_key", { key: key })
-      .then((res) => {
-        if (res.data.length > 0 && res.data.length < 2) {
-          setShow(true);
-        } else {
-          MySwal.fire({
-            title: (
-              <strong style={{ fontFamily: "Vazirmatn" }}>اینجا کجاست ؟</strong>
-            ),
-            html: (
-              <p style={{ fontFamily: "Vazirmatn" }}>
-                همچین بازی ای با این کلید ({key}) وجود ندارد
-              </p>
-            ),
-            confirmButtonText: "بریم صفحه اصلی",
-            icon: "error",
-          }).then(() => (window.location.href = "/home"));
-        }
-      });
-  });
+    // make conneciton to Websocket server
+    const newSocket = io("http://localhost:8001", {
+      query: {
+        username: userData.username,
+        gameKey: gameKey,
+      },
+    });
+    setSocket(newSocket);
+  }, [setSocket]);
 
-  return <main>{show ? <h1>Welcom to the Amazonon</h1> : <></>}</main>;
+  const usersListener = (users: any) => {
+    // save users names
+    const usersNames: any[] = [];
+    users.map((user: any) => usersNames.push(user.username));
+
+    const uniqeUsers = [...new Set(usersNames)];
+    setAllUsers(uniqeUsers);
+  };
+
+  useEffect(() => {
+    // make listener for when user joined the game or lifted
+    socket?.on(`${gameKey}`, usersListener);
+    return () => {
+      socket?.off(`${gameKey}`, usersListener);
+    };
+  }, [usersListener]);
+
+  return (
+    <main>
+      <div>
+        <h1>This is GamePage</h1>
+        {allUsers.map((username) => (
+          <strong
+            style={{ margin: "1rem", background: "orange" }}
+            key={username}
+          >
+            {username}
+          </strong>
+        ))}
+      </div>
+    </main>
+  );
 }
 
 export default GamePage;

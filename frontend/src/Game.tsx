@@ -4,7 +4,7 @@ import "./assets/fonts/Lalezar-Regular.woff";
 import Home from "./components/main/Home";
 import NotFound from "./components/NotFound";
 import Profile from "./components/main/Profile";
-import GamePage from "./components/game/GamePage";
+import Play from "./components/game/Play";
 
 function Game() {
   return (
@@ -14,7 +14,7 @@ function Game() {
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/game/:key" element={<GamePage />} />
+          <Route path="/game/:key" element={<Play />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
