@@ -1,7 +1,16 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import io, { Socket } from "socket.io-client";
 
-function GamePage({ userData, gameKey }: { userData: any; gameKey: any }) {
+function GamePage({
+  userData,
+  gameKey,
+  gameData,
+}: {
+  userData: any;
+  gameKey: any;
+  gameData: any;
+}) {
   const [socket, setSocket] = useState<Socket>();
   const [allUsers, setAllUsers] = useState<any[]>([]);
 
@@ -11,17 +20,38 @@ function GamePage({ userData, gameKey }: { userData: any; gameKey: any }) {
       query: {
         username: userData.username,
         gameKey: gameKey,
+        capacity: gameData.capacity,
       },
     });
     setSocket(newSocket);
   }, [setSocket]);
 
   const usersListener = (users: any) => {
-    // save users names
     const usersNames: any[] = [];
     users.map((user: any) => usersNames.push(user.username));
-
     const uniqeUsers = [...new Set(usersNames)];
+
+    if (uniqeUsers.length >= gameData.capacity) {
+      if (userData.username == gameData.creator) {
+        axios.post("http://localhost:3001/game/change_status", {
+          // when the number of users in equal to capacity, we closed the game
+          key: gameKey,
+          type: "close",
+        });
+      }
+    } else {
+      axios
+        .post("http://localhost:3001/game/info", { key: gameKey })
+        .then((res) => {
+          if (res.data.status == "close") {
+            axios.post("http://localhost:3001/game/change_status", {
+              key: gameKey,
+              type: "open",
+            });
+          }
+        });
+    }
+
     setAllUsers(uniqeUsers);
   };
 

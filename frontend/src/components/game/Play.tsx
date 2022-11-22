@@ -9,7 +9,9 @@ const MySwal = withReactContent(Swal);
 function Play() {
   const { key } = useParams(); // this is game key
   const [userData, setUserData] = useState([]);
+  const [gameData, setGameData] = useState([]);
   const [show, setShow] = useState(false);
+  const [loading, setLoading] = useState(true); // for when all request in done, we show GamePage
 
   useEffect(() => {
     // for get all user infromation
@@ -43,10 +45,26 @@ function Play() {
           }).then(() => (window.location.href = "/home"));
         }
       });
+
+    // for get game information
+    axios.post("http://localhost:3001/game/info", { key: key }).then((res) => {
+      setGameData(res.data);
+      setLoading(false);
+    });
   }, []);
 
   return (
-    <main>{show ? <GamePage userData={userData} gameKey={key} /> : <></>}</main>
+    <main>
+      {show ? (
+        loading ? (
+          <>loading</>
+        ) : (
+          <GamePage userData={userData} gameKey={key} gameData={gameData} />
+        )
+      ) : (
+        <></>
+      )}
+    </main>
   );
 }
 

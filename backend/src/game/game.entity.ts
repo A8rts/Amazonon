@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, IsNull } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Game {
@@ -19,4 +19,7 @@ export class Game {
 
   @Column()
   capacity: number;
+
+  @Column()
+  status: string; // this is for when capacity of room is full and we do not allow other users join the game
 }

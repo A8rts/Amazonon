@@ -51,7 +51,28 @@ function Home() {
       confirmButtonText: "برو بریم",
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location.href = `/game/${result.value}`;
+        axios
+          .post("http://localhost:3001/game/info", { key: result.value })
+          .then((res) => {
+            if (res.data.status !== "close") {
+              window.location.href = `/game/${result.value}`;
+            } else {
+              MySwal.fire({
+                title: (
+                  <strong style={{ fontFamily: "Vazirmatn" }}>
+                    این بازی بسته است
+                  </strong>
+                ),
+                html: (
+                  <p style={{ fontFamily: "Vazirmatn", fontSize: "1rem" }}>
+                    ظرفیت تعداد بازیکنان این بازی پر است!
+                  </p>
+                ),
+                icon: "warning",
+                confirmButtonText: "باشه",
+              });
+            }
+          });
       }
     });
   }

@@ -21,6 +21,9 @@ export class GameGateway
   }
 
   handleConnection(client: Socket) {
+    // console.log(client.handshake.query['capacity']);
+    const capacity = Number(client.handshake.query['capacity']);
+
     this.users.push({
       username: client.handshake.query['username'],
       gameKey: client.handshake.query['gameKey'],

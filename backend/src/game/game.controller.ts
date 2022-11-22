@@ -19,4 +19,14 @@ export class GameController {
   validKey(@Req() req) {
     return this.gameService.validKey(req.body.key);
   }
+
+  @Post('/info')
+  getInfo(@Req() req) {
+    return this.gameService.getInfo(req.body.key);
+  }
+
+  @Post('/change_status')
+  changeStatus(@Req() req) {
+    return this.gameService.changeStatus(req.body.key, req.body.type);
+  }
 }

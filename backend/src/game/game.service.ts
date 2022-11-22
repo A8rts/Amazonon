@@ -24,6 +24,7 @@ export class GameService {
     game.type = gameData.type;
     game.subjects = gameData.subjects;
     game.capacity = gameData.capacity;
+    game.status = 'open';
 
     this.gameRepository.save(game);
     return game;
@@ -31,5 +32,28 @@ export class GameService {
 
   validKey(key: string) {
     return this.gameRepository.findBy({ key: key });
+  }
+
+  getInfo(key: string) {
+    return this.gameRepository.findOneBy({ key: key });
+  }
+
+  changeStatus(key: string, type: string) {
+    // when game is full status is close and when game is not full status is open
+    if (type == 'open') {
+      return this.gameRepository
+        .createQueryBuilder()
+        .update(Game)
+        .set({ status: 'open' })
+        .where('key = :key', { key: key })
+        .execute();
+    } else if (type == 'close') {
+      return this.gameRepository
+        .createQueryBuilder()
+        .update(Game)
+        .set({ status: 'close' })
+        .where('key = :key', { key: key })
+        .execute();
+    }
   }
 }

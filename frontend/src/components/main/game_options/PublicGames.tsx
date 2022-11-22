@@ -10,7 +10,14 @@ function PublicGames() {
 
   useEffect(() => {
     axios.get("http://localhost:3001/game/public").then((res) => {
-      setGames(res.data);
+      const publigGames = [];
+      for (let i = 0; i < res.data.length; i++) {
+        if (res.data[i].status !== "close") {
+          publigGames.push(res.data[i]);
+        }
+      }
+
+      setGames(publigGames);
     });
   }, []);
 
@@ -50,6 +57,30 @@ function PublicGames() {
     });
   }
 
+  function joinPublicGame(key: string) {
+    axios.post("http://localhost:3001/game/info", { key: key }).then((res) => {
+      // for check that game is closed or open
+      if (res.data.status !== "close") {
+        window.location.href = `/game/${key}`;
+      } else {
+        MySwal.fire({
+          title: (
+            <strong style={{ fontFamily: "Vazirmatn" }}>
+              این بازی بسته است
+            </strong>
+          ),
+          html: (
+            <p style={{ fontFamily: "Vazirmatn", fontSize: "1rem" }}>
+              ظرفیت تعداد بازیکنان این بازی پر است!
+            </p>
+          ),
+          icon: "warning",
+          confirmButtonText: "باشه",
+        });
+      }
+    });
+  }
+
   return (
     <div className="public-games">
       <div className="main-box mt-3">
@@ -73,7 +104,7 @@ function PublicGames() {
                 <div className="p-game-butons">
                   <button
                     className="go-public-game-btn"
-                    onClick={() => (window.location.href = `/game/${item.key}`)}
+                    onClick={() => joinPublicGame(item.key)}
                   >
                     برو بریم
                   </button>
