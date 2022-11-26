@@ -26,6 +26,7 @@ export class GameGateway
 
     this.users.push({
       username: client.handshake.query['username'],
+      gender: client.handshake.query['gender'],
       gameKey: client.handshake.query['gameKey'],
     });
 

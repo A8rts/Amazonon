@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import io, { Socket } from "socket.io-client";
+import Users from "./Users";
+import "./GamePage.css";
 
 function GamePage({
   userData,
@@ -19,6 +21,7 @@ function GamePage({
     const newSocket = io("http://localhost:8001", {
       query: {
         username: userData.username,
+        gender: userData.gender,
         gameKey: gameKey,
         capacity: gameData.capacity,
       },
@@ -27,9 +30,15 @@ function GamePage({
   }, [setSocket]);
 
   const usersListener = (users: any) => {
-    const usersNames: any[] = [];
-    users.map((user: any) => usersNames.push(user.username));
-    const uniqeUsers = [...new Set(usersNames)];
+    const usersData: any[] = [];
+    users.map((user: any) =>
+      usersData.push({ username: user.username, gender: user.gender })
+    );
+
+    const usernames = usersData.map((user) => user.username);
+    const uniqeUsers = usersData.filter(
+      ({ username }, index) => !usernames.includes(username, index + 1)
+    );
 
     if (uniqeUsers.length >= gameData.capacity) {
       if (userData.username == gameData.creator) {
@@ -65,17 +74,10 @@ function GamePage({
 
   return (
     <main>
-      <div>
-        <h1>This is GamePage</h1>
-        {allUsers.map((username) => (
-          <strong
-            style={{ margin: "1rem", background: "orange" }}
-            key={username}
-          >
-            {username}
-          </strong>
-        ))}
-      </div>
+      <header className="game-page-header">
+        <p className="start-game-txt">شروع بازی</p>
+      </header>
+      <Users users={allUsers} gameData={gameData} />
     </main>
   );
 }
