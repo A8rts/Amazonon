@@ -31,7 +31,12 @@ function Users({
                 <div className="user-data mb-4 mt-3" key={user.username}>
                   <p className="user-name">{user.username}</p>
                   <div className="user-icon">
-                    {user.gender == "man" ? (
+                    {user.username == gameData.creator ? (
+                      <img
+                        src="../../../public/crown.png"
+                        className="man-user-icon"
+                      ></img>
+                    ) : user.gender == "man" ? (
                       <img
                         src="../../../public/man.png"
                         className="man-user-icon"

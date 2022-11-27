@@ -4,6 +4,7 @@ import {
   OnGatewayConnection,
   OnGatewayDisconnect,
   OnGatewayInit,
+  SubscribeMessage,
 } from '@nestjs/websockets';
 import { Socket } from 'socket.io';
 
@@ -44,5 +45,10 @@ export class GameGateway
     );
     this.users = newUsers;
     this.server.emit(`${client.handshake.query['gameKey']}`, this.users);
+  }
+
+  @SubscribeMessage('startGame') // for start games events
+  handleStartsGames(client: any) {
+    this.server.emit(`start${client.handshake.query['gameKey']}`);
   }
 }

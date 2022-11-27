@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import io, { Socket } from "socket.io-client";
 import Users from "./Users";
 import "./GamePage.css";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
+const MySwal = withReactContent(Swal);
 
 function GamePage({
   userData,
@@ -72,11 +75,58 @@ function GamePage({
     };
   }, [usersListener]);
 
+  const startListener = () => {
+    Swal.fire({ title: "بازی شروع شد" }); // this is for test now
+  };
+
+  useEffect(() => {
+    // to listen for the game start event (when the game creator started the game)
+    socket?.on(`start${gameData.key}`, startListener);
+    return () => {
+      socket?.off(`start${gameData.key}`, startListener);
+    };
+  }, [startListener]);
+
+  function startGame() {
+    // send start game message to the websocket server
+    if (userData.username !== gameData.creator) {
+      MySwal.fire({
+        title: (
+          <strong style={{ fontFamily: "Vazirmatn" }}>شما سازنده نیستی!</strong>
+        ),
+        html: (
+          <p style={{ fontFamily: "Vazirmatn" }}>
+            شما سازنده ی این بازی نیستید! سازنده {gameData.creator} است و فقط او
+            میتواند بازی را شروع کند
+          </p>
+        ),
+        confirmButtonText: "باشه",
+        icon: "error",
+      });
+    } else if (allUsers.length < gameData.capacity) {
+      MySwal.fire({
+        title: (
+          <strong style={{ fontFamily: "Vazirmatn" }}>ظرفیت کامل نیست!</strong>
+        ),
+        html: (
+          <p style={{ fontFamily: "Vazirmatn" }}>
+            شما مشخص کرده بودید که ظرفیت بازی {gameData.capacity} نفر باشد
+          </p>
+        ),
+        confirmButtonText: "فهمیدم",
+        icon: "warning",
+      });
+    } else {
+      socket?.emit("startGame");
+    }
+  }
+
   return (
     <main>
-      <header className="game-page-header">
+      <button className="game-page-header" onClick={() => startGame()}>
         <p className="start-game-txt">شروع بازی</p>
-      </header>
+      </button>
+
       <Users users={allUsers} gameData={gameData} />
     </main>
   );
