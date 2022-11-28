@@ -18,6 +18,7 @@ function GamePage({
 }) {
   const [socket, setSocket] = useState<Socket>();
   const [allUsers, setAllUsers] = useState<any[]>([]);
+  const [show, setShow] = useState(true);
 
   useEffect(() => {
     // make conneciton to Websocket server
@@ -76,7 +77,36 @@ function GamePage({
   }, [usersListener]);
 
   const startListener = () => {
-    Swal.fire({ title: "بازی شروع شد" }); // this is for test now
+    setShow(false); // when the question is showed we want to clear the page
+    MySwal.fire({
+      title: (
+        <strong style={{ fontFamily: "Vazirmatn" }}>
+          بازی شروع شد! سوالو بخون
+        </strong>
+      ),
+      html: (
+        <p style={{ fontFamily: "Vazirmatn" }}>
+          سوال : پوشش گیاهی در مناطق کوهستانی متناسب با چه عواملی تغییر می کند؟
+        </p>
+      ),
+      showConfirmButton: false,
+      timer: 30000,
+      timerProgressBar: true,
+      allowOutsideClick: false,
+      background: "#8e44ad",
+      color: "white",
+      imageUrl: "../../../public/question.png",
+      imageHeight: "18rem",
+      footer: (
+        <strong style={{ fontFamily: "Vazirmatn" }}>موضوع : طبیعت</strong>
+      ),
+      showClass: {
+        popup: "animate__animated animate__swing",
+      },
+      hideClass: {
+        popup: "animate__animated animate__fadeOutUp",
+      },
+    });
   };
 
   useEffect(() => {
@@ -123,11 +153,17 @@ function GamePage({
 
   return (
     <main>
-      <button className="game-page-header" onClick={() => startGame()}>
-        <p className="start-game-txt">شروع بازی</p>
-      </button>
+      {show ? (
+        <div>
+          <button className="game-page-header" onClick={() => startGame()}>
+            <p className="start-game-txt">شروع بازی</p>
+          </button>
 
-      <Users users={allUsers} gameData={gameData} />
+          <Users users={allUsers} gameData={gameData} />
+        </div>
+      ) : (
+        <></>
+      )}
     </main>
   );
 }
