@@ -9,6 +9,8 @@ import { UsersModule } from './authentication/users/users.module';
 import { AuthModule } from './authentication/auth/auth.module';
 import { GameModule } from './game/game.module';
 import { Game } from './game/game.entity';
+import { QuestionsModule } from './questions/questions.module';
+import { Questions } from './questions/questions.entity';
 
 @Module({
   imports: [
@@ -19,13 +21,14 @@ import { Game } from './game/game.entity';
       username: 'root',
       password: '',
       database: 'amazonon',
-      entities: [User, VerificationCode, Game],
+      entities: [User, VerificationCode, Game , Questions],
       synchronize: true,
     }),
     UsersModule,
     VerificationCodeModule,
     AuthModule,
     GameModule,
+    QuestionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
