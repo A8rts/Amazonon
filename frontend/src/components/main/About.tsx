@@ -5,12 +5,16 @@ import "./About.css";
 
 function About() {
   const [name, setName] = useState("");
+  const [admin, setAdmin] = useState(false);
 
   useEffect(() => {
     axios
       .get("http://localhost:3001/authorization", { withCredentials: true })
       .then((res) => {
         setName(res.data.username);
+        if (res.data.username == "arta") {
+          setAdmin(true);
+        }
       })
       .catch(() => {
         window.location.href = "/";
@@ -19,7 +23,7 @@ function About() {
 
   return (
     <main>
-      <Header authenticated={true} />
+      <Header authenticated={true} admin={admin}/>
       <div className="about">
         <p className="about-txt mt-4">خب بریم ببینیم این بازی چجوریه؟؟</p>
         <div className="about-icon-box">

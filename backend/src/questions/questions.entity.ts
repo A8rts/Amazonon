@@ -16,4 +16,7 @@ export class Questions {
 
   @Column()
   guide2: string;
+
+  @Column()
+  answer: string;
 }

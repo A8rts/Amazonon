@@ -1,0 +1,161 @@
+.hello-admin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  font-family: Lalezar Regular;
+  font-size: 3rem;
+  text-align: center;
+  /* margin: 1rem; */
+}
+
+.admin-panel {
+  width: 40%;
+  background-color: orange;
+  margin: auto;
+  border-radius: 10px;
+  border: 3px solid black;
+}
+
+.add-question-txt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Lalezar Regular;
+  font-size: 2.2rem;
+}
+
+.add-question-box {
+  background-color: #ffc312;
+  width: 70%;
+  margin: auto;
+  border: 3px solid black;
+  border-radius: 10px;
+}
+
+.add-question-inp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  background-color: #ffd32a;
+  border-radius: 5px;
+  border: 3px dashed #232523;
+  width: 80%;
+  height: 3rem;
+}
+
+.add-question-inp::placeholder {
+  color: black;
+  font-family: Vazirmatn;
+  width: 100%;
+}
+
+.add-question-inp:focus {
+  outline: none !important;
+  border: 3px dashed black;
+}
+
+.send-question {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  font-family: Vazirmatn;
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  border: 3px solid black;
+  width: 23%;
+  font-size: 1.3rem;
+  height: 4rem;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 1700px) {
+  .admin-panel {
+    width: 48%;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .admin-panel {
+    width: 55%;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .admin-panel {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .admin-panel {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .admin-panel {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .hello-admin {
+    font-size: 2.7rem;
+  }
+
+  .admin-panel {
+    width: 90%;
+  }
+
+  .add-question-txt {
+    font-size: 2rem;
+  }
+
+  .add-question-box {
+    width: 80%;
+  }
+
+  .add-question-inp {
+    width: 80%;
+    height: 3rem;
+  }
+
+  .send-question {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+    .hello-admin {
+      font-size: 2.7rem;
+    }
+  
+    .admin-panel {
+      width: 95%;
+    }
+  
+    .add-question-txt {
+      font-size: 2rem;
+    }
+  
+    .add-question-box {
+      width: 90%;
+    }
+  
+    .add-question-inp {
+      width: 90%;
+      height: 2.8rem;
+    }
+  
+    .send-question {
+      width: 40%;
+      font-size: 1rem;
+      height: 3rem;
+    }
+  }
+  

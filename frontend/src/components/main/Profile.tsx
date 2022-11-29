@@ -9,7 +9,7 @@ function Profile() {
     phonenumber: "",
     gender: "",
   });
-
+  const [admin, setAdmin] = useState(false);
   useEffect(() => {
     axios
       .get("http://localhost:3001/authorization", { withCredentials: true })
@@ -20,6 +20,9 @@ function Profile() {
           res.data.gender = "خانم";
         }
         setUserInfo(res.data);
+        if (res.data.username == "arta") {
+          setAdmin(true);
+        }
       })
       .catch(() => {
         window.location.href = "/";
@@ -28,9 +31,12 @@ function Profile() {
 
   return (
     <main className="mb-4">
-      <Header authenticated={true} />
+      <Header authenticated={true} admin={admin} />
       <div className="profile">
-        <img src="../../public/profile.png" className="profile-icon mt-4 animate__animated animate__jackInTheBox"></img>
+        <img
+          src="../../public/profile.png"
+          className="profile-icon mt-4 animate__animated animate__jackInTheBox"
+        ></img>
         <div className="profile-box mt-4">
           <div className="profile-content">
             <p className="profile-txt">پروفایل شما</p>

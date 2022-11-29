@@ -13,12 +13,16 @@ function Home() {
   const [games, setGames] = useState(false); // for show public games
   const [join, setJoin] = useState(false);
   const [name, setName] = useState("");
+  const [admin, setAdmin] = useState(false); // it is for admins :D
 
   useEffect(() => {
     axios
       .get("http://localhost:3001/authorization", { withCredentials: true })
       .then((res) => {
         setName(res.data.username);
+        if (res.data.username == "arta") {
+          setAdmin(true);
+        }
       })
       .catch(() => {
         window.location.href = "/";
@@ -79,7 +83,7 @@ function Home() {
 
   return (
     <main className="home">
-      <Header authenticated={true} />
+      <Header authenticated={true} admin={admin}/>
       {create ? (
         <Create name={name} />
       ) : games ? (

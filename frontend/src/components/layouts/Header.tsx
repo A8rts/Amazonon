@@ -2,7 +2,13 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./Header.css";
 
-function Header({ authenticated }: { authenticated: boolean }) {
+function Header({
+  authenticated,
+  admin,
+}: {
+  authenticated: boolean;
+  admin: boolean;
+}) {
   function logOut() {
     axios
       .post("http://localhost:3001/logout", undefined, {
@@ -18,7 +24,10 @@ function Header({ authenticated }: { authenticated: boolean }) {
       {authenticated ? (
         <div className="authenticated-header">
           <div className="main-of-header">
-            <img src="../../../public/book.png" className="header-icon animate__animated animate__jello"></img>
+            <img
+              src="../../../public/book.png"
+              className="header-icon animate__animated animate__jello"
+            ></img>
             <div className="header-lables">
               <Link className="header-lable" to="/home">
                 خانه
@@ -29,6 +38,13 @@ function Header({ authenticated }: { authenticated: boolean }) {
               <Link className="header-lable" to="/about">
                 درباره
               </Link>
+              {admin ? (
+                <Link className="header-lable" to="/admin">
+                  مدیریت
+                </Link>
+              ) : (
+                <></>
+              )}
               <a className="header-lable logout-btn" onClick={() => logOut()}>
                 خروج
               </a>

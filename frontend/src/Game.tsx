@@ -6,6 +6,7 @@ import NotFound from "./components/NotFound";
 import Profile from "./components/main/Profile";
 import Play from "./components/game/Play";
 import About from "./components/main/About";
+import Admin from "./components/main/Admin";
 
 function Game() {
   return (
@@ -17,6 +18,7 @@ function Game() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/game/:key" element={<Play />} />
           <Route path="/about" element={<About />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
