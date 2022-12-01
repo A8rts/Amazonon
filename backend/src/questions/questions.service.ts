@@ -24,4 +24,16 @@ export class QuestionsService {
 
     return this.questionsRepository.save(question);
   }
+
+  async findQuestion(gameSubjects: any) {
+    // find question from questions repository
+    const questions = [];
+    for (let i = 0; i < gameSubjects.length; i++) {
+      questions.push(
+        await this.questionsRepository.findBy({ subject: gameSubjects[i] }),
+      );
+    }
+
+    return questions;
+  }
 }

@@ -19,6 +19,7 @@ function GamePage({
   const [socket, setSocket] = useState<Socket>();
   const [allUsers, setAllUsers] = useState<any[]>([]);
   const [show, setShow] = useState(true);
+  const [question, setQuestion] = useState("");
 
   useEffect(() => {
     // make conneciton to Websocket server
@@ -78,17 +79,41 @@ function GamePage({
 
   const startListener = () => {
     setShow(false); // when the question is showed we want to clear the page
+
+    axios
+      .post("http://localhost:3001/questions/findQuestion", {
+        gameSubjects: gameData.subjects,
+      })
+      .then((res) => {
+        const randLength = Math.floor(Math.random() * res.data.length);
+        const question = res.data[randLength][0];
+
+        showQuestion(question); // for showing question to players
+      });
+  };
+
+  function showQuestion(question: any) {
+    const eng_subjects = [
+      { english: "cinema", farsi: "سینما" },
+      { english: "food", farsi: "غذا" },
+      { english: "sport", farsi: "ورزش" },
+      { english: "nature", farsi: "طبیعت" },
+      { english: "history", farsi: "تاریخ" },
+      { english: "religious", farsi: "مذهبی" },
+    ];
+    for (let i = 0; i < eng_subjects.length; i++) {
+      if (question.subject == eng_subjects[i].english) {
+        question.subject = eng_subjects[i].farsi;
+      }
+    }
+
     MySwal.fire({
       title: (
         <strong style={{ fontFamily: "Vazirmatn" }}>
           بازی شروع شد! سوالو بخون
         </strong>
       ),
-      html: (
-        <p style={{ fontFamily: "Vazirmatn" }}>
-          سوال : پوشش گیاهی در مناطق کوهستانی متناسب با چه عواملی تغییر می کند؟
-        </p>
-      ),
+      html: <p style={{ fontFamily: "Vazirmatn" }}>{question.question}</p>,
       showConfirmButton: false,
       timer: 30000,
       timerProgressBar: true,
@@ -98,7 +123,9 @@ function GamePage({
       imageUrl: "../../../public/question.png",
       imageHeight: "18rem",
       footer: (
-        <strong style={{ fontFamily: "Vazirmatn" }}>موضوع : طبیعت</strong>
+        <strong style={{ fontFamily: "Vazirmatn" }}>
+          موضوع : {question.subject}
+        </strong>
       ),
       showClass: {
         popup: "animate__animated animate__swing",
@@ -107,7 +134,7 @@ function GamePage({
         popup: "animate__animated animate__fadeOutUp",
       },
     });
-  };
+  }
 
   useEffect(() => {
     // to listen for the game start event (when the game creator started the game)

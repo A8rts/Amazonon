@@ -14,4 +14,9 @@ export class QuestionsController {
   addQuestion(@Req() req) {
     return this.questionsService.addQuestion(req.body);
   }
+
+  @Post('/findQuestion')
+  findQuestion(@Req() req) {
+    return this.questionsService.findQuestion(req.body.gameSubjects);
+  }
 }
