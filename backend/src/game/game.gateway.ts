@@ -7,11 +7,14 @@ import {
   SubscribeMessage,
 } from '@nestjs/websockets';
 import { Socket } from 'socket.io';
+import { QuestionsService } from 'src/questions/questions.service';
 
 @WebSocketGateway(8001, { cors: '*' })
 export class GameGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
 {
+  constructor(readonly questionsService: QuestionsService) {}
+
   @WebSocketServer()
   server;
 
@@ -48,7 +51,14 @@ export class GameGateway
   }
 
   @SubscribeMessage('startGame') // for start games events
-  handleStartsGames(client: any) {
-    this.server.emit(`start${client.handshake.query['gameKey']}`);
+  async handleStartsGames(client: any, gameSubjects) {
+    const question = await this.questionsService.findQuestion(gameSubjects);
+    const randLength = Math.floor(Math.random() * question.length);
+    const rand_question = question[randLength][0]; // find question for show to players
+
+    this.server.emit(
+      `start${client.handshake.query['gameKey']}`,
+      rand_question,
+    );
   }
 }

@@ -8,5 +8,6 @@ import { QuestionsController } from './questions.controller';
   imports: [TypeOrmModule.forFeature([Questions])],
   providers: [QuestionsService],
   controllers: [QuestionsController],
+  exports: [QuestionsService],
 })
 export class QuestionsModule {}

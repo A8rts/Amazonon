@@ -77,19 +77,9 @@ function GamePage({
     };
   }, [usersListener]);
 
-  const startListener = () => {
+  const startListener = (question: any) => {
     setShow(false); // when the question is showed we want to clear the page
-
-    axios
-      .post("http://localhost:3001/questions/findQuestion", {
-        gameSubjects: gameData.subjects,
-      })
-      .then((res) => {
-        const randLength = Math.floor(Math.random() * res.data.length);
-        const question = res.data[randLength][0];
-
-        showQuestion(question); // for showing question to players
-      });
+    showQuestion(question);
   };
 
   function showQuestion(question: any) {
@@ -174,7 +164,7 @@ function GamePage({
         icon: "warning",
       });
     } else {
-      socket?.emit("startGame");
+      socket?.emit("startGame", gameData.subjects);
     }
   }
 

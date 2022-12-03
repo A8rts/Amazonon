@@ -4,9 +4,10 @@ import { Game } from './game.entity';
 import { GameService } from './game.service';
 import { GameController } from './game.controller';
 import { GameGateway } from './game.gateway';
+import { QuestionsModule } from 'src/questions/questions.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Game])],
+  imports: [QuestionsModule, TypeOrmModule.forFeature([Game])],
   providers: [GameService, GameGateway],
   controllers: [GameController],
 })
