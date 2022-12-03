@@ -5,6 +5,7 @@ import Users from "./Users";
 import "./GamePage.css";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
+import Beads from "./Beads";
 const MySwal = withReactContent(Swal);
 
 function GamePage({
@@ -19,7 +20,7 @@ function GamePage({
   const [socket, setSocket] = useState<Socket>();
   const [allUsers, setAllUsers] = useState<any[]>([]);
   const [show, setShow] = useState(true);
-  const [question, setQuestion] = useState("");
+  const [beads, setBeads] = useState(false);
 
   useEffect(() => {
     // make conneciton to Websocket server
@@ -123,6 +124,8 @@ function GamePage({
       hideClass: {
         popup: "animate__animated animate__fadeOutUp",
       },
+    }).then(() => {
+      setBeads(true);
     });
   }
 
@@ -164,7 +167,11 @@ function GamePage({
         icon: "warning",
       });
     } else {
-      socket?.emit("startGame", gameData.subjects);
+      socket?.emit("startGame", {
+        game_key: gameKey,
+        gameSubjects: gameData.subjects,
+        creator: gameData.creator,
+      });
     }
   }
 
@@ -178,6 +185,8 @@ function GamePage({
 
           <Users users={allUsers} gameData={gameData} />
         </div>
+      ) : beads ? (
+        <Beads />
       ) : (
         <></>
       )}

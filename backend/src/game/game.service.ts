@@ -2,12 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Game } from './game.entity';
+import { GameTimes } from './game_times.entity';
 
 @Injectable()
 export class GameService {
   constructor(
     @InjectRepository(Game)
     private gameRepository: Repository<Game>,
+    @InjectRepository(GameTimes)
+    private gameTimesRepository: Repository<GameTimes>,
   ) {}
 
   getAllPublicGames(type: string) {
@@ -56,4 +59,15 @@ export class GameService {
         .execute();
     }
   }
+
+  createGameTime(gameTimeData: any) {
+    const gameTime = new GameTimes();
+    gameTime.game_key = gameTimeData.game_key;
+    gameTime.creator = gameTimeData.creator;
+    gameTime.question_id = gameTimeData.question_id;
+    gameTime.beads = gameTimeData.beads;
+
+    this.gameTimesRepository.save(gameTime);
+  }
+
 }

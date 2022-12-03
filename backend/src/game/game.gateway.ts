@@ -8,12 +8,16 @@ import {
 } from '@nestjs/websockets';
 import { Socket } from 'socket.io';
 import { QuestionsService } from 'src/questions/questions.service';
+import { GameService } from './game.service';
 
 @WebSocketGateway(8001, { cors: '*' })
 export class GameGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
 {
-  constructor(readonly questionsService: QuestionsService) {}
+  constructor(
+    readonly questionsService: QuestionsService,
+    readonly gameService: GameService,
+  ) {}
 
   @WebSocketServer()
   server;
@@ -25,9 +29,6 @@ export class GameGateway
   }
 
   handleConnection(client: Socket) {
-    // console.log(client.handshake.query['capacity']);
-    const capacity = Number(client.handshake.query['capacity']);
-
     this.users.push({
       username: client.handshake.query['username'],
       gender: client.handshake.query['gender'],
@@ -51,10 +52,19 @@ export class GameGateway
   }
 
   @SubscribeMessage('startGame') // for start games events
-  async handleStartsGames(client: any, gameSubjects) {
-    const question = await this.questionsService.findQuestion(gameSubjects);
+  async handleStartsGames(client: any, messageData) {
+    const question = await this.questionsService.findQuestion(
+      messageData.gameSubjects,
+    );
     const randLength = Math.floor(Math.random() * question.length);
     const rand_question = question[randLength][0]; // find question for show to players
+
+    const game_time = this.gameService.createGameTime({
+      game_key: messageData.game_key,
+      creator: messageData.creator,
+      question_id: rand_question.id,
+      beads: {},
+    });
 
     this.server.emit(
       `start${client.handshake.query['gameKey']}`,

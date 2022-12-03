@@ -29,4 +29,9 @@ export class GameController {
   changeStatus(@Req() req) {
     return this.gameService.changeStatus(req.body.key, req.body.type);
   }
+
+  @Post('/create/game_time')
+  createGameTimes(@Req() req) {
+    return this.gameService.createGameTime(req.body);
+  }
 }
