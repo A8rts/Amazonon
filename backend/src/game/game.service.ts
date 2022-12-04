@@ -28,6 +28,8 @@ export class GameService {
     game.subjects = gameData.subjects;
     game.capacity = gameData.capacity;
     game.status = 'open';
+    game.start = false;
+    game.choose_beads = false;
 
     this.gameRepository.save(game);
     return game;
@@ -70,4 +72,22 @@ export class GameService {
     this.gameTimesRepository.save(gameTime);
   }
 
+  changeStart(key: any) {
+    // for when game creator started the game, we change thin event in database
+    return this.gameRepository
+      .createQueryBuilder()
+      .update(Game)
+      .set({ start: true })
+      .where('key = :key', { key: key })
+      .execute();
+  }
+
+  changeBeads(key: any) {
+    return this.gameRepository
+      .createQueryBuilder()
+      .update(Game)
+      .set({ choose_beads: true })
+      .where('key = :key', { key: key })
+      .execute();
+  }
 }

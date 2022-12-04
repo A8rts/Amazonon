@@ -5,7 +5,7 @@ import Users from "./Users";
 import "./GamePage.css";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
-import Beads from "./Beads";
+import Start from "./Start";
 const MySwal = withReactContent(Swal);
 
 function GamePage({
@@ -21,6 +21,7 @@ function GamePage({
   const [allUsers, setAllUsers] = useState<any[]>([]);
   const [show, setShow] = useState(true);
   const [beads, setBeads] = useState(false);
+  const [showingQuesiton, setShowingQuesiton] = useState(false);
 
   useEffect(() => {
     // make conneciton to Websocket server
@@ -33,6 +34,10 @@ function GamePage({
       },
     });
     setSocket(newSocket);
+
+    if (gameData.choose_beads == true) {
+      setBeads(true);
+    }
   }, [setSocket]);
 
   const usersListener = (users: any) => {
@@ -81,6 +86,8 @@ function GamePage({
   const startListener = (question: any) => {
     setShow(false); // when the question is showed we want to clear the page
     showQuestion(question);
+    axios.post("http://localhost:3001/game/changeStart", { key: gameKey });
+    gameData.start = true;
   };
 
   function showQuestion(question: any) {
@@ -97,7 +104,7 @@ function GamePage({
         question.subject = eng_subjects[i].farsi;
       }
     }
-
+    setShowingQuesiton(true);
     MySwal.fire({
       title: (
         <strong style={{ fontFamily: "Vazirmatn" }}>
@@ -115,7 +122,7 @@ function GamePage({
       imageHeight: "18rem",
       footer: (
         <strong style={{ fontFamily: "Vazirmatn" }}>
-          موضوع : {question.subject}
+          موضوع : {question.subject} || لطفا از صفحه خارج نیشد
         </strong>
       ),
       showClass: {
@@ -126,6 +133,8 @@ function GamePage({
       },
     }).then(() => {
       setBeads(true);
+      setShowingQuesiton(false);
+      axios.post("http://localhost:3001/game/changeBeads", { key: gameKey });
     });
   }
 
@@ -177,7 +186,9 @@ function GamePage({
 
   return (
     <main>
-      {show ? (
+      {gameData.start ? (
+        <></>
+      ) : show ? (
         <div>
           <button className="game-page-header" onClick={() => startGame()}>
             <p className="start-game-txt">شروع بازی</p>
@@ -185,8 +196,12 @@ function GamePage({
 
           <Users users={allUsers} gameData={gameData} />
         </div>
-      ) : beads ? (
-        <Beads />
+      ) : (
+        <></>
+      )}
+
+      {gameData.start ? (
+        <Start beads={beads} showingQuesiton={showingQuesiton} />
       ) : (
         <></>
       )}

@@ -34,4 +34,14 @@ export class GameController {
   createGameTimes(@Req() req) {
     return this.gameService.createGameTime(req.body);
   }
+
+  @Post('/changeStart')
+  changeStart(@Req() req) {
+    return this.gameService.changeStart(req.body.key);
+  }
+
+  @Post('/changeBeads')
+  changeBeads(@Req() req) {
+    return this.gameService.changeBeads(req.body.key);
+  }
 }

@@ -22,4 +22,10 @@ export class Game {
 
   @Column()
   status: string; // this is for when capacity of room is full and we do not allow other users join the game
+
+  @Column()
+  start: boolean;
+
+  @Column()
+  choose_beads: boolean;
 }
