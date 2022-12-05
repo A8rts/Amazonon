@@ -201,7 +201,14 @@ function GamePage({
       )}
 
       {gameData.start ? (
-        <Start beads={beads} showingQuesiton={showingQuesiton} />
+        <Start
+          beads={beads}
+          showingQuesiton={showingQuesiton}
+          gameKey={gameKey}
+          userData={userData}
+          socket={socket}
+          gameData={gameData}
+        />
       ) : (
         <></>
       )}

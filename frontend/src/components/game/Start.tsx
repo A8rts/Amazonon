@@ -3,16 +3,29 @@ import Beads from "./Beads";
 function Start({
   beads,
   showingQuesiton,
+  gameKey,
+  userData,
+  socket,
+  gameData,
 }: {
   beads: boolean;
   showingQuesiton: boolean;
+  gameKey: string;
+  userData: any;
+  socket: any;
+  gameData: any;
 }) {
   return (
     <main>
       {showingQuesiton ? (
         <></>
       ) : beads ? (
-        <Beads />
+        <Beads
+          gameKey={gameKey}
+          userData={userData}
+          socket={socket}
+          gameData={gameData}
+        />
       ) : (
         <div
           className="reloaded_status"

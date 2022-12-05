@@ -13,7 +13,4 @@ export class GameTimes {
 
   @Column()
   question_id: string;
-
-  @Column({ type: 'simple-json' })
-  beads: object;
 }

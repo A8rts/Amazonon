@@ -63,7 +63,7 @@ export class GameGateway
       game_key: messageData.game_key,
       creator: messageData.creator,
       question_id: rand_question.id,
-      beads: {},
+      beads: [],
     });
 
     this.server.emit(

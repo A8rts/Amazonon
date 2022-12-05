@@ -44,4 +44,21 @@ export class GameController {
   changeBeads(@Req() req) {
     return this.gameService.changeBeads(req.body.key);
   }
+
+  @Post('/saveBead')
+  saveBead(@Req() req) {
+    return this.gameService.saveBead(
+      req.body.gameKey,
+      req.body.username,
+      req.body.bead,
+    );
+  }
+
+  @Post('/checkBeadSended')
+  checkBeadSended(@Req() req) {
+    return this.gameService.checkBeadSended(
+      req.body.gameKey,
+      req.body.username,
+    );
+  }
 }

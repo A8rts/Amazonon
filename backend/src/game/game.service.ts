@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Beads } from './beads.entity';
 import { Game } from './game.entity';
 import { GameTimes } from './game_times.entity';
 
@@ -11,6 +12,8 @@ export class GameService {
     private gameRepository: Repository<Game>,
     @InjectRepository(GameTimes)
     private gameTimesRepository: Repository<GameTimes>,
+    @InjectRepository(Beads)
+    private beadsRepository: Repository<Beads>,
   ) {}
 
   getAllPublicGames(type: string) {
@@ -67,7 +70,6 @@ export class GameService {
     gameTime.game_key = gameTimeData.game_key;
     gameTime.creator = gameTimeData.creator;
     gameTime.question_id = gameTimeData.question_id;
-    gameTime.beads = gameTimeData.beads;
 
     this.gameTimesRepository.save(gameTime);
   }
@@ -89,5 +91,39 @@ export class GameService {
       .set({ choose_beads: true })
       .where('key = :key', { key: key })
       .execute();
+  }
+
+  async saveBead(gameKey: string, username: string, bead: any) {
+    const gameTimes = await this.gameTimesRepository.findBy({
+      game_key: gameKey,
+    });
+    const lastGame = gameTimes.slice(-1)[0]; // to get now game time data
+
+    const beads = new Beads();
+    beads.game_key = gameKey;
+    beads.username = username;
+    beads.bead = bead;
+    beads.game_time_id = lastGame.id;
+
+    return this.beadsRepository.save(beads);
+  }
+
+  async checkBeadSended(gameKey: string, username: string) {
+    const gameTimes = await this.gameTimesRepository.findBy({
+      game_key: gameKey,
+    });
+    const lastGame = gameTimes.slice(-1)[0];
+
+    const beads = await this.beadsRepository.findBy({
+      game_key: gameKey,
+      username: username,
+    });
+    const lastBead = beads.slice(-1)[0];
+
+    if (lastGame.id == lastBead.game_time_id) {
+      return true;
+    } else {
+      return "no";
+    }
   }
 }
