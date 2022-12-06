@@ -23,6 +23,7 @@ export class GameGateway
   server;
 
   users = []; // for handle users list
+  beads = [];
 
   afterInit() {
     console.log('afterInit');
@@ -69,6 +70,21 @@ export class GameGateway
     this.server.emit(
       `start${client.handshake.query['gameKey']}`,
       rand_question,
+    );
+  }
+
+  @SubscribeMessage('beadSended')
+  async handleBeadSended(client: any, bead: any) {
+    this.beads.push({
+      bead: bead.bead,
+      gameKey: client.handshake.query['gameKey'],
+    });
+
+    this.server.emit(
+      `saveBead${client.handshake.query['gameKey']}`,
+      this.beads.filter(
+        (bead) => bead.gameKey == client.handshake.query['gameKey'],
+      ),
     );
   }
 }

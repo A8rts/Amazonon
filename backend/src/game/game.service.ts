@@ -119,11 +119,15 @@ export class GameService {
       username: username,
     });
     const lastBead = beads.slice(-1)[0];
+    console.log(gameTimes);
 
-    if (lastGame.id == lastBead.game_time_id) {
+    if (
+      lastBead.game_time_id !== undefined &&
+      lastGame.id == lastBead.game_time_id
+    ) {
       return true;
     } else {
-      return "no";
+      return 'no';
     }
   }
 }
