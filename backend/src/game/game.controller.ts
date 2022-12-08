@@ -55,10 +55,17 @@ export class GameController {
   }
 
   @Post('/checkBeadSended')
+  //check the user sended the bead or not
   checkBeadSended(@Req() req) {
     return this.gameService.checkBeadSended(
       req.body.gameKey,
       req.body.username,
     );
+  }
+
+  @Post('/checkClosedBeads')
+  //check how many beads is open!
+  checkClosedBeads(@Req() req) {
+    return this.gameService.checkClosedBeads(req.body.gameKey);
   }
 }

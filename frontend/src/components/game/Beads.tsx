@@ -31,14 +31,33 @@ function Beads({
           setSendedBead(true);
         }
       });
-  });
+
+    axios
+      .post("http://localhost:3001/game/checkClosedBeads", {
+        gameKey: gameKey,
+      })
+      .then((res) => {
+        const prevBeads = [];
+        for (let i = 0; i < res.data.length; i++) {
+          if (res.data[i].bead == 1) {
+            res.data[i].bead = "one";
+            prevBeads.push(res.data[i].bead);
+          } else if (res.data[i].bead == 2) {
+            res.data[i].bead = "two";
+            prevBeads.push(res.data[i].bead);
+          } else if (res.data[i].bead == 3) {
+            res.data[i].bead = "three";
+            prevBeads.push(res.data[i].bead);
+          }
+        }
+        setBeads(prevBeads);
+      });
+  }, []);
 
   function checkDisabled(bead: number, limit: number, counts: any) {
-    console.log(counts);
-    console.log(limit);
-
+    //check if the selected bead is open or not
     if (bead == 1) {
-      if (counts.one <= limit) {
+      if (counts.one >= limit) {
         MySwal.fire({
           title: (
             <strong style={{ fontFamily: "Vazirmatn" }}>
@@ -101,8 +120,6 @@ function Beads({
   }
 
   function sendBead(bead: number) {
-    console.log(beads);
-    
     const counts: any = {};
     beads.forEach(function (x) {
       counts[x] = (counts[x] || 0) + 1;
@@ -114,15 +131,11 @@ function Beads({
     if (func) {
       //save the user bead on database
       if (sendedBead == false) {
-        axios
-          .post("http://localhost:3001/game/saveBead", {
-            gameKey: gameKey,
-            username: userData.username,
-            bead: bead,
-          })
-          .then((res) => {
-            console.log(res.data);
-          });
+        axios.post("http://localhost:3001/game/saveBead", {
+          gameKey: gameKey,
+          username: userData.username,
+          bead: bead,
+        });
 
         setSendedBead(true);
         socket.emit("beadSended", { bead: bead });
@@ -147,8 +160,7 @@ function Beads({
   }
 
   const saveBeadListener = (beads: any) => {
-    console.log(beads);
-
+    //save bead in state
     const allBeads = [];
     for (let i = 0; i < beads.length; i++) {
       if (beads[i].bead == 1) {

@@ -13,4 +13,7 @@ export class GameTimes {
 
   @Column()
   question_id: string;
+
+  @Column({ type: 'simple-array' })
+  close_bead: number[];
 }

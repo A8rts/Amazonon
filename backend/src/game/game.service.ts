@@ -130,4 +130,18 @@ export class GameService {
       return 'no';
     }
   }
+
+  async checkClosedBeads(gameKey: string) {
+    const gameTimes = await this.gameTimesRepository.findBy({
+      game_key: gameKey,
+    });
+    const lastGameTime = gameTimes.slice(-1)[0];
+
+    const allGameTimeBeads = await this.beadsRepository.findBy({
+      game_key: gameKey,
+      game_time_id: lastGameTime.id,
+    });
+
+    return allGameTimeBeads;
+  }
 }
