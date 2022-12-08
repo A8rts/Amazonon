@@ -28,4 +28,7 @@ export class Game {
 
   @Column()
   choose_beads: boolean;
+
+  @Column()
+  betting: boolean;
 }

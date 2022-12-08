@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Beads from "./Beads";
 
 function Start({
@@ -15,16 +16,32 @@ function Start({
   socket: any;
   gameData: any;
 }) {
+  const [betting, setBetting] = useState(false);
+
+  function changeBetting() {
+    setBetting(true);
+  }
+
+  useEffect(() => {
+    // for if betting section is true we show that
+    if (gameData.betting) {
+      setBetting(true);
+    }
+  });
+
   return (
     <main>
       {showingQuesiton ? (
         <></>
+      ) : betting ? (
+        <>this is betting</>
       ) : beads ? (
         <Beads
           gameKey={gameKey}
           userData={userData}
           socket={socket}
           gameData={gameData}
+          changeBetting={changeBetting}
         />
       ) : (
         <div

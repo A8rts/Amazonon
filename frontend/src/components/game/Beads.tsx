@@ -10,14 +10,17 @@ function Beads({
   userData,
   socket,
   gameData,
+  changeBetting,
 }: {
   gameKey: string;
   userData: any;
   socket: any;
   gameData: any;
+  changeBetting: any;
 }) {
   const [sendedBead, setSendedBead] = useState(false);
   const [beads, setBeads] = useState<number[]>([]);
+  const [countBeads, setCountBeads] = useState(0);
 
   useEffect(() => {
     // check the user is choose one bead or no
@@ -51,6 +54,7 @@ function Beads({
           }
         }
         setBeads(prevBeads);
+        setCountBeads(prevBeads.length);
       });
   }, []);
 
@@ -160,6 +164,7 @@ function Beads({
   }
 
   const saveBeadListener = (beads: any) => {
+    setCountBeads(beads.length);
     //save bead in state
     const allBeads = [];
     for (let i = 0; i < beads.length; i++) {
@@ -185,11 +190,30 @@ function Beads({
     };
   }, [saveBeadListener]);
 
+  useEffect(() => {
+    if (beads.length == gameData.capacity) {
+      changeBetting();
+      if (userData.username == gameData.creator) {
+        axios
+          .post("http://localhost:3001/game/chooseBeadsFinished", {
+            gameKey: gameKey,
+          })
+          .then((res) => {
+            console.log(res.data);
+          });
+      }
+    }
+  });
+
   return (
     <div className="beads mb-5">
       <p className="beads-page-txt">
         خب خب! حالا که سوالو خوندین مهره رنگی خود را انتخاب کنید
       </p>
+      <p className="count-beads-page-txt">
+        {countBeads} نفر مهره های خود را انتخاب کرده اند
+      </p>
+
       <div className="beads-box">
         <img src="../../../public/puzzle.png" className="bead-icon"></img>
         <button className="bead-btn one-score" onClick={() => sendBead(1)}>

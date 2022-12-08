@@ -79,6 +79,16 @@
   height: 18rem;
 }
 
+.count-beads-page-txt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.7rem;
+  font-family: Lalezar Regular;
+  color: #72348d;
+}
+
 @media screen and (max-width: 1750px) {
   .beads-box {
     width: 80%;
@@ -148,6 +158,10 @@
 }
 
 @media screen and (max-width: 648px) {
+  .count-beads-page-txt {
+    font-size: 1.3rem;
+  }
+
   .beads-page-txt {
     font-size: 2.2rem;
   }

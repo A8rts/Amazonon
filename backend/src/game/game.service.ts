@@ -33,6 +33,7 @@ export class GameService {
     game.status = 'open';
     game.start = false;
     game.choose_beads = false;
+    game.betting = false;
 
     this.gameRepository.save(game);
     return game;
@@ -143,5 +144,14 @@ export class GameService {
     });
 
     return allGameTimeBeads;
+  }
+
+  chooseBeadsFinished(key: string) {
+    return this.gameRepository
+      .createQueryBuilder()
+      .update(Game)
+      .set({ choose_beads: false, betting: true })
+      .where('key = :key', { key: key })
+      .execute();
   }
 }

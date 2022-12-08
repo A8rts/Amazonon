@@ -68,4 +68,10 @@ export class GameController {
   checkClosedBeads(@Req() req) {
     return this.gameService.checkClosedBeads(req.body.gameKey);
   }
+
+  @Post('/chooseBeadsFinished')
+  //when choose bead section in game is finished
+  chooseBeadsFinished(@Req() req) {
+    return this.gameService.chooseBeadsFinished(req.body.gameKey);
+  }
 }
