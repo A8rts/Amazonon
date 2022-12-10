@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Beads from "./Beads";
+import Betting from "./Betting";
 
 function Start({
   beads,
@@ -34,7 +35,7 @@ function Start({
       {showingQuesiton ? (
         <></>
       ) : betting ? (
-        <>this is betting</>
+        <Betting />
       ) : beads ? (
         <Beads
           gameKey={gameKey}

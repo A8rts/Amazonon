@@ -1,0 +1,46 @@
+.first-betting-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  width: 18rem;
+  height: 18rem;
+}
+
+.betting-box {
+  margin: auto;
+  width: 40%;
+  background-color: orange;
+  border-radius: 10px;
+  border: 3px solid black;
+}
+
+.betting-box-txt {
+  font-family: Lalezar Regular;
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.bet-icon-box {
+  float: right;
+  width: 20%;
+  margin-right: 5%;
+}
+
+.bet-icon {
+  width: 20rem;
+  height: 20rem;
+}
+
+.bet-icon-box-2 {
+  float: left;
+  margin-left: 5%;
+}
+
+.bet-icon-2 {
+  width: 20rem;
+  height: 20rem;
+}
