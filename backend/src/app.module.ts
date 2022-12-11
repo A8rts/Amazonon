@@ -13,6 +13,7 @@ import { QuestionsModule } from './questions/questions.module';
 import { Questions } from './questions/questions.entity';
 import { GameTimes } from './game/game_times.entity';
 import { Beads } from './game/beads.entity';
+import { Bettings } from './game/bettings.entity';
 
 @Module({
   imports: [
@@ -23,7 +24,15 @@ import { Beads } from './game/beads.entity';
       username: 'root',
       password: '',
       database: 'amazonon',
-      entities: [User, VerificationCode, Game, Questions, GameTimes, Beads],
+      entities: [
+        User,
+        VerificationCode,
+        Game,
+        Questions,
+        GameTimes,
+        Beads,
+        Bettings,
+      ],
       synchronize: true,
     }),
     UsersModule,

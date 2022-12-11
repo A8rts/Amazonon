@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Beads } from './beads.entity';
+import { Bettings } from './bettings.entity';
 import { Game } from './game.entity';
 import { GameTimes } from './game_times.entity';
 
@@ -14,6 +15,8 @@ export class GameService {
     private gameTimesRepository: Repository<GameTimes>,
     @InjectRepository(Beads)
     private beadsRepository: Repository<Beads>,
+    @InjectRepository(Bettings)
+    private bettingsRepository: Repository<Bettings>,
   ) {}
 
   getAllPublicGames(type: string) {
@@ -153,5 +156,42 @@ export class GameService {
       .set({ choose_beads: false, betting: true })
       .where('key = :key', { key: key })
       .execute();
+  }
+
+  async saveBettings(betting_list: any, gameKey: string) {
+    const gameTimes = await this.gameTimesRepository.findBy({
+      game_key: gameKey,
+    });
+    const lastGameTime = gameTimes.slice(-1)[0];
+
+    for (let i = 0; i < betting_list.length; i++) {
+      const bet = new Bettings();
+      bet.game_key = gameKey;
+      bet.game_time_id = lastGameTime.id;
+      bet.username = betting_list[i].name;
+      bet.to_player = betting_list[i].to;
+
+      this.bettingsRepository.save(bet);
+    }
+
+    return 'done the program :)))';
+  }
+
+  async checkBettingCreated(gameKey: string) {
+    const gameTimes = await this.gameTimesRepository.findBy({
+      game_key: gameKey,
+    });
+    const lastGameTime = gameTimes.slice(-1)[0];
+
+    const betting_list = await this.bettingsRepository.findBy({
+      game_key: gameKey,
+      game_time_id: lastGameTime.id,
+    });
+
+    if (betting_list.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

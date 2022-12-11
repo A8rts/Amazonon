@@ -74,4 +74,19 @@ export class GameController {
   chooseBeadsFinished(@Req() req) {
     return this.gameService.chooseBeadsFinished(req.body.gameKey);
   }
+
+  @Post('/saveBettings')
+  //when choose bead section in game is finished
+  saveBettings(@Req() req) {
+    return this.gameService.saveBettings(
+      req.body.betting_list,
+      req.body.gameKey,
+    );
+  }
+
+  @Post('/checkBettingCreated')
+  //check creator create the betting list on databsae or not
+  checkBettingCreated(@Req() req) {
+    return this.gameService.checkBettingCreated(req.body.gameKey);
+  }
 }

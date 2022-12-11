@@ -9,6 +9,7 @@ function Start({
   userData,
   socket,
   gameData,
+  allUsers,
 }: {
   beads: boolean;
   showingQuesiton: boolean;
@@ -16,6 +17,7 @@ function Start({
   userData: any;
   socket: any;
   gameData: any;
+  allUsers: any;
 }) {
   const [betting, setBetting] = useState(false);
 
@@ -32,35 +34,44 @@ function Start({
 
   return (
     <main>
-      {showingQuesiton ? (
-        <></>
-      ) : betting ? (
-        <Betting />
-      ) : beads ? (
-        <Beads
-          gameKey={gameKey}
-          userData={userData}
-          socket={socket}
-          gameData={gameData}
-          changeBetting={changeBetting}
-        />
+      {allUsers.length > 0 ? (
+        showingQuesiton ? (
+          <></>
+        ) : betting ? (
+          <Betting
+            users={allUsers}
+            gameKey={gameKey}
+            userData={userData}
+            gameData={gameData}
+          />
+        ) : beads ? (
+          <Beads
+            gameKey={gameKey}
+            userData={userData}
+            socket={socket}
+            gameData={gameData}
+            changeBetting={changeBetting}
+          />
+        ) : (
+          <div
+            className="reloaded_status"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontFamily: "Lalezar Regular",
+              fontSize: "2rem",
+              textAlign: "center",
+            }}
+          >
+            <p>
+              نباید صفحه رو رفرش میکردین! چند ثانیه صبر کنید و صفحه رو مجدد رفرش
+              کنید! اگر زمان نمایش سوال تمام شده باشد به بازی برخواهید گشت
+            </p>
+          </div>
+        )
       ) : (
-        <div
-          className="reloaded_status"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontFamily: "Lalezar Regular",
-            fontSize: "2rem",
-            textAlign: "center",
-          }}
-        >
-          <p>
-            نباید صفحه رو رفرش میکردین! چند ثانیه صبر کنید و صفحه رو مجدد رفرش
-            کنید! اگر زمان نمایش سوال تمام شده باشد به بازی برخواهید گشت
-          </p>
-        </div>
+        <></>
       )}
     </main>
   );
