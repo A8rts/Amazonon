@@ -10,7 +10,7 @@
 .betting-box {
   margin: auto;
   width: 40%;
-  background-color: orange;
+  background-color: #feac01;
   border-radius: 10px;
   border: 3px solid black;
 }
@@ -43,4 +43,241 @@
 .bet-icon-2 {
   width: 20rem;
   height: 20rem;
+}
+
+.bet-players-box {
+  width: 80%;
+  background-color: #ffcf00;
+  margin: auto;
+  border: 3px solid black;
+  max-height: 50vh;
+  overflow: auto;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.player-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  width: 45%;
+  background-color: #3498db;
+  border-radius: 50px;
+  font-family: Lalezar Regular;
+  font-size: 2rem;
+  border: 3px dashed black;
+}
+
+.player-name:hover {
+  background-color: #1f8fda;
+}
+
+.player-bet {
+  display: flex;
+  align-items: center;
+  border: 3px dashed black;
+  width: 90%;
+  margin: auto;
+  border-radius: 20px;
+  padding: 0.5rem;
+}
+
+.coin-bet-icon-add {
+  background-color: #df2b2b;
+  width: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5rem;
+  border-radius: 50px;
+  font-family: Lalezar Regular;
+  font-size: 2rem;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.coin-bet-icon-remove {
+  background-color: #df2b2b;
+  width: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5rem;
+  border-radius: 50px;
+  font-family: Lalezar Regular;
+  font-size: 2rem;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.bet-coin:hover {
+  background-color: #c22727;
+}
+
+.bet-icon-mobiles {
+  display: none;
+}
+
+@media screen and (max-width: 1835px) {
+  .coin-bet-icon-add {
+    margin-right: 3rem;
+  }
+
+  .coin-bet-icon-remove {
+    margin-left: 3rem;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .coin-bet-icon-add {
+    margin-right: 1rem;
+  }
+
+  .coin-bet-icon-remove {
+    margin-left: 1rem;
+  }
+}
+
+@media screen and (max-width: 1370px) {
+  .bet-icon {
+    width: 18rem;
+    height: 18rem;
+  }
+
+  .bet-icon-2 {
+    width: 18rem;
+    height: 18rem;
+  }
+
+  .bet-icon-box {
+    float: right;
+    width: 20%;
+    margin-right: 3%;
+  }
+
+  .bet-icon-box-2 {
+    float: left;
+    margin-left: 3%;
+  }
+
+  .betting-box {
+    width: 45%;
+  }
+}
+
+@media screen and (max-width: 1245px) {
+  .bet-icon-box {
+    margin-right: 1%;
+  }
+
+  .bet-icon-box-2 {
+    float: left;
+    margin-left: 1%;
+  }
+
+  .betting-box {
+    width: 46%;
+  }
+}
+
+@media screen and (max-width: 1133px) {
+  .bet-icon-box-2 {
+    display: none;
+  }
+
+  .betting-box {
+    width: 70%;
+  }
+
+  .bet-icon-box {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 856px) {
+  .betting-box {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .betting-box {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .first-betting-icon {
+    width: 15rem;
+    height: 15rem;
+  }
+
+  .betting-box {
+    width: 95%;
+  }
+
+  .bet-players-box {
+    width: 90%;
+  }
+
+  .player-bet {
+    display: flex;
+    align-items: center;
+    border: 3px dashed black;
+    width: 90%;
+    margin: auto;
+    border-radius: 20px;
+    padding: 0rem;
+  }
+
+  .player-name {
+    width: 50%;
+    font-size: 1.8rem;
+  }
+
+  .coin-bet-icon-add {
+    font-size: 1.8rem;
+    width: 2.9rem;
+  }
+
+  .coin-bet-icon-remove {
+    font-size: 1.8rem;
+    width: 2.9rem;
+  }
+}
+
+@media screen and (max-width: 445px) {
+  .first-betting-icon {
+    width: 15rem;
+    height: 15rem;
+  }
+
+  .betting-box {
+    width: 98%;
+  }
+
+  .player-name {
+    width: 50%;
+    font-size: 1.5rem;
+  }
+
+  .coin-bet-icon-add {
+    font-size: 1.5rem;
+    width: 2.5rem;
+    margin-right: 0.7rem;
+  }
+
+  .coin-bet-icon-remove {
+    font-size: 1.5rem;
+    width: 2.5rem;
+    margin-left: 0.7rem;
+  }
+
+  .betting-box-txt {
+    font-size: 2.3rem;
+  }
 }
