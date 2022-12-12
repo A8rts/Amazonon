@@ -87,4 +87,9 @@ export class GameGateway
       ),
     );
   }
+
+  @SubscribeMessage('getBettingList')
+  async handleGetBettingList(client: any, bet_list: any) {
+    this.server.emit('showBettingList', bet_list.bet_list);
+  }
 }

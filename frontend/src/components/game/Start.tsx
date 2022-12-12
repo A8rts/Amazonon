@@ -43,6 +43,7 @@ function Start({
             gameKey={gameKey}
             userData={userData}
             gameData={gameData}
+            socket={socket}
           />
         ) : beads ? (
           <Beads

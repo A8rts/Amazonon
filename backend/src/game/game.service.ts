@@ -164,17 +164,20 @@ export class GameService {
     });
     const lastGameTime = gameTimes.slice(-1)[0];
 
+    const bet_l = [];
+
     for (let i = 0; i < betting_list.length; i++) {
       const bet = new Bettings();
       bet.game_key = gameKey;
       bet.game_time_id = lastGameTime.id;
       bet.username = betting_list[i].name;
       bet.to_player = betting_list[i].to;
+      bet_l.push(bet);
 
       this.bettingsRepository.save(bet);
     }
 
-    return 'done the program :)))';
+    return bet_l;
   }
 
   async checkBettingCreated(gameKey: string) {
@@ -193,5 +196,19 @@ export class GameService {
     } else {
       return false;
     }
+  }
+
+  async getBettingList(gameKey: string) {
+    const gameTimes = await this.gameTimesRepository.findBy({
+      game_key: gameKey,
+    });
+    const lastGameTime = gameTimes.slice(-1)[0];
+
+    const betting_list = await this.bettingsRepository.findBy({
+      game_key: gameKey,
+      game_time_id: lastGameTime.id,
+    });
+
+    return betting_list;
   }
 }

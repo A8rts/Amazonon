@@ -89,4 +89,10 @@ export class GameController {
   checkBettingCreated(@Req() req) {
     return this.gameService.checkBettingCreated(req.body.gameKey);
   }
+
+  @Post('/getBettingList')
+  //check creator create the betting list on databsae or not
+  getBettingList(@Req() req) {
+    return this.gameService.getBettingList(req.body.gameKey);
+  }
 }

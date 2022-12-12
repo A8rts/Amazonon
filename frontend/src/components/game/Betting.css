@@ -58,6 +58,18 @@
   border-bottom-left-radius: 5px;
 }
 
+.to-player-txt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  font-family: Lalezar Regular;
+  font-size: 1.5rem;
+  color: black;
+  margin-top: -1rem;
+}
+
 .player-name {
   display: flex;
   align-items: center;
@@ -72,8 +84,16 @@
   border: 3px dashed black;
 }
 
+.disable-name {
+  background-color: #3498db54;
+}
+
 .player-name:hover {
   background-color: #1f8fda;
+}
+
+.disable-name:hover {
+  background-color: #3498db54;
 }
 
 .player-bet {
@@ -114,8 +134,16 @@
   cursor: pointer;
 }
 
+.disable-coin {
+  background-color: #df2b2bbb;
+}
+
 .bet-coin:hover {
   background-color: #c22727;
+}
+
+.disable-coin:hover {
+  background-color: #df2b2bbb;
 }
 
 .bet-icon-mobiles {
@@ -199,6 +227,10 @@
 }
 
 @media screen and (max-width: 856px) {
+  .to-player-txt {
+    font-size: 1.3rem;
+  }
+
   .betting-box {
     width: 80%;
   }
