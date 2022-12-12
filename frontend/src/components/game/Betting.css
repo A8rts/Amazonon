@@ -82,6 +82,7 @@
   font-family: Lalezar Regular;
   font-size: 2rem;
   border: 3px dashed black;
+  margin-top: 1rem;
 }
 
 .disable-name {
@@ -96,12 +97,23 @@
   background-color: #3498db54;
 }
 
+.king-player-bet {
+  border: 3px dashed black;
+  margin: auto;
+  width: 90%;
+  border-radius: 20px;
+  padding: 0.5rem;
+}
+
 .player-bet {
   display: flex;
   align-items: center;
+}
+
+.disable-player-bet {
   border: 3px dashed black;
-  width: 90%;
   margin: auto;
+  width: 90%;
   border-radius: 20px;
   padding: 0.5rem;
 }
@@ -118,6 +130,7 @@
   font-size: 2rem;
   margin-top: 1rem;
   cursor: pointer;
+  border: none;
 }
 
 .coin-bet-icon-remove {
@@ -132,6 +145,7 @@
   font-size: 2rem;
   margin-top: 1rem;
   cursor: pointer;
+  border: none;
 }
 
 .disable-coin {
@@ -148,6 +162,23 @@
 
 .bet-icon-mobiles {
   display: none;
+}
+
+.bet-coin-sec {
+  display: flex;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.coin-ic {
+  width: 5rem;
+  height: 5rem;
+}
+
+.count-coin-bet {
+  font-family: Lalezar Regular;
+  font-size: 1.5rem;
 }
 
 @media screen and (max-width: 1835px) {
@@ -167,6 +198,10 @@
 
   .coin-bet-icon-remove {
     margin-left: 1rem;
+  }
+
+  .player-name {
+    width: 50%;
   }
 }
 
@@ -256,7 +291,7 @@
     width: 90%;
   }
 
-  .player-bet {
+  .player-bet-disable {
     display: flex;
     align-items: center;
     border: 3px dashed black;
@@ -280,6 +315,11 @@
     font-size: 1.8rem;
     width: 2.9rem;
   }
+
+  .coin-ic {
+    width: 4rem;
+    height: 4rem;
+  }
 }
 
 @media screen and (max-width: 445px) {
@@ -300,13 +340,13 @@
   .coin-bet-icon-add {
     font-size: 1.5rem;
     width: 2.5rem;
-    margin-right: 0.7rem;
+    margin-right: 0.2rem;
   }
 
   .coin-bet-icon-remove {
     font-size: 1.5rem;
     width: 2.5rem;
-    margin-left: 0.7rem;
+    margin-left: 0.2rem;
   }
 
   .betting-box-txt {

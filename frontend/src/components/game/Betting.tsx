@@ -20,6 +20,8 @@ function Betting({
   >([]);
 
   const [myBet, setMyBet] = useState<Array<{ to_player: string }>>([]);
+  const [coin, setCoin] = useState(1);
+  const [mark, setMark] = useState("+");
 
   let sended = 0;
 
@@ -127,6 +129,28 @@ function Betting({
     };
   }, [showBettingListListener]);
 
+  function saveCoin(type: string) {
+    if (type == "add") {
+      setCoin(coin + 1);
+      if (coin + 1 == 0) {
+        setCoin(1);
+        setMark("+");
+      }
+      if (coin + 1 > 0) {
+        setMark("+");
+      }
+    } else if (type == "remove") {
+      setCoin(coin - 1);
+      if (coin - 1 == 0) {
+        setCoin(-1);
+        setMark("");
+      }
+      if (coin - 1 < 0) {
+        setMark("");
+      }
+    }
+  }
+
   return (
     <div className="betting mb-5">
       <img
@@ -163,13 +187,39 @@ function Betting({
 
             {betting.map((bet) =>
               bet.to_player == myBet.to_player ? (
-                <div className="player-bet mt-4 mb-4" key={bet.id}>
-                  <p className="bet-coin coin-bet-icon-add">+</p>
-                  <p className="player-name">{bet.to_player}</p>
-                  <p className="bet-coin coin-bet-icon-remove">-</p>
+                <div className="king-player-bet mt-4 mb-4" key={bet.id}>
+                  <div className="player-bet">
+                    <button
+                      className="bet-coin coin-bet-icon-add"
+                      onClick={() => saveCoin("add")}
+                    >
+                      +
+                    </button>
+
+                    <p className="player-name">{bet.to_player}</p>
+                    <button
+                      className="bet-coin coin-bet-icon-remove"
+                      onClick={() => saveCoin("remove")}
+                    >
+                      -
+                    </button>
+                  </div>
+                  <div className="bet-coin-sec mt-2">
+                    <p className="count-coin-bet mt-4">
+                      {mark}
+                      {coin} :{" "}
+                    </p>
+                    <img
+                      src="../../../public/coin.png"
+                      className="coin-ic"
+                    ></img>
+                  </div>
                 </div>
               ) : (
-                <div className="player-bet mt-4 mb-4" key={bet.id}>
+                <div
+                  className="player-bet mt-4 mb-4 disable-player-bet"
+                  key={bet.id}
+                >
                   <p className="bet-coin coin-bet-icon-add disable-coin">+</p>
                   <p className="player-name disable-name">{bet.to_player}</p>
                   <p className="bet-coin coin-bet-icon-remove disable-coin">
