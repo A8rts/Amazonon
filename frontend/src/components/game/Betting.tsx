@@ -52,17 +52,15 @@ function Betting({
             });
 
           sended++;
+        } else if (res.data == true) {
+          axios
+            .post("http://localhost:3001/game/getBettingList", {
+              gameKey: gameKey,
+            })
+            .then((res) => {
+              sort_betting_list(res.data);
+            });
         }
-      });
-  }, []);
-
-  useEffect(() => {
-    axios
-      .post("http://localhost:3001/game/getBettingList", {
-        gameKey: gameKey,
-      })
-      .then((res) => {
-        sort_betting_list(res.data);
       });
   }, []);
 
@@ -119,7 +117,7 @@ function Betting({
   }
 
   const showBettingListListener = (bet_list: any) => {
-    setBetting(bet_list);
+    sort_betting_list(bet_list);
   };
 
   useEffect(() => {
