@@ -16,4 +16,7 @@ export class Bettings {
 
   @Column()
   to_player: string;
+
+  @Column()
+  status: string;
 }

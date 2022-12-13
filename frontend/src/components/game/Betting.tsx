@@ -8,12 +8,14 @@ function Betting({
   userData,
   gameData,
   socket,
+  endedBetting,
 }: {
   users: any;
   gameKey: string;
   userData: any;
   gameData: any;
   socket: any;
+  endedBetting: any;
 }) {
   const [betting, setBetting] = useState<
     Array<{ username: string; to_player: string; id: number }>
@@ -22,6 +24,8 @@ function Betting({
   const [myBet, setMyBet] = useState<Array<{ to_player: string }>>([]);
   const [coin, setCoin] = useState(1);
   const [mark, setMark] = useState("+");
+  const [done, setDone] = useState(false); // for when player done the bet section we know that
+  const [allDones, setAllDones] = useState(0);
 
   let sended = 0;
 
@@ -63,6 +67,26 @@ function Betting({
         }
       });
   }, []);
+
+  useEffect(() => {
+    // check player done the betting section or not
+    axios
+      .post("http://localhost:3001/game/checkBettingDone", {
+        gameKey: gameKey,
+        username: userData.username,
+      })
+      .then((res) => {
+        if (res.data == true) {
+          setDone(true);
+        }
+      });
+
+    axios
+      .post("http://localhost:3001/game/countBettingDones", {
+        gameKey: gameKey,
+      })
+      .then((res) => setAllDones(res.data));
+  });
 
   function sort_betting_list(bet_list: any) {
     //move to first element in bet_list who the player is going to bet on that
@@ -149,6 +173,45 @@ function Betting({
     }
   }
 
+  function bettingDone() {
+    axios
+      .post("http://localhost:3001/game/setDoneBetting", {
+        gameKey: gameKey,
+        username: userData.username,
+      })
+      .then((res) => {
+        setDone(true);
+      });
+
+    socket.emit("bettingDone");
+  }
+
+  const onePlayerBettingDoneListener = () => {
+    setAllDones(allDones + 1);
+    if (userData.username == gameData.creator) {
+      if (allDones + 1 == gameData.capacity) {
+        socket.emit("bettingIsDone");
+      }
+    }
+  };
+
+  const bettingIsDoneListener = () => {
+    endedBetting(); // when all players finished betting, go to the answer to question
+    alert("the betting section is finished");
+  };
+
+  useEffect(() => {
+    socket.on(`onePlayerBettingDone${gameKey}`, onePlayerBettingDoneListener);
+    socket.on(`bettingIsDone${gameKey}`, bettingIsDoneListener);
+    return () => {
+      socket.off(
+        `onePlayerBettingDone${gameKey}`,
+        onePlayerBettingDoneListener
+      );
+      socket.off(`bettingIsDone${gameKey}`, bettingIsDoneListener);
+    };
+  }, [onePlayerBettingDoneListener, bettingIsDoneListener]);
+
   return (
     <div className="betting mb-5">
       <img
@@ -176,6 +239,14 @@ function Betting({
           <p className="to-player-txt mb-3">
             شما باید روی {myBet.to_player} شرط بندی کنید
           </p>
+          <p className="count-dones mb-2">{allDones} نفر شرط خود را بستند</p>
+          {done ? (
+            <></>
+          ) : (
+            <button className="iam-done mb-3" onClick={() => bettingDone()}>
+              من شرط بستم
+            </button>
+          )}
 
           <div className="bet-players-box mb-4">
             <img
@@ -183,47 +254,51 @@ function Betting({
               className="bet-icon-mobiles"
             />
 
-            {betting.map((bet) =>
-              bet.to_player == myBet.to_player ? (
-                <div className="king-player-bet mt-4 mb-4" key={bet.id}>
-                  <div className="player-bet">
-                    <button
-                      className="bet-coin coin-bet-icon-add"
-                      onClick={() => saveCoin("add")}
-                    >
-                      +
-                    </button>
+            {done ? (
+              <p className="betting-ended">شما شرط بندی خود را تمام کردید :)</p>
+            ) : (
+              betting.map((bet) =>
+                bet.to_player == myBet.to_player ? (
+                  <div className="king-player-bet mt-4 mb-4" key={bet.id}>
+                    <div className="player-bet">
+                      <button
+                        className="bet-coin coin-bet-icon-add"
+                        onClick={() => saveCoin("add")}
+                      >
+                        +
+                      </button>
 
-                    <p className="player-name">{bet.to_player}</p>
-                    <button
-                      className="bet-coin coin-bet-icon-remove"
-                      onClick={() => saveCoin("remove")}
-                    >
+                      <p className="player-name">{bet.to_player}</p>
+                      <button
+                        className="bet-coin coin-bet-icon-remove"
+                        onClick={() => saveCoin("remove")}
+                      >
+                        -
+                      </button>
+                    </div>
+                    <div className="bet-coin-sec mt-2">
+                      <p className="count-coin-bet mt-4">
+                        {mark}
+                        {coin} :{" "}
+                      </p>
+                      <img
+                        src="../../../public/coin.png"
+                        className="coin-ic"
+                      ></img>
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    className="player-bet mt-4 mb-4 disable-player-bet"
+                    key={bet.id}
+                  >
+                    <p className="bet-coin coin-bet-icon-add disable-coin">+</p>
+                    <p className="player-name disable-name">{bet.to_player}</p>
+                    <p className="bet-coin coin-bet-icon-remove disable-coin">
                       -
-                    </button>
-                  </div>
-                  <div className="bet-coin-sec mt-2">
-                    <p className="count-coin-bet mt-4">
-                      {mark}
-                      {coin} :{" "}
                     </p>
-                    <img
-                      src="../../../public/coin.png"
-                      className="coin-ic"
-                    ></img>
                   </div>
-                </div>
-              ) : (
-                <div
-                  className="player-bet mt-4 mb-4 disable-player-bet"
-                  key={bet.id}
-                >
-                  <p className="bet-coin coin-bet-icon-add disable-coin">+</p>
-                  <p className="player-name disable-name">{bet.to_player}</p>
-                  <p className="bet-coin coin-bet-icon-remove disable-coin">
-                    -
-                  </p>
-                </div>
+                )
               )
             )}
           </div>

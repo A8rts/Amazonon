@@ -181,6 +181,45 @@
   font-size: 1.5rem;
 }
 
+.iam-done {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  font-family: Lalezar Regular;
+  font-size: 1.5rem;
+  border-radius: 10px;
+  background-color: #27ae60;
+  border: 3px dashed black;
+  padding: 0.5rem;
+  width: 25%;
+}
+
+.iam-done:hover {
+  border: 3px solid black;
+}
+
+.betting-ended {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  font-family: Lalezar Regular;
+  font-size: 1.7rem;
+  padding: 2.5rem;
+}
+
+.count-dones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  font-family: Lalezar Regular;
+  font-size: 1.3rem;
+  color: #6d218d;
+  margin-top: -1rem;
+}
+
 @media screen and (max-width: 1835px) {
   .coin-bet-icon-add {
     margin-right: 3rem;
@@ -188,6 +227,10 @@
 
   .coin-bet-icon-remove {
     margin-left: 3rem;
+  }
+
+  .iam-done {
+    width: 30%;
   }
 }
 
@@ -206,6 +249,10 @@
 }
 
 @media screen and (max-width: 1370px) {
+  .iam-done {
+    width: 35%;
+  }
+
   .bet-icon {
     width: 18rem;
     height: 18rem;
@@ -278,6 +325,12 @@
 }
 
 @media screen and (max-width: 560px) {
+  .iam-done {
+    width: 40%;
+    font-size: 1.3rem;
+    padding: 0.4rem;
+  }
+
   .first-betting-icon {
     width: 15rem;
     height: 15rem;
@@ -323,6 +376,12 @@
 }
 
 @media screen and (max-width: 445px) {
+  .iam-done {
+    width: 45%;
+    font-size: 1.3rem;
+    padding: 0.4rem;
+  }
+
   .first-betting-icon {
     width: 15rem;
     height: 15rem;

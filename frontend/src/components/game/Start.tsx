@@ -25,6 +25,10 @@ function Start({
     setBetting(true);
   }
 
+  function endedBetting() {
+    setBetting(false);
+  }
+
   useEffect(() => {
     // for if betting section is true we show that
     if (gameData.betting) {
@@ -44,6 +48,7 @@ function Start({
             userData={userData}
             gameData={gameData}
             socket={socket}
+            endedBetting={endedBetting}
           />
         ) : beads ? (
           <Beads

@@ -135,11 +135,18 @@ export class GameService {
     }
   }
 
-  async checkClosedBeads(gameKey: string) {
+  async findLastGameTime(gameKey: string) {
+    // find last game time in the game with key :)
     const gameTimes = await this.gameTimesRepository.findBy({
       game_key: gameKey,
     });
     const lastGameTime = gameTimes.slice(-1)[0];
+
+    return lastGameTime;
+  }
+
+  async checkClosedBeads(gameKey: string) {
+    const lastGameTime = await this.findLastGameTime(gameKey);
 
     const allGameTimeBeads = await this.beadsRepository.findBy({
       game_key: gameKey,
@@ -159,10 +166,7 @@ export class GameService {
   }
 
   async saveBettings(betting_list: any, gameKey: string) {
-    const gameTimes = await this.gameTimesRepository.findBy({
-      game_key: gameKey,
-    });
-    const lastGameTime = gameTimes.slice(-1)[0];
+    const lastGameTime = await this.findLastGameTime(gameKey);
 
     const bet_l = [];
 
@@ -172,6 +176,7 @@ export class GameService {
       bet.game_time_id = lastGameTime.id;
       bet.username = betting_list[i].name;
       bet.to_player = betting_list[i].to;
+      bet.status = 'not_done';
       bet_l.push(bet);
 
       this.bettingsRepository.save(bet);
@@ -181,10 +186,7 @@ export class GameService {
   }
 
   async checkBettingCreated(gameKey: string) {
-    const gameTimes = await this.gameTimesRepository.findBy({
-      game_key: gameKey,
-    });
-    const lastGameTime = gameTimes.slice(-1)[0];
+    const lastGameTime = await this.findLastGameTime(gameKey);
 
     const betting_list = await this.bettingsRepository.findBy({
       game_key: gameKey,
@@ -199,10 +201,7 @@ export class GameService {
   }
 
   async getBettingList(gameKey: string) {
-    const gameTimes = await this.gameTimesRepository.findBy({
-      game_key: gameKey,
-    });
-    const lastGameTime = gameTimes.slice(-1)[0];
+    const lastGameTime = await this.findLastGameTime(gameKey);
 
     const betting_list = await this.bettingsRepository.findBy({
       game_key: gameKey,
@@ -210,5 +209,57 @@ export class GameService {
     });
 
     return betting_list;
+  }
+
+  async setDoneBetting(gameKey: string, username: string) {
+    const lastGameTime = await this.findLastGameTime(gameKey);
+
+    return this.bettingsRepository
+      .createQueryBuilder()
+      .update(Bettings)
+      .set({ status: 'done' })
+      .where('game_key = :gameKey', { gameKey: gameKey })
+      .andWhere('game_time_id = :game_time_id', {
+        game_time_id: lastGameTime.id,
+      })
+      .andWhere('username = :username', { username: username })
+      .execute();
+  }
+
+  async checkBettingDone(gameKey: string, username: string) {
+    const lastGameTime = await this.findLastGameTime(gameKey);
+
+    const user_bet = await this.bettingsRepository.findBy({
+      game_key: gameKey,
+      game_time_id: lastGameTime.id,
+      username: username,
+    });
+
+    if (user_bet.length > 0) {
+      if (user_bet[0].status == 'done') {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  async countBettingDones(gameKey: string) {
+    const lastGameTime = await this.findLastGameTime(gameKey);
+
+    const bettings = await this.bettingsRepository.findBy({
+      game_key: gameKey,
+      game_time_id: lastGameTime.id,
+    });
+
+    let count = 0;
+
+    for (let i = 0; i < bettings.length; i++) {
+      if (bettings[i].status == 'done') {
+        count++;
+      }
+    }
+
+    return count;
   }
 }

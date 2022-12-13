@@ -92,4 +92,16 @@ export class GameGateway
   async handleGetBettingList(client: any, bet_list: any) {
     this.server.emit('showBettingList', bet_list.bet_list);
   }
+
+  @SubscribeMessage('bettingDone')
+  async handleBettingDone(client: any) {
+    this.server.emit(
+      `onePlayerBettingDone${client.handshake.query['gameKey']}`,
+    );
+  }
+
+  @SubscribeMessage('bettingIsDone')
+  async handleBettingIsDone(client: any) {
+    this.server.emit(`bettingIsDone${client.handshake.query['gameKey']}`);
+  }
 }

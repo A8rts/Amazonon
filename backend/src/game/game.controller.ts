@@ -91,8 +91,28 @@ export class GameController {
   }
 
   @Post('/getBettingList')
-  //check creator create the betting list on databsae or not
   getBettingList(@Req() req) {
     return this.gameService.getBettingList(req.body.gameKey);
+  }
+
+  @Post('/setDoneBetting')
+  // when player say my betting is done we change it in database
+  setDoneBetting(@Req() req) {
+    return this.gameService.setDoneBetting(req.body.gameKey, req.body.username);
+  }
+
+  @Post('/checkBettingDone')
+  // check the player is finished the betting section or not
+  checkBettingDone(@Req() req) {
+    return this.gameService.checkBettingDone(
+      req.body.gameKey,
+      req.body.username,
+    );
+  }
+
+  @Post('/countBettingDones')
+  // for count all dones betting in the game
+  countBettingDones(@Req() req) {
+    return this.gameService.countBettingDones(req.body.gameKey);
   }
 }
