@@ -19,4 +19,7 @@ export class Bettings {
 
   @Column()
   status: string;
+
+  @Column()
+  bet_coin: number;
 }

@@ -115,4 +115,14 @@ export class GameController {
   countBettingDones(@Req() req) {
     return this.gameService.countBettingDones(req.body.gameKey);
   }
+
+  @Post('/updateBettingCoin')
+  // for save bet coin to players
+  updateBettingCoin(@Req() req) {
+    return this.gameService.updateBettingCoin(
+      req.body.gameKey,
+      req.body.username,
+      req.body.coin,
+    );
+  }
 }

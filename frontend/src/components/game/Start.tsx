@@ -22,6 +22,7 @@ function Start({
   const [betting, setBetting] = useState(false);
 
   function changeBetting() {
+    // when betting is true we chnage true in state
     setBetting(true);
   }
 

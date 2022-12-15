@@ -28,8 +28,25 @@ function Betting({
   const [allDones, setAllDones] = useState(0);
 
   let sended = 0;
+  let countCreatedPoints = 0;
 
   useEffect(() => {
+    axios // to check the player point created or not
+      .post("http://localhost:3001/points/checkCreatedPoints", {
+        gameKey: gameKey,
+        username: userData.username,
+      })
+      .then((res) => {
+        if (res.data == "not_created" && countCreatedPoints == 0) {
+          axios // for save players coin on database and handle that
+            .post("http://localhost:3001/points/createPoints", {
+              gameKey: gameKey,
+              username: userData.username,
+            });
+          countCreatedPoints++;
+        }
+      });
+
     axios
       .post("http://localhost:3001/game/checkBettingCreated", {
         gameKey: gameKey,
@@ -152,6 +169,7 @@ function Betting({
   }, [showBettingListListener]);
 
   function saveCoin(type: string) {
+    // player choose coin for bet, we save that
     if (type == "add") {
       setCoin(coin + 1);
       if (coin + 1 == 0) {
@@ -183,6 +201,13 @@ function Betting({
         setDone(true);
       });
 
+    axios // to save your bet coin on database
+      .post("http://localhost:3001/game/updateBettingCoin", {
+        gameKey: gameKey,
+        username: userData.username,
+        coin: coin,
+      });
+
     socket.emit("bettingDone");
   }
 
@@ -196,8 +221,7 @@ function Betting({
   };
 
   const bettingIsDoneListener = () => {
-    endedBetting(); // when all players finished betting, go to the answer to question
-    alert("the betting section is finished");
+    alert("betting is doe :))))))))))))))");
   };
 
   useEffect(() => {

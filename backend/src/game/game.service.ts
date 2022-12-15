@@ -177,6 +177,7 @@ export class GameService {
       bet.username = betting_list[i].name;
       bet.to_player = betting_list[i].to;
       bet.status = 'not_done';
+      bet.bet_coin = 0;
       bet_l.push(bet);
 
       this.bettingsRepository.save(bet);
@@ -261,5 +262,20 @@ export class GameService {
     }
 
     return count;
+  }
+
+  async updateBettingCoin(gameKey: string, username: string, bet_coin: number) {
+    const lastGameTime = await this.findLastGameTime(gameKey);
+
+    return this.bettingsRepository
+      .createQueryBuilder()
+      .update(Bettings)
+      .set({ bet_coin: bet_coin })
+      .where('game_key = :gameKey', { gameKey: gameKey })
+      .andWhere('game_time_id = :game_time_id', {
+        game_time_id: lastGameTime.id,
+      })
+      .andWhere('username = :username', { username: username })
+      .execute();
   }
 }
