@@ -25,7 +25,7 @@ function Beads({
   useEffect(() => {
     // check the user is choose one bead or no
     axios
-      .post("http://localhost:3001/game/checkBeadSended", {
+      .post("http://localhost:3001/beads/checkBeadSended", {
         gameKey: gameKey,
         username: userData.username,
       })
@@ -36,7 +36,7 @@ function Beads({
       });
 
     axios
-      .post("http://localhost:3001/game/checkClosedBeads", {
+      .post("http://localhost:3001/beads/checkClosedBeads", {
         gameKey: gameKey,
       })
       .then((res) => {
@@ -135,7 +135,7 @@ function Beads({
     if (func) {
       //save the user bead on database
       if (sendedBead == false) {
-        axios.post("http://localhost:3001/game/saveBead", {
+        axios.post("http://localhost:3001/beads/saveBead", {
           gameKey: gameKey,
           username: userData.username,
           bead: bead,
@@ -195,7 +195,7 @@ function Beads({
       changeBetting();
       if (userData.username == gameData.creator) {
         axios
-          .post("http://localhost:3001/game/chooseBeadsFinished", {
+          .post("http://localhost:3001/beads/chooseBeadsFinished", {
             gameKey: gameKey,
           })
           .then((res) => {

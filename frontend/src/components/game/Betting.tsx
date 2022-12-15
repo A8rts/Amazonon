@@ -48,7 +48,7 @@ function Betting({
       });
 
     axios
-      .post("http://localhost:3001/game/checkBettingCreated", {
+      .post("http://localhost:3001/betting/checkBettingCreated", {
         gameKey: gameKey,
       })
       .then((res) => {
@@ -64,7 +64,7 @@ function Betting({
 
           const bet_list = betting_list_maker(move_up(names));
           axios
-            .post("http://localhost:3001/game/saveBettings", {
+            .post("http://localhost:3001/betting/saveBettings", {
               betting_list: bet_list,
               gameKey: gameKey,
             })
@@ -75,7 +75,7 @@ function Betting({
           sended++;
         } else if (res.data == true) {
           axios
-            .post("http://localhost:3001/game/getBettingList", {
+            .post("http://localhost:3001/betting/getBettingList", {
               gameKey: gameKey,
             })
             .then((res) => {
@@ -88,7 +88,7 @@ function Betting({
   useEffect(() => {
     // check player done the betting section or not
     axios
-      .post("http://localhost:3001/game/checkBettingDone", {
+      .post("http://localhost:3001/betting/checkBettingDone", {
         gameKey: gameKey,
         username: userData.username,
       })
@@ -99,7 +99,7 @@ function Betting({
       });
 
     axios
-      .post("http://localhost:3001/game/countBettingDones", {
+      .post("http://localhost:3001/betting/countBettingDones", {
         gameKey: gameKey,
       })
       .then((res) => setAllDones(res.data));
@@ -193,7 +193,7 @@ function Betting({
 
   function bettingDone() {
     axios
-      .post("http://localhost:3001/game/setDoneBetting", {
+      .post("http://localhost:3001/betting/setDoneBetting", {
         gameKey: gameKey,
         username: userData.username,
       })
@@ -202,7 +202,7 @@ function Betting({
       });
 
     axios // to save your bet coin on database
-      .post("http://localhost:3001/game/updateBettingCoin", {
+      .post("http://localhost:3001/betting/updateBettingCoin", {
         gameKey: gameKey,
         username: userData.username,
         coin: coin,
