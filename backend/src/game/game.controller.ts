@@ -45,4 +45,10 @@ export class GameController {
   chooseBeadsFinished(@Req() req) {
     return this.gameService.chooseBeadsFinished(req.body.gameKey);
   }
+
+  @Post('/setAnswerTime')
+  // time to show answer input to players
+  setAnswerTime(@Req() req) {
+    return this.gameService.setAnswerTime(req.body.gameKey);
+  }
 }

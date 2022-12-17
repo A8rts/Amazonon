@@ -8,14 +8,14 @@ function Betting({
   userData,
   gameData,
   socket,
-  endedBetting,
+  itIsAnswerTime,
 }: {
   users: any;
   gameKey: string;
   userData: any;
   gameData: any;
   socket: any;
-  endedBetting: any;
+  itIsAnswerTime: any;
 }) {
   const [betting, setBetting] = useState<
     Array<{ username: string; to_player: string; id: number }>
@@ -221,7 +221,12 @@ function Betting({
   };
 
   const bettingIsDoneListener = () => {
-    alert("betting is doe :))))))))))))))");
+    axios
+      .post("http://localhost:3001/game/setAnswerTime", { gameKey: gameKey })
+      .then((res) => {
+        console.log(res.data);
+      });
+    itIsAnswerTime(); // call itIsAnswerTime function(it is in Start.tsx)
   };
 
   useEffect(() => {

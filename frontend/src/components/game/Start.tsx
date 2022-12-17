@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import AnswerTime from "./AnswerTime";
 import Beads from "./Beads";
 import Betting from "./Betting";
 
@@ -20,19 +21,24 @@ function Start({
   allUsers: any;
 }) {
   const [betting, setBetting] = useState(false);
+  const [answerTime, setAnswerTime] = useState(false);
 
   function changeBetting() {
-    // when betting is true we chnage true in state
+    // when betting is true we chnage true in state(used in beads component)
     setBetting(true);
   }
 
-  function endedBetting() {
+  function itIsAnswerTime() {
     setBetting(false);
+    setAnswerTime(true);
   }
 
   useEffect(() => {
-    // for if betting section is true we show that
-    if (gameData.betting) {
+    // check status of game
+    if (gameData.answer_time) {
+      setBetting(false);
+      setAnswerTime(true);
+    } else if (gameData.betting) {
       setBetting(true);
     }
   });
@@ -42,6 +48,8 @@ function Start({
       {allUsers.length > 0 ? (
         showingQuesiton ? (
           <></>
+        ) : answerTime ? (
+          <AnswerTime />
         ) : betting ? (
           <Betting
             users={allUsers}
@@ -49,7 +57,7 @@ function Start({
             userData={userData}
             gameData={gameData}
             socket={socket}
-            endedBetting={endedBetting}
+            itIsAnswerTime={itIsAnswerTime}
           />
         ) : beads ? (
           <Beads
