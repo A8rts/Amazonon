@@ -19,6 +19,8 @@ import { Points } from './points/points.entity';
 import { GameTimesModule } from './game_times/game_times.module';
 import { BettingModule } from './betting/betting.module';
 import { BeadsModule } from './beads/beads.module';
+import { AnswerTimesModule } from './answer_times/answer_times.module';
+import { AnswerTimes } from './answer_times/answer_times.entity';
 
 @Module({
   imports: [
@@ -38,6 +40,7 @@ import { BeadsModule } from './beads/beads.module';
         Beads,
         Bettings,
         Points,
+        AnswerTimes,
       ],
       synchronize: true,
     }),
@@ -50,6 +53,7 @@ import { BeadsModule } from './beads/beads.module';
     GameTimesModule,
     BettingModule,
     BeadsModule,
+    AnswerTimesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

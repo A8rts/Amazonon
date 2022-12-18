@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import AnswerTime from "./AnswerTime";
 import Beads from "./Beads";
@@ -31,6 +32,15 @@ function Start({
   function itIsAnswerTime() {
     setBetting(false);
     setAnswerTime(true);
+
+    if (userData.username == gameData.creator) {
+      // create new answer time in database
+      axios
+        .post("http://localhost:3001/answer-times/create", {
+          gameKey: gameKey,
+        })
+        .then((res) => console.log(res.data));
+    }
   }
 
   useEffect(() => {
@@ -49,7 +59,7 @@ function Start({
         showingQuesiton ? (
           <></>
         ) : answerTime ? (
-          <AnswerTime />
+          <AnswerTime gameKey={gameKey} />
         ) : betting ? (
           <Betting
             users={allUsers}
