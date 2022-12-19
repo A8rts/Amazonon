@@ -1,0 +1,33 @@
+.count-coin {
+  width: 100%;
+  background-color: #232523;
+  color: white;
+  font-family: Lalezar Regular;
+  padding: 0.9rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 4px dashed #ff7a0d;
+  margin: auto;
+}
+
+.coin-coin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+.coin-txt {
+  font-size: 1.7rem;
+  color: #ffc522;
+}
+
+.coin-icon {
+  width: 5rem;
+  height: 5rem;
+}
+
+.your-coin-txt {
+  color: white;
+  font-size: 2rem;
+}

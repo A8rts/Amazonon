@@ -17,4 +17,9 @@ export class PointsController {
       req.body.username,
     );
   }
+
+  @Post('/getCoint') // to check we created player point data on databse or not
+  getCoint(@Req() req) {
+    return this.pointsService.getCoint(req.body.gameKey, req.body.username);
+  }
 }

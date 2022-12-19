@@ -30,4 +30,11 @@ export class PointsService {
 
     return 'not_created';
   }
+
+  async getCoint(gameKey: string, username: string) {
+    return this.pointsRepository.findOneBy({
+      game_key: gameKey,
+      username: username,
+    });
+  }
 }

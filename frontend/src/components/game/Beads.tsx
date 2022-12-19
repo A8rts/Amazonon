@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import "./Beads.css";
+import "./styles/Beads.css";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 const MySwal = withReactContent(Swal);

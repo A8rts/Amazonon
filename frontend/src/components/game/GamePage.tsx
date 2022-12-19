@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import io, { Socket } from "socket.io-client";
 import Users from "./Users";
-import "./GamePage.css";
+import "./styles/GamePage.css"
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 import Start from "./Start";

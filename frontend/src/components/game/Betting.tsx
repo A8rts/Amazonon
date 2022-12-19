@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import "./Betting.css";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
+const MySwal = withReactContent(Swal);
+import "./styles/Betting.css";
 
 function Betting({
   users,
@@ -8,6 +11,7 @@ function Betting({
   userData,
   gameData,
   socket,
+  userCoin,
   itIsAnswerTime,
 }: {
   users: any;
@@ -15,6 +19,7 @@ function Betting({
   userData: any;
   gameData: any;
   socket: any;
+  userCoin: any;
   itIsAnswerTime: any;
 }) {
   const [betting, setBetting] = useState<
@@ -26,6 +31,7 @@ function Betting({
   const [mark, setMark] = useState("+");
   const [done, setDone] = useState(false); // for when player done the bet section we know that
   const [allDones, setAllDones] = useState(0);
+  const [error, setError] = useState("");
 
   let sended = 0;
   let countCreatedPoints = 0;
@@ -171,22 +177,36 @@ function Betting({
   function saveCoin(type: string) {
     // player choose coin for bet, we save that
     if (type == "add") {
-      setCoin(coin + 1);
-      if (coin + 1 == 0) {
-        setCoin(1);
-        setMark("+");
-      }
-      if (coin + 1 > 0) {
-        setMark("+");
+      if (Math.abs(coin + 1) > userCoin) {
+        setError(
+          `شما فقط ${userCoin} تا سکه دارید بیشتر از آن نمیتوانید شرط بندی کنید`
+        );
+      } else {
+        setError("");
+        setCoin(coin + 1);
+        if (coin + 1 == 0) {
+          setCoin(1);
+          setMark("+");
+        }
+        if (coin + 1 > 0) {
+          setMark("+");
+        }
       }
     } else if (type == "remove") {
-      setCoin(coin - 1);
-      if (coin - 1 == 0) {
-        setCoin(-1);
-        setMark("");
-      }
-      if (coin - 1 < 0) {
-        setMark("");
+      if (Math.abs(coin - 1) > userCoin) {
+        setError(
+          `شما فقط ${userCoin} تا سکه دارید بیشتر از آن نمیتوانید شرط بندی کنید`
+        );
+      } else {
+        setError("");
+        setCoin(coin - 1);
+        if (coin - 1 == 0) {
+          setCoin(-1);
+          setMark("");
+        }
+        if (coin - 1 < 0) {
+          setMark("");
+        }
       }
     }
   }
@@ -315,6 +335,7 @@ function Betting({
                         className="coin-ic"
                       ></img>
                     </div>
+                    <p className="error-txt">{error}</p>
                   </div>
                 ) : (
                   <div
