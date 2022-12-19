@@ -104,4 +104,9 @@ export class GameGateway
   async handleBettingIsDone(client: any) {
     this.server.emit(`bettingIsDone${client.handshake.query['gameKey']}`);
   }
+
+  @SubscribeMessage('answetTimeFinished')
+  async handleAnswetTimeFinished(client: any) {
+    this.server.emit(`sendAnswers${client.handshake.query['gameKey']}`);
+  }
 }

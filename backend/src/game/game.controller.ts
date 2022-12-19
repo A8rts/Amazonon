@@ -51,4 +51,10 @@ export class GameController {
   setAnswerTime(@Req() req) {
     return this.gameService.setAnswerTime(req.body.gameKey);
   }
+
+  @Post('/itIsResultTime')
+  // time to show answer input to players
+  itIsResultTime(@Req() req) {
+    return this.gameService.itIsResultTime(req.body.gameKey);
+  }
 }

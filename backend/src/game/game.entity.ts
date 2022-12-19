@@ -34,4 +34,7 @@ export class Game {
 
   @Column()
   answer_time: boolean;
+
+  @Column()
+  result_time: boolean;
 }

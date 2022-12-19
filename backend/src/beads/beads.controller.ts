@@ -28,4 +28,10 @@ export class BeadsController {
   checkClosedBeads(@Req() req) {
     return this.beadsService.checkClosedBeads(req.body.gameKey);
   }
+
+  @Post('/getBead')
+  //check how many beads is open!
+  getBead(@Req() req) {
+    return this.beadsService.getBead(req.body.gameKey, req.body.username);
+  }
 }

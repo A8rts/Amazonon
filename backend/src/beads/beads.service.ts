@@ -71,4 +71,14 @@ export class BeadsService {
 
     return allGameTimeBeads;
   }
+
+  async getBead(gameKey: string, username: string) {
+    const lastGameTime = await this.findLastGameTime(gameKey);
+
+    return this.beadsRepository.findOneBy({
+      game_key: gameKey,
+      username: username,
+      game_time_id: lastGameTime.id,
+    });
+  }
 }

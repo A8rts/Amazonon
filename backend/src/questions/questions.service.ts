@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { GameTimes } from 'src/game_times/game_times.entity';
 import { Repository } from 'typeorm';
 import { Questions } from './questions.entity';
 
@@ -8,6 +9,8 @@ export class QuestionsService {
   constructor(
     @InjectRepository(Questions)
     private questionsRepository: Repository<Questions>,
+    @InjectRepository(GameTimes)
+    private gameTimesRepository: Repository<GameTimes>,
   ) {}
 
   getAll() {
@@ -35,5 +38,15 @@ export class QuestionsService {
     }
 
     return questions;
+  }
+
+  async getQuestion(gameKey: string) {
+    const gameTimes = await this.gameTimesRepository.findBy({
+      game_key: gameKey,
+    });
+    const lastGameTime = gameTimes.slice(-1)[0];
+    const questionId = Number(lastGameTime.question_id);
+
+    return this.questionsRepository.findOneBy({ id: questionId });
   }
 }

@@ -23,6 +23,19 @@ function Start({
 }) {
   const [betting, setBetting] = useState(false);
   const [answerTime, setAnswerTime] = useState(false);
+  const [resultTime, setResultTime] = useState(false);
+  const [questionDetail, setQuestionDetail] = useState([]);
+
+  useEffect(() => {
+    // for get question details in this game time
+    axios
+      .post("http://localhost:3001/questions/getQuestion", {
+        gameKey: gameKey,
+      })
+      .then((res) => {
+        setQuestionDetail(res.data);
+      });
+  }, []);
 
   function changeBetting() {
     // when betting is true we chnage true in state(used in beads component)
@@ -35,17 +48,24 @@ function Start({
 
     if (userData.username == gameData.creator) {
       // create new answer time in database
-      axios
-        .post("http://localhost:3001/answer-times/create", {
-          gameKey: gameKey,
-        })
-        .then((res) => console.log(res.data));
+      axios.post("http://localhost:3001/answer-times/create", {
+        gameKey: gameKey,
+      });
     }
   }
 
+  function itIsShowResultTime() {
+    setAnswerTime(false);
+    setResultTime(true);
+  }
+
   useEffect(() => {
-    // check status of game
-    if (gameData.answer_time) {
+    // check status of game to know show wich component
+    if (gameData.result_time) {
+      setBetting(false);
+      setAnswerTime(false);
+      setResultTime(true);
+    } else if (gameData.answer_time) {
       setBetting(false);
       setAnswerTime(true);
     } else if (gameData.betting) {
@@ -58,8 +78,17 @@ function Start({
       {allUsers.length > 0 ? (
         showingQuesiton ? (
           <></>
+        ) : resultTime ? (
+          <>it is result</>
         ) : answerTime ? (
-          <AnswerTime gameKey={gameKey} />
+          <AnswerTime
+            gameKey={gameKey}
+            socket={socket}
+            userData={userData}
+            questionDetail={questionDetail}
+            gameData={gameData}
+            itIsShowResultTime={itIsShowResultTime}
+          />
         ) : betting ? (
           <Betting
             users={allUsers}
