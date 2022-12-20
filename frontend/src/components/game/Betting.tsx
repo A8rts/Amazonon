@@ -13,6 +13,7 @@ function Betting({
   socket,
   userCoin,
   itIsAnswerTime,
+  setTheUserCoin,
 }: {
   users: any;
   gameKey: string;
@@ -21,6 +22,7 @@ function Betting({
   socket: any;
   userCoin: any;
   itIsAnswerTime: any;
+  setTheUserCoin: any;
 }) {
   const [betting, setBetting] = useState<
     Array<{ username: string; to_player: string; id: number }>
@@ -48,7 +50,8 @@ function Betting({
             .post("http://localhost:3001/points/createPoints", {
               gameKey: gameKey,
               username: userData.username,
-            });
+            })
+            .then(() => setTheUserCoin(2));
           countCreatedPoints++;
         }
       });
@@ -241,11 +244,9 @@ function Betting({
   };
 
   const bettingIsDoneListener = () => {
-    axios
-      .post("http://localhost:3001/game/setAnswerTime", { gameKey: gameKey })
-      .then((res) => {
-        console.log(res.data);
-      });
+    axios.post("http://localhost:3001/game/setAnswerTime", {
+      gameKey: gameKey,
+    });
     itIsAnswerTime(); // call itIsAnswerTime function(it is in Start.tsx)
   };
 

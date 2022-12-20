@@ -41,26 +41,22 @@ function Start({
   }, []);
 
   useEffect(() => {
-    getCoin();
-  }, []);
-
-  function getCoin() {
     axios
       .post("http://localhost:3001/points/getCoint", {
         gameKey: gameKey,
         username: userData.username,
       })
-      .then((res) => setUserCoin(res.data.coins));
-  }
+      .then((res) => {
+        setUserCoin(res.data.coins);
+      });
+  }, []);
 
   function changeBetting() {
     // when betting is true we chnage true in state(used in beads component)
     setBetting(true);
-    getCoin();
   }
 
   function itIsAnswerTime() {
-    getCoin();
     setBetting(false);
     setAnswerTime(true);
 
@@ -75,6 +71,11 @@ function Start({
   function itIsShowResultTime() {
     setAnswerTime(false);
     setResultTime(true);
+  }
+
+  function setTheUserCoin(coin: number) {
+    // to set real time coin on state
+    setUserCoin(coin);
   }
 
   useEffect(() => {
@@ -131,6 +132,7 @@ function Start({
             socket={socket}
             userCoin={userCoin}
             itIsAnswerTime={itIsAnswerTime}
+            setTheUserCoin={setTheUserCoin}
           />
         ) : beads ? (
           <Beads
