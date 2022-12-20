@@ -37,4 +37,33 @@ export class PointsService {
       username: username,
     });
   }
+
+  async applyResults(gameKey: string, result: any) {
+    for (let i = 0; i < result.length; i++) {
+      const old_coin = await this.pointsRepository.findOneBy({
+        game_key: gameKey,
+        username: result[i].username,
+      });
+
+      if (result[i].type == 'add') {
+        this.pointsRepository
+          .createQueryBuilder()
+          .update(Points)
+          .set({ coins: old_coin.coins + result[i].coin }) // add some coin to player
+          .where('game_key = :gameKey', { gameKey: gameKey })
+          .andWhere('username = :username', { username: result[i].username })
+          .execute();
+      } else if (result[i].type == 'remove') {
+        this.pointsRepository
+          .createQueryBuilder()
+          .update(Points)
+          .set({ coins: old_coin.coins - result[i].coin }) // delete some coin from player
+          .where('game_key = :gameKey', { gameKey: gameKey })
+          .andWhere('username = :username', { username: result[i].username })
+          .execute();
+      }
+    }
+
+    return 'done';
+  }
 }

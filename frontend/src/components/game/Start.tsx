@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import AnswerTime from "./AnswerTime";
 import Beads from "./Beads";
 import Betting from "./Betting";
+import Result from "./Result";
 import "./styles/Start.css";
 
 function Start({
@@ -25,7 +26,7 @@ function Start({
   const [betting, setBetting] = useState(false);
   const [answerTime, setAnswerTime] = useState(false);
   const [resultTime, setResultTime] = useState(false);
-  const [questionDetail, setQuestionDetail] = useState([]);
+  const [questionDetail, setQuestionDetail] = useState([]); // detail of question
   const [userCoin, setUserCoin] = useState(0);
 
   useEffect(() => {
@@ -40,20 +41,26 @@ function Start({
   }, []);
 
   useEffect(() => {
+    getCoin();
+  }, []);
+
+  function getCoin() {
     axios
       .post("http://localhost:3001/points/getCoint", {
         gameKey: gameKey,
         username: userData.username,
       })
       .then((res) => setUserCoin(res.data.coins));
-  }, []);
+  }
 
   function changeBetting() {
     // when betting is true we chnage true in state(used in beads component)
     setBetting(true);
+    getCoin();
   }
 
   function itIsAnswerTime() {
+    getCoin();
     setBetting(false);
     setAnswerTime(true);
 
@@ -86,7 +93,7 @@ function Start({
 
   return (
     <main>
-      {betting ? (
+      {betting || resultTime ? (
         <header className="count-coin">
           <div className="coin-coin">
             <p className="coin-txt mt-4">{userCoin} : </p>
@@ -101,7 +108,7 @@ function Start({
         showingQuesiton ? (
           <></>
         ) : resultTime ? (
-          <>it is result</>
+          <Result gameKey={gameKey} questionDetail={questionDetail}/>
         ) : answerTime ? (
           <AnswerTime
             gameKey={gameKey}

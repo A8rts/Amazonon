@@ -18,8 +18,13 @@ export class PointsController {
     );
   }
 
-  @Post('/getCoint') // to check we created player point data on databse or not
+  @Post('/getCoint')
   getCoint(@Req() req) {
     return this.pointsService.getCoint(req.body.gameKey, req.body.username);
+  }
+
+  @Post('/applyResults') // add point to players and remove poin from players
+  applyResults(@Req() req) {
+    return this.pointsService.applyResults(req.body.gameKey, req.body.result);
   }
 }

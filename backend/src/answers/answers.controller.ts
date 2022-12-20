@@ -18,4 +18,9 @@ export class AnswersController {
   checkSaved(@Req() req) {
     return this.answersService.checkSaved(req.body.gameKey, req.body.username);
   }
+
+  @Post('getAnswers')
+  getAnswers(@Req() req) {
+    return this.answersService.getAnswers(req.body.gameKey);
+  }
 }

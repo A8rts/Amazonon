@@ -44,4 +44,13 @@ export class AnswersService {
       game_time_id: lastGameTime.id,
     });
   }
+
+  async getAnswers(gameKey: string) {
+    const lastGameTime = await this.findLastGameTime(gameKey);
+
+    return this.answersRepository.findBy({
+      game_key: gameKey,
+      game_time_id: lastGameTime.id,
+    });
+  }
 }

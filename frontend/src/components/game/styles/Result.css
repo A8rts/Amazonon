@@ -1,0 +1,28 @@
+.result-txt {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 2.3rem;
+  font-family: Lalezar Regular;
+}
+
+.result-table {
+  margin: auto;
+  text-align: center;
+  width: 70%;
+  font-family: Lalezar Regular;
+  background-color: #FEAC01;
+  border-collapse: collapse;
+  border-radius: 10px;
+  border-style: hidden;
+  box-shadow: 0 0 0 3px black;
+}
+
+.result-line {
+  font-size: 1.9rem;
+  border: 2px solid black;
+}
+
+.td-result {
+  border: 2px solid black;
+}
