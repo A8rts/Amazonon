@@ -93,7 +93,7 @@ function Start({
 
   return (
     <main>
-      {betting || resultTime ? (
+      {betting ? (
         <header className="count-coin">
           <div className="coin-coin">
             <p className="coin-txt mt-4">{userCoin} : </p>
@@ -108,7 +108,11 @@ function Start({
         showingQuesiton ? (
           <></>
         ) : resultTime ? (
-          <Result gameKey={gameKey} questionDetail={questionDetail}/>
+          <Result
+            gameKey={gameKey}
+            questionDetail={questionDetail}
+            userCoin={userCoin}
+          />
         ) : answerTime ? (
           <AnswerTime
             gameKey={gameKey}

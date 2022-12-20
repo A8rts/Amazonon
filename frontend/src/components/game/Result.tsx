@@ -1,14 +1,18 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./styles/Result.css";
 
 function Result({
   gameKey,
   questionDetail,
+  userCoin,
 }: {
   gameKey: string;
   questionDetail: any;
+  userCoin: any;
 }) {
+  const [result, setResult] = useState([]);
+
   useEffect(() => {
     // to save betting list and answers
     let bettingList: any = [];
@@ -92,23 +96,115 @@ function Result({
         }
       }
     }
-    apply_results(betting_result);
+    apply_results(betting_result, bettingList, status_of_answers);
   }
 
-  function apply_results(betting_result: any) {
+  let countOfApplyResults = 0;
+
+  function apply_results(
+    betting_result: any,
+    bettingList: any,
+    status_of_answers: any
+  ) {
+    const r: any = [];
+
+    for (let o = 0; o < bettingList.length; o++) {
+      const to_player_answer_status = status_of_answers.filter(
+        (answer: any) => answer.username == bettingList[o].to_player
+      );
+      const my_betting_result = betting_result.filter(
+        (b: any) => b.username == bettingList[o].username
+      );
+
+      r.push({
+        name: bettingList[o].username,
+        answer_status: to_player_answer_status[0].status,
+        to: bettingList[o].to_player,
+        bet_coin: Math.abs(bettingList[o].bet_coin),
+        type_of_bet: bettingList[o].bet_coin > 0 ? "can" : "can't",
+        work_on_coin_type: my_betting_result[0].type,
+        count_coin: my_betting_result[0].coin,
+      });
+    }
+
+    setResult(r);
+
     // apply result on databse(add coin or remove coin)
-    axios.post("http://localhost:3001/points/applyResults", {
-      gameKey: gameKey,
-      result: betting_result,
-    });
+    if (countOfApplyResults == 0) {
+      axios
+        .post("http://localhost:3001/game-times/checkGameTimeStatus", {
+          gameKey: gameKey,
+        })
+        .then((res) => {
+          if (res.data.status !== "finished") {
+            axios.post("http://localhost:3001/points/applyResults", {
+              gameKey: gameKey,
+              result: betting_result,
+            });
+            axios.post("http://localhost:3001/game-times/finishGameTime", {
+              gameKey: gameKey,
+            });
+          }
+        });
+    }
+
+    countOfApplyResults++;
   }
 
   return (
-    <div>
+    <div className="mb-5">
+      <header className="start-header">امزونون</header>
+
       <div className="result">
-        <p className="result-txt mt-5">
+        <img src="../../../public/result.png" className="result-icon"></img>
+        <p className="result-txt">
           خب خب این دست تمام شد! ببینید چه کردید!
         </p>
+
+        <div className="count-player-coin mb-3">
+          <p className="mt-4">{userCoin} : </p>
+          <img src="../../../public/coin.png" className="coin-icon-2"></img>
+        </div>
+
+        <p className="answer-question mb-4">
+          جواب درست : {questionDetail.answer}
+        </p>
+        <table className="result-table">
+          <tbody>
+            <tr className="result-line">
+              <td className="td-result">نام</td>
+              <td className="td-result">جوابش به سوال</td>
+              <td className="td-result">روی کسی که شرط بسته</td>
+              <td className="td-result">تعداد سکه ای که شرط بسته</td>
+              <td className="td-result">روی چه چیزی شرط بسته؟</td>
+              <td className="td-result">سود و زیان بازیکن</td>
+            </tr>
+            {result.map((r: any) => (
+              <tr className="result-line" key={r.name}>
+                <td className="td-result">{r.name}</td>
+                <td className="td-result">
+                  {r.answer_status == "wrong" ? <>اشتباه</> : <>درست</>}
+                </td>
+                <td className="td-result">{r.to}</td>
+                <td className="td-result">{r.bet_coin}</td>
+                <td className="td-result">
+                  {r.type_of_bet == "can" ? (
+                    <>درست جواب دادن {r.to}</>
+                  ) : (
+                    <>اشتباه جواب دادن {r.to}</>
+                  )}
+                </td>
+                <td className="td-result">
+                  {r.work_on_coin_type == "add" ? (
+                    <>+{r.count_coin}</>
+                  ) : (
+                    <>-{r.count_coin}</>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

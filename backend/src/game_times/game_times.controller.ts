@@ -10,4 +10,14 @@ export class GameTimesController {
   createGameTimes(@Req() req) {
     return this.gameTimesService.createGameTime(req.body);
   }
+
+  @Post('finishGameTime')
+  finishGameTime(@Req() req) {
+    return this.gameTimesService.finishGameTime(req.body.gameKey);
+  }
+
+  @Post('checkGameTimeStatus')
+  checkGameTimeStatus(@Req() req) {
+    return this.gameTimesService.checkGameTimeStatus(req.body.gameKey);
+  }
 }

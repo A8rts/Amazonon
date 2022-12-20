@@ -14,7 +14,37 @@ export class GameTimesService {
     gameTime.game_key = gameTimeData.game_key;
     gameTime.creator = gameTimeData.creator;
     gameTime.question_id = gameTimeData.question_id;
+    gameTime.status = 'running';
 
     this.gameTimesRepository.save(gameTime);
+  }
+
+  async finishGameTime(gameKey: string) {
+    const gameTimes = await this.gameTimesRepository.findBy({
+      game_key: gameKey,
+    });
+    const lastGameTime = gameTimes.slice(-1)[0];
+
+    return this.gameTimesRepository
+      .createQueryBuilder()
+      .update(GameTimes)
+      .set({ status: 'finished' })
+      .where('game_key = :gameKey', { gameKey: gameKey })
+      .andWhere('id = :id', {
+        id: lastGameTime.id,
+      })
+      .execute();
+  }
+
+  async checkGameTimeStatus(gameKey: string) {
+    const gameTimes = await this.gameTimesRepository.findBy({
+      game_key: gameKey,
+    });
+    const lastGameTime = gameTimes.slice(-1)[0];
+
+    return this.gameTimesRepository.findOneBy({
+      game_key: gameKey,
+      id: lastGameTime.id,
+    });
   }
 }

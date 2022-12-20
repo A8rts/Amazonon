@@ -9,13 +9,18 @@
 .result-table {
   margin: auto;
   text-align: center;
-  width: 70%;
+  width: 80%;
   font-family: Lalezar Regular;
-  background-color: #FEAC01;
+  background-color: #feac01;
   border-collapse: collapse;
   border-radius: 10px;
   border-style: hidden;
   box-shadow: 0 0 0 3px black;
+}
+
+.coin-icon-2 {
+  width: 5rem;
+  height: 5rem;
 }
 
 .result-line {
@@ -25,4 +30,251 @@
 
 .td-result {
   border: 2px solid black;
+}
+
+.result-icon {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  width: 21rem;
+  height: 21rem;
+}
+
+.start-header {
+  width: 100%;
+  background-color: #298bcc;
+  color: white;
+  font-family: Lalezar Regular;
+  text-align: center;
+  font-size: 2.2rem;
+  padding: 1.7rem;
+}
+
+.answer-question {
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+  font-family: Lalezar Regular;
+  background-color: #009432;
+  width: 25%;
+  margin: auto;
+  border-radius: 10px;
+  border: 3px dashed rgb(3, 34, 3);
+}
+
+.count-player-coin {
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-size: 1.8rem;
+  font-family: Lalezar Regular;
+  background-color: #232523;
+  width: 15%;
+  margin: auto;
+  border-radius: 50px;
+  border: #8395a7 3px dashed;
+}
+
+@media screen and (max-width: 1777px) {
+  .result-table {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .count-player-coin {
+    width: 17%;
+  }
+
+  .result-table {
+    width: 90%;
+  }
+
+  .result-line {
+    font-size: 1.7rem;
+    border: 2px solid black;
+  }
+
+  .td-result {
+    border: 2px solid black;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .result-table {
+    width: 95%;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .result-table {
+    width: 98%;
+  }
+
+  .result-line {
+    font-size: 1.5rem;
+    border: 2px solid black;
+  }
+
+  .result-icon {
+    width: 18rem;
+    height: 18rem;
+  }
+
+  .count-player-coin {
+    width: 22%;
+    padding: 0rem;
+    font-size: 1.5rem;
+  }
+
+  .coin-icon-2 {
+    width: 4rem;
+    height: 4rem;
+    margin-top: 0.4rem;
+  }
+
+  .answer-question {
+    font-size: 1.5rem;
+    width: 35%;
+  }
+}
+
+@media screen and (max-width: 731px) {
+  .result-txt {
+    font-size: 2rem;
+  }
+
+  .result-table {
+    width: 98%;
+  }
+
+  .result-line {
+    font-size: 1.3rem;
+    border: 2px solid black;
+  }
+
+  .count-player-coin {
+    width: 28%;
+    padding: 0rem;
+    font-size: 1.5rem;
+  }
+
+  .answer-question {
+    font-size: 1.5rem;
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 497px) {
+  .result-txt {
+    font-size: 1.8rem;
+  }
+
+  .result-table {
+    width: 100%;
+    border-radius: 2px;
+  }
+
+  .result-line {
+    font-size: 1.1rem;
+  }
+
+  .result-icon {
+    width: 16rem;
+    height: 16rem;
+  }
+
+  .count-player-coin {
+    width: 35%;
+    padding: 0rem;
+    font-size: 1.4rem;
+    border-radius: 20px;
+  }
+
+  .coin-icon-2 {
+    width: 3rem;
+    height: 3rem;
+    margin-top: 0.8rem;
+  }
+
+  .answer-question {
+    font-size: 1.5rem;
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .result-txt {
+    font-size: 1.8rem;
+  }
+
+  .result-table {
+    width: 100%;
+    border-radius: 2px;
+  }
+
+  .result-line {
+    font-size: 1rem;
+  }
+
+  .result-icon {
+    width: 16rem;
+    height: 16rem;
+  }
+
+  .count-player-coin {
+    width: 35%;
+    padding: 0rem;
+    font-size: 1.4rem;
+    border-radius: 20px;
+  }
+
+  .coin-icon-2 {
+    width: 3rem;
+    height: 3rem;
+    margin-top: 0.8rem;
+  }
+
+  .answer-question {
+    font-size: 1.5rem;
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .result-txt {
+    font-size: 1.8rem;
+  }
+
+  .result-table {
+    width: 100%;
+    border-radius: 2px;
+  }
+
+  .result-line {
+    font-size: 1rem;
+  }
+
+  .result-icon {
+    width: 16rem;
+    height: 16rem;
+  }
+
+  .count-player-coin {
+    width: 40%;
+    padding: 0rem;
+    font-size: 1.4rem;
+    border-radius: 20px;
+  }
+
+  .coin-icon-2 {
+    width: 3rem;
+    height: 3rem;
+    margin-top: 0.8rem;
+  }
+
+  .answer-question {
+    font-size: 1.5rem;
+    width: 70%;
+  }
 }
