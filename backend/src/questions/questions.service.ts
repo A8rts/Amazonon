@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { GameTimes } from 'src/game_times/game_times.entity';
+import { GameTimes } from '@/game_times/game_times.entity';
 import { Repository } from 'typeorm';
-import { Questions } from './questions.entity';
+import { Questions } from '@/questions/questions.entity';
 
 @Injectable()
 export class QuestionsService {

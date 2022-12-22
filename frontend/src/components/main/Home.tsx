@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Header from "../layouts/Header";
-import Create from "./game_options/Create";
-import PublicGames from "./game_options/PublicGames";
-import "./Home.css";
+import Header from "@comp/layouts/Header";
+import Create from "@main/game_options/Create";
+import PublicGames from "@main/game_options/PublicGames";
+import "@main/Home.css";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 const MySwal = withReactContent(Swal);
@@ -83,7 +83,7 @@ function Home() {
 
   return (
     <main className="home">
-      <Header authenticated={true} admin={admin}/>
+      <Header authenticated={true} admin={admin} />
       {create ? (
         <Create name={name} />
       ) : games ? (

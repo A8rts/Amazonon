@@ -1,4 +1,4 @@
-import "./styles/Users.css";
+import "@game/styles/Users.css";
 
 function Users({
   users,

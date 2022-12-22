@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import io, { Socket } from "socket.io-client";
-import Users from "./Users";
-import "./styles/GamePage.css"
+import Users from "@game/Users";
+import "@game/styles/GamePage.css";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
-import Start from "./Start";
+import Start from "@game/Start";
 const MySwal = withReactContent(Swal);
 
 function GamePage({

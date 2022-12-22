@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import "./styles/Result.css";
+import "@game/styles/Result.css";
 
 function Result({
   gameKey,
@@ -157,9 +157,7 @@ function Result({
 
       <div className="result">
         <img src="../../../public/result.png" className="result-icon"></img>
-        <p className="result-txt">
-          خب خب این دست تمام شد! ببینید چه کردید!
-        </p>
+        <p className="result-txt">خب خب این دست تمام شد! ببینید چه کردید!</p>
 
         <div className="count-player-coin mb-3">
           <p className="mt-4">{userCoin} : </p>

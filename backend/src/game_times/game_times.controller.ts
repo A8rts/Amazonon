@@ -1,6 +1,6 @@
 import { Controller } from '@nestjs/common';
 import { Post, Req } from '@nestjs/common/decorators';
-import { GameTimesService } from './game_times.service';
+import { GameTimesService } from '@/game_times/game_times.service';
 
 @Controller('game-times')
 export class GameTimesController {

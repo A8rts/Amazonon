@@ -1,5 +1,5 @@
 import { Controller, Post, Req } from '@nestjs/common';
-import { BettingService } from './betting.service';
+import { BettingService } from '@/betting/betting.service';
 
 @Controller('betting')
 export class BettingController {

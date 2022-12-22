@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import GamePage from "./GamePage";
+import GamePage from "@game/GamePage";
 const MySwal = withReactContent(Swal);
 
 function Play() {

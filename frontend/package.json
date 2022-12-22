@@ -19,7 +19,8 @@
     "socket.io-client": "^4.5.3",
     "sweetalert2": "^11.6.4",
     "sweetalert2-react-content": "^5.0.7",
-    "typeface-lalezarregular": "^1.0.1"
+    "typeface-lalezarregular": "^1.0.1",
+    "vite-tsconfig-paths": "^4.0.3"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",

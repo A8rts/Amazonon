@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./components/auth/Login";
-import "./assets/fonts/Lalezar-Regular.woff";
-import Home from "./components/main/Home";
-import NotFound from "./components/NotFound";
-import Profile from "./components/main/Profile";
-import Play from "./components/game/Play";
-import About from "./components/main/About";
-import Admin from "./components/main/Admin";
+import Login from "@auth/Login";
+import "@/assets/fonts/Lalezar-Regular.woff";
+import Home from "@main/Home";
+import NotFound from "@comp/NotFound";
+import Profile from "@main/Profile";
+import Play from "@game/Play";
+import About from "@main/About";
+import Admin from "@main/Admin";
 
 function Game() {
   return (

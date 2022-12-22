@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import Header from "../layouts/Header";
-import "./Login.css";
-import Register from "./Register";
+import Header from "@comp/layouts/Header";
+import "@auth/Login.css";
+import Register from "@auth/Register";
 import "animate.css";
 import axios from "axios";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
-import VerifyCode from "./VerifyCode";
+import VerifyCode from "@auth/VerifyCode";
 const MySwal = withReactContent(Swal);
 
 function Login() {

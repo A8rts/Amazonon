@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-import "./Create.css";
+import "@main/game_options/Create.css";
 const MySwal = withReactContent(Swal);
 import withReactContent from "sweetalert2-react-content";
 import { useState } from "react";

@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { GameTimes } from 'src/game_times/game_times.entity';
-import { AnswersController } from './answers.controller';
-import { Answers } from './answers.entity';
-import { AnswersService } from './answers.service';
+import { GameTimes } from '@/game_times/game_times.entity';
+import { AnswersController } from '@/answers/answers.controller';
+import { Answers } from '@/answers/answers.entity';
+import { AnswersService } from '@/answers/answers.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Answers, GameTimes])],

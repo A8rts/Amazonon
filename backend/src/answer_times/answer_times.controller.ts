@@ -1,5 +1,5 @@
 import { Controller, Post, Req } from '@nestjs/common';
-import { AnswerTimesService } from './answer_times.service';
+import { AnswerTimesService } from '@/answer_times/answer_times.service';
 
 @Controller('answer-times')
 export class AnswerTimesController {

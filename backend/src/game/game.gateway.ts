@@ -7,8 +7,8 @@ import {
   SubscribeMessage,
 } from '@nestjs/websockets';
 import { Socket } from 'socket.io';
-import { QuestionsService } from 'src/questions/questions.service';
-import { GameService } from './game.service';
+import { QuestionsService } from '@/questions/questions.service';
+import { GameService } from '@/game/game.service';
 
 @WebSocketGateway(8001, { cors: '*' })
 export class GameGateway

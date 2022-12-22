@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Header from "../layouts/Header";
-import "./Profile.css";
+import Header from "@comp/layouts/Header";
+import "@main/Profile.css";
 
 function Profile() {
   const [userInfo, setUserInfo] = useState({

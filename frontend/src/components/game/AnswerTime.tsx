@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import "./styles/AnswerTime.css";
+import "@game/styles/AnswerTime.css";
 
 function AnswerTime({
   gameKey,

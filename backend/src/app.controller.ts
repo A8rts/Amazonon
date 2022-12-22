@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Req, UseGuards , Res , Next } from '@nestjs/common';
-import { AppService } from './app.service';
-import { AuthenticatedGuard } from './authentication/guards/authenticated.guard';
-import { LoginGuard } from './authentication/guards/login.guard';
+import { AppService } from '@/app.service';
+import { AuthenticatedGuard } from '@guards/authenticated.guard';
+import { LoginGuard } from '@guards/login.guard';
 
 @Controller()
 export class AppController {

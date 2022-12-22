@@ -1,5 +1,5 @@
 import { Controller, Post, Req } from '@nestjs/common';
-import { VerificationCodeService } from './verification_code.service';
+import { VerificationCodeService } from '@verification_code/verification_code.service';
 
 @Controller('verification-code')
 export class VerificationCodeController {

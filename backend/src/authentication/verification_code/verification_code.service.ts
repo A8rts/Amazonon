@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { VerificationCode } from './verification_code.entity';
+import { VerificationCode } from '@verification_code/verification_code.entity';
 
 @Injectable()
 export class VerificationCodeService {

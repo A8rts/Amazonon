@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Header from "../layouts/Header";
-import "./About.css";
+import Header from "@comp/layouts/Header";
+import "@main/About.css";
+
 
 function About() {
   const [name, setName] = useState("");

@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Header from "../layouts/Header";
-import "./Admin.css";
+import Header from "@comp/layouts/Header";
+import "@main/Admin.css";
+
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 const MySwal = withReactContent(Swal);

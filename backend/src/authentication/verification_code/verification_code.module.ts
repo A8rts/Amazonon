@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { VerificationCode } from './verification_code.entity';
-import { VerificationCodeService } from './verification_code.service';
-import { VerificationCodeController } from './verification_code.controller';
+import { VerificationCode } from '@verification_code/verification_code.entity';
+import { VerificationCodeService } from '@verification_code/verification_code.service';
+import { VerificationCodeController } from '@verification_code/verification_code.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([VerificationCode])],

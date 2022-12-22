@@ -1,5 +1,5 @@
 import { Controller, Post, Req } from '@nestjs/common';
-import { BeadsService } from './beads.service';
+import { BeadsService } from "@/beads/beads.service";
 
 @Controller('beads')
 export class BeadsController {

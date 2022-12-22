@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import AnswerTime from "./AnswerTime";
-import Beads from "./Beads";
-import Betting from "./Betting";
-import Result from "./Result";
-import "./styles/Start.css";
+import AnswerTime from "@game/AnswerTime";
+import Beads from "@game/Beads";
+import Betting from "@game/Betting";
+import Result from "@game/Result";
+import "@game/styles/Start.css";
 
 function Start({
   beads,

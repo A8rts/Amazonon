@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { PointsService } from './points.service';
-import { PointsController } from './points.controller';
+import { PointsService } from '@/points/points.service';
+import { PointsController } from '@/points/points.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Points } from './points.entity';
+import { Points } from '@/points/points.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Points])],

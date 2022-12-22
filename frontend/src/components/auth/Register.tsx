@@ -1,7 +1,7 @@
-import "./Register.css";
+import "@auth/Register.css";
 import "animate.css";
 import { useState } from "react";
-import VerifyCode from "./VerifyCode";
+import VerifyCode from "@auth/VerifyCode";
 import withReactContent from "sweetalert2-react-content";
 import axios from "axios";
 import Swal from "sweetalert2";

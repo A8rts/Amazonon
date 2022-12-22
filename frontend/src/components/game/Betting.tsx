@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 const MySwal = withReactContent(Swal);
-import "./styles/Betting.css";
+import "@game/styles/Betting.css";
 
 function Betting({
   users,

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Link } from "react-router-dom";
-import "./Header.css";
+import "@comp/layouts/Header.css";
 
 function Header({
   authenticated,
