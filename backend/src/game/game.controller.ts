@@ -57,4 +57,10 @@ export class GameController {
   itIsResultTime(@Req() req) {
     return this.gameService.itIsResultTime(req.body.gameKey);
   }
+
+  @Post('/setPlayAgain')
+  // make default conditions in the game
+  setPlayAgain(@Req() req) {
+    return this.gameService.setPlayAgain(req.body.gameKey);
+  }
 }

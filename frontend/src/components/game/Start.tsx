@@ -14,6 +14,7 @@ function Start({
   socket,
   gameData,
   allUsers,
+  startGame,
 }: {
   beads: boolean;
   showingQuesiton: boolean;
@@ -22,6 +23,7 @@ function Start({
   socket: any;
   gameData: any;
   allUsers: any;
+  startGame: any;
 }) {
   const [betting, setBetting] = useState(false);
   const [answerTime, setAnswerTime] = useState(false);
@@ -78,6 +80,10 @@ function Start({
     setUserCoin(coin);
   }
 
+  function playAgain() {
+    startGame();
+  }
+
   useEffect(() => {
     // check status of game to know show wich component
     if (gameData.result_time) {
@@ -113,6 +119,10 @@ function Start({
             gameKey={gameKey}
             questionDetail={questionDetail}
             userCoin={userCoin}
+            userData={userData}
+            gameData={gameData}
+            socket={socket}
+            playAgain={playAgain}
           />
         ) : answerTime ? (
           <AnswerTime

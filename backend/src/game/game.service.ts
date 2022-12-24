@@ -131,4 +131,19 @@ export class GameService {
       .where('key = :gameKey', { gameKey: gameKey })
       .execute();
   }
+
+  setPlayAgain(gameKey: string) {
+    return this.gameRepository
+      .createQueryBuilder()
+      .update(Game)
+      .set({
+        start: false,
+        choose_beads: false,
+        betting: false,
+        answer_time: false,
+        result_time: false,
+      })
+      .where('key = :gameKey', { gameKey: gameKey })
+      .execute();
+  }
 }

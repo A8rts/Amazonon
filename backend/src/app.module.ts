@@ -23,6 +23,8 @@ import { AnswerTimesModule } from '@/answer_times/answer_times.module';
 import { AnswerTimes } from '@/answer_times/answer_times.entity';
 import { AnswersModule } from '@/answers/answers.module';
 import { Answers } from '@/answers/answers.entity';
+import { PlayAgainTimesModule } from '@play_again/play_again_times.module';
+import { PlayAgainTimes } from '@play_again/play_again_times.entity';
 
 @Module({
   imports: [
@@ -44,6 +46,7 @@ import { Answers } from '@/answers/answers.entity';
         Points,
         AnswerTimes,
         Answers,
+        PlayAgainTimes
       ],
       synchronize: true,
     }),
@@ -58,6 +61,7 @@ import { Answers } from '@/answers/answers.entity';
     BeadsModule,
     AnswerTimesModule,
     AnswersModule,
+    PlayAgainTimesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

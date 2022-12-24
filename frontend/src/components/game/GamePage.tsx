@@ -209,6 +209,7 @@ function GamePage({
           socket={socket}
           gameData={gameData}
           allUsers={allUsers}
+          startGame={startGame}
         />
       ) : (
         <></>

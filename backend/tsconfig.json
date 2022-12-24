@@ -23,6 +23,7 @@
       "@users/*" : ["src/authentication/users/*"],
       "@auth/*" : ["src/authentication/auth/*"],
       "@guards/*" : ["src/authentication/guards/*"],
+      "@play_again/*" : ["src/play_again_times/*"],
     }
   },
   "include": ["src"],

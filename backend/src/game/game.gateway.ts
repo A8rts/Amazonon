@@ -109,4 +109,9 @@ export class GameGateway
   async handleAnswetTimeFinished(client: any) {
     this.server.emit(`sendAnswers${client.handshake.query['gameKey']}`);
   }
+
+  @SubscribeMessage('playAgain')
+  async handlePlayAgain(client: any) {
+    this.server.emit(`startAgain${client.handshake.query['gameKey']}`);
+  }
 }

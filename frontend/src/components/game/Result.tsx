@@ -6,14 +6,73 @@ function Result({
   gameKey,
   questionDetail,
   userCoin,
+  gameData,
+  userData,
+  socket,
+  playAgain,
 }: {
   gameKey: string;
   questionDetail: any;
   userCoin: any;
+  gameData: any;
+  userData: any;
+  socket: any;
+  playAgain: any;
 }) {
   const [result, setResult] = useState([]);
+  const [counter, setCounter] = useState(30);
 
   useEffect(() => {
+    const timer: any =
+      counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
+
+    return () => {
+      clearInterval(timer);
+      if (counter - 1 == 0) {
+        sendPlayAgainEvent();
+      }
+    };
+  }, [counter]);
+
+  let countOfPlayAgainTimeCreated = 0;
+
+  useEffect(() => {
+    axios
+      .post(
+        "http://localhost:3001/play-again-times/checkPlayAgainTimeCreated",
+        {
+          gameKey: gameKey,
+        }
+      )
+      .then((res) => {
+        if (
+          gameData.creator == userData.username &&
+          res.data == "not_created" &&
+          countOfPlayAgainTimeCreated == 0
+        ) {
+          axios
+            .post("http://localhost:3001/play-again-times/create", {
+              gameKey: gameKey,
+            })
+            .then((res) => console.log(res.data));
+          countOfPlayAgainTimeCreated++;
+        } else if (res.data !== "not_created") {
+          // to change the date for start the game again
+          const playAgainTimeDate = new Date(String(res.data[0].date));
+          const nowDate = new Date();
+
+          const diffDate = nowDate.getTime() - playAgainTimeDate.getTime();
+
+          const total_seconds = parseInt(String(Math.floor(diffDate / 1000)));
+
+          if (total_seconds > 30) {
+            sendPlayAgainEvent();
+          } else {
+            setCounter(30 - total_seconds);
+          }
+        }
+      });
+
     // to save betting list and answers
     let bettingList: any = [];
     let answersList: any = [];
@@ -34,6 +93,18 @@ function Result({
           });
       });
   }, []);
+
+  function sendPlayAgainEvent() {
+    if (gameData.creator == userData.username) {
+      axios
+        .post("http://localhost:3001/game/setPlayAgain", {
+          gameKey: gameKey,
+        })
+        .then(() => {
+          socket.emit("playAgain");
+        });
+    }
+  }
 
   function answers_checker(bettingList: any, answersList: any) {
     // check players answers is right or no and save that
@@ -99,8 +170,6 @@ function Result({
     apply_results(betting_result, bettingList, status_of_answers);
   }
 
-  let countOfApplyResults = 0;
-
   function apply_results(
     betting_result: any,
     bettingList: any,
@@ -110,8 +179,9 @@ function Result({
 
     for (let o = 0; o < bettingList.length; o++) {
       const to_player_answer_status = status_of_answers.filter(
-        (answer: any) => answer.username == bettingList[o].to_player
+        (answer: any) => answer.username == bettingList[o].username
       );
+
       const my_betting_result = betting_result.filter(
         (b: any) => b.username == bettingList[o].username
       );
@@ -129,6 +199,8 @@ function Result({
 
     setResult(r);
 
+    let countOfApplyResults = 0;
+
     // apply result on databse(add coin or remove coin)
     if (countOfApplyResults == 0) {
       axios
@@ -141,19 +213,32 @@ function Result({
               gameKey: gameKey,
               result: betting_result,
             });
-            axios.post("http://localhost:3001/game-times/finishGameTime", {
-              gameKey: gameKey,
-            });
+            axios
+              .post("http://localhost:3001/game-times/finishGameTime", {
+                gameKey: gameKey,
+              })
+              .then(() => {
+                countOfApplyResults++;
+              });
           }
         });
     }
-
-    countOfApplyResults++;
   }
+
+  const startAgainListener = () => {
+    playAgain(); // call playAgain function in (Start.tsx)
+  };
+
+  useEffect(() => {
+    socket.on(`startAgain${gameKey}`, startAgainListener);
+    return () => {
+      socket.off(`startAgain${gameKey}`, startAgainListener);
+    };
+  }, [startAgainListener]);
 
   return (
     <div className="mb-5">
-      <header className="start-header">امزونون</header>
+      <header className="start-header">{counter}</header>
 
       <div className="result">
         <img src="../../../public/result.png" className="result-icon"></img>
