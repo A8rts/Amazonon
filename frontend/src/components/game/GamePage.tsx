@@ -12,18 +12,23 @@ function GamePage({
   userData,
   gameKey,
   gameData,
+  updateGameData,
 }: {
   userData: any;
   gameKey: any;
   gameData: any;
+  updateGameData: any;
 }) {
   const [socket, setSocket] = useState<Socket>();
   const [allUsers, setAllUsers] = useState<any[]>([]);
   const [show, setShow] = useState(true);
   const [beads, setBeads] = useState(false);
   const [showingQuesiton, setShowingQuesiton] = useState(false);
+  const [start, setStart] = useState(false);
 
   useEffect(() => {
+    setStart(gameData.start);
+
     // make conneciton to Websocket server
     const newSocket = io("http://localhost:8001", {
       query: {
@@ -87,7 +92,7 @@ function GamePage({
     setShow(false); // when the question is showed we want to clear the page
     showQuestion(question);
     axios.post("http://localhost:3001/game/changeStart", { key: gameKey });
-    gameData.start = true;
+    setStart(true);
   };
 
   function showQuestion(question: any) {
@@ -147,6 +152,8 @@ function GamePage({
   }, [startListener]);
 
   function startGame() {
+    setStart(false);
+
     // send start game message to the websocket server
     if (userData.username !== gameData.creator) {
       MySwal.fire({
@@ -200,7 +207,7 @@ function GamePage({
         <></>
       )}
 
-      {gameData.start ? (
+      {gameData.start == true || start == true ? (
         <Start
           beads={beads}
           showingQuesiton={showingQuesiton}

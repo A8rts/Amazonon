@@ -73,6 +73,7 @@ function Start({
   function itIsShowResultTime() {
     setAnswerTime(false);
     setResultTime(true);
+    setBetting(false);
   }
 
   function setTheUserCoin(coin: number) {
@@ -86,16 +87,27 @@ function Start({
 
   useEffect(() => {
     // check status of game to know show wich component
-    if (gameData.result_time) {
-      setBetting(false);
-      setAnswerTime(false);
-      setResultTime(true);
-    } else if (gameData.answer_time) {
-      setBetting(false);
-      setAnswerTime(true);
-    } else if (gameData.betting) {
-      setBetting(true);
-    }
+    axios
+      .post("http://localhost:3001/game/info", { key: gameKey })
+      .then((res) => {
+        const info = res.data;
+
+        if (info.result_time) {
+          setBetting(false);
+          setAnswerTime(false);
+          setResultTime(true);
+        } else if (info.answer_time) {
+          setBetting(false);
+          setAnswerTime(true);
+          setResultTime(false);
+        } else if (info.betting) {
+          setBetting(true);
+          setAnswerTime(false);
+          setResultTime(false);
+        } else if (info.result_time == false) {
+          setResultTime(false);
+        }
+      });
   });
 
   return (
@@ -110,7 +122,6 @@ function Start({
       ) : (
         <></>
       )}
-
       {allUsers.length > 0 ? (
         showingQuesiton ? (
           <></>
