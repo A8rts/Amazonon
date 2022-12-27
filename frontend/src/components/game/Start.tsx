@@ -129,7 +129,6 @@ function Start({
           <Result
             gameKey={gameKey}
             questionDetail={questionDetail}
-            userCoin={userCoin}
             userData={userData}
             gameData={gameData}
             socket={socket}

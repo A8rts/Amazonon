@@ -5,7 +5,6 @@ import "@game/styles/Result.css";
 function Result({
   gameKey,
   questionDetail,
-  userCoin,
   gameData,
   userData,
   socket,
@@ -13,14 +12,14 @@ function Result({
 }: {
   gameKey: string;
   questionDetail: any;
-  userCoin: any;
   gameData: any;
   userData: any;
   socket: any;
   playAgain: any;
 }) {
   const [result, setResult] = useState([]);
-  const [counter, setCounter] = useState(30);
+  const [playerCoin, setPlayerCoin] = useState(0);
+  const [counter, setCounter] = useState(60);
 
   useEffect(() => {
     const timer: any =
@@ -38,6 +37,15 @@ function Result({
 
   useEffect(() => {
     axios
+      .post("http://localhost:3001/points/getCoint", {
+        gameKey: gameKey,
+        username: userData.username,
+      })
+      .then((res) => {
+        setPlayerCoin(res.data.coins);
+      });
+
+    axios
       .post(
         "http://localhost:3001/play-again-times/checkPlayAgainTimeCreated",
         {
@@ -50,11 +58,9 @@ function Result({
           res.data == "not_created" &&
           countOfPlayAgainTimeCreated == 0
         ) {
-          axios
-            .post("http://localhost:3001/play-again-times/create", {
-              gameKey: gameKey,
-            })
-            .then((res) => console.log(res.data));
+          axios.post("http://localhost:3001/play-again-times/create", {
+            gameKey: gameKey,
+          });
           countOfPlayAgainTimeCreated++;
         } else if (res.data !== "not_created") {
           // to change the date for start the game again
@@ -65,10 +71,10 @@ function Result({
 
           const total_seconds = parseInt(String(Math.floor(diffDate / 1000)));
 
-          if (total_seconds > 30) {
+          if (total_seconds > 60) {
             sendPlayAgainEvent();
           } else {
-            setCounter(30 - total_seconds);
+            setCounter(60 - total_seconds);
           }
         }
       });
@@ -170,6 +176,8 @@ function Result({
     apply_results(betting_result, bettingList, status_of_answers);
   }
 
+  let countOfApplyResults = 0;
+
   function apply_results(
     betting_result: any,
     bettingList: any,
@@ -199,8 +207,6 @@ function Result({
 
     setResult(r);
 
-    let countOfApplyResults = 0;
-
     // apply result on databse(add coin or remove coin)
     if (countOfApplyResults == 0) {
       axios
@@ -209,17 +215,15 @@ function Result({
         })
         .then((res) => {
           if (res.data.status !== "finished") {
-            axios.post("http://localhost:3001/points/applyResults", {
-              gameKey: gameKey,
-              result: betting_result,
-            });
             axios
-              .post("http://localhost:3001/game-times/finishGameTime", {
+              .post("http://localhost:3001/points/applyResults", {
                 gameKey: gameKey,
+                result: betting_result,
               })
-              .then(() => {
-                countOfApplyResults++;
-              });
+              .then(() => countOfApplyResults++);
+            axios.post("http://localhost:3001/game-times/finishGameTime", {
+              gameKey: gameKey,
+            });
           }
         });
     }
@@ -245,7 +249,7 @@ function Result({
         <p className="result-txt">خب خب این دست تمام شد! ببینید چه کردید!</p>
 
         <div className="count-player-coin mb-3">
-          <p className="mt-4">{userCoin} : </p>
+          <p className="mt-4">{playerCoin} : </p>
           <img src="../../../public/coin.png" className="coin-icon-2"></img>
         </div>
 

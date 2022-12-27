@@ -88,6 +88,13 @@ export class GameGateway
     );
   }
 
+  @SubscribeMessage('clearBeads')
+  async handleClearBeads(client: any) {
+    this.beads = this.beads.filter(
+      (bead: any) => bead.gameKey !== client.handshake.query['gameKey'],
+    );
+  }
+
   @SubscribeMessage('getBettingList')
   async handleGetBettingList(client: any, bet_list: any) {
     this.server.emit('showBettingList', bet_list.bet_list);

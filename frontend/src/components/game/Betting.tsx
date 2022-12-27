@@ -117,10 +117,12 @@ function Betting({
   function sort_betting_list(bet_list: any) {
     //move to first element in bet_list who the player is going to bet on that
     const my_bet: any = [];
+    console.log(bet_list);
 
     bet_list.map((bet: any) => {
       bet.username == userData.username ? my_bet.push(bet) : <></>;
     });
+    console.log(userData.username);
 
     bet_list = bet_list.filter(
       (bet: any) => bet.username !== userData.username

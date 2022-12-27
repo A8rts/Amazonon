@@ -31,7 +31,7 @@ function Beads({
         username: userData.username,
       })
       .then((res) => {
-        if (res.data) {
+        if (res.data !== "no") {
           setSendedBead(true);
         }
       });
@@ -203,6 +203,8 @@ function Beads({
             console.log(res.data);
           });
       }
+
+      socket.emit("clearBeads"); // when choose bead section is done, clear all choosed bead from beads array in backend
     }
   });
 

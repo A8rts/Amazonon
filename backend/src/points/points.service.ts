@@ -53,7 +53,10 @@ export class PointsService {
           .where('game_key = :gameKey', { gameKey: gameKey })
           .andWhere('username = :username', { username: result[i].username })
           .execute();
-      } else if (result[i].type == 'remove') {
+      } else if (
+        result[i].type == 'remove' &&
+        old_coin.coins - result[i].coin >= 0
+      ) {
         this.pointsRepository
           .createQueryBuilder()
           .update(Points)
