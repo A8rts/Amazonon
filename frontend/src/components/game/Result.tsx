@@ -173,30 +173,21 @@ function Result({
         }
       }
     }
-    apply_results(betting_result, bettingList, status_of_answers);
-  }
 
-  let countOfApplyResults = 0;
-
-  function apply_results(
-    betting_result: any,
-    bettingList: any,
-    status_of_answers: any
-  ) {
     const r: any = [];
 
     for (let o = 0; o < bettingList.length; o++) {
-      const to_player_answer_status = status_of_answers.filter(
+      const my_answer_status = status_of_answers.filter(
         (answer: any) => answer.username == bettingList[o].username
       );
-
       const my_betting_result = betting_result.filter(
         (b: any) => b.username == bettingList[o].username
       );
 
       r.push({
+        // save result data to show that
         name: bettingList[o].username,
-        answer_status: to_player_answer_status[0].status,
+        answer_status: my_answer_status[0].status,
         to: bettingList[o].to_player,
         bet_coin: Math.abs(bettingList[o].bet_coin),
         type_of_bet: bettingList[o].bet_coin > 0 ? "can" : "can't",
@@ -204,9 +195,15 @@ function Result({
         count_coin: my_betting_result[0].coin,
       });
     }
-
     setResult(r);
 
+    if (gameData.creator == userData.username) {
+      apply_results(betting_result);
+    }
+  }
+
+  let countOfApplyResults = 0; // for count requests to apply result
+  function apply_results(betting_result: any) {
     // apply result on databse(add coin or remove coin)
     if (countOfApplyResults == 0) {
       axios
