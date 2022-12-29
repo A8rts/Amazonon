@@ -27,4 +27,9 @@ export class PointsController {
   applyResults(@Req() req) {
     return this.pointsService.applyResults(req.body.gameKey, req.body.result);
   }
+
+  @Post('/getAllCoinsFromGame') // get all players coins
+  getAllCoinsFromGame(@Req() req) {
+    return this.pointsService.getAllCoinsFromGame(req.body.gameKey);
+  }
 }

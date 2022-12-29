@@ -10,6 +10,7 @@ function Result({
   socket,
   playAgain,
   answers,
+  weHaveWinner,
 }: {
   gameKey: string;
   questionDetail: any;
@@ -18,6 +19,7 @@ function Result({
   socket: any;
   playAgain: any;
   answers: any;
+  weHaveWinner: any;
 }) {
   const [result, setResult] = useState([]);
   const [playerCoin, setPlayerCoin] = useState(0);
@@ -231,6 +233,7 @@ function Result({
               })
               .then(() => {
                 countOfApplyResults++;
+                socket.emit("checkPoints");
               });
             axios.post("http://localhost:3001/game-times/finishGameTime", {
               gameKey: gameKey,
@@ -244,12 +247,47 @@ function Result({
     playAgain(); // call playAgain function in (Start.tsx)
   };
 
+  const getYourCoinAndCheckWinnerListener = () => {
+    const players_coins: any = [];
+    axios
+      .post("http://localhost:3001/points/getAllCoinsFromGame", {
+        gameKey: gameKey,
+      })
+      .then((res) => {
+        players_coins.push(res.data);
+
+        // update player coin next to betting
+        res.data.filter((p_coin: any) =>
+          p_coin.username == userData.username ? (
+            setPlayerCoin(p_coin.coins)
+          ) : (
+            <></>
+          )
+        );
+
+        //to check if one player coins are bigger than 10 coins we say that player is winner :)))
+        for (let c = 0; c < res.data.length; c++) {
+          if (res.data[c].coins > 2) {
+            weHaveWinner(); // call this function for show winner page
+          }
+        }
+      });
+  };
+
   useEffect(() => {
     socket.on(`startAgain${gameKey}`, startAgainListener);
+    socket.on(
+      `getYourCoinAndCheckWinner${gameKey}`,
+      getYourCoinAndCheckWinnerListener
+    );
     return () => {
       socket.off(`startAgain${gameKey}`, startAgainListener);
+      socket.off(
+        `getYourCoinAndCheckWinner${gameKey}`,
+        getYourCoinAndCheckWinnerListener
+      );
     };
-  }, [startAgainListener]);
+  }, [startAgainListener, getYourCoinAndCheckWinnerListener]);
 
   return (
     <div className="mb-5">

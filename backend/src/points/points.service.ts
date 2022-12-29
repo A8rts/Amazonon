@@ -69,4 +69,8 @@ export class PointsService {
 
     return 'done';
   }
+
+  getAllCoinsFromGame(gameKey: string) {
+    return this.pointsRepository.findBy({ game_key: gameKey });
+  }
 }

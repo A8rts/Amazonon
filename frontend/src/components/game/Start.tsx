@@ -31,6 +31,7 @@ function Start({
   const [questionDetail, setQuestionDetail] = useState([]); // detail of question
   const [userCoin, setUserCoin] = useState(0);
   const [answers, setAnswers] = useState<any>([]);
+  const [winner, setWinner] = useState(false);
 
   useEffect(() => {
     // for get question details in this game time
@@ -47,6 +48,10 @@ function Start({
         setUserCoin(res.data.coins);
       });
   }, []);
+
+  function weHaveWinner() {
+    setWinner(true);
+  }
 
   function getQuestionDetail() {
     axios
@@ -145,6 +150,8 @@ function Start({
       {allUsers.length > 0 ? (
         showingQuesiton ? (
           <></>
+        ) : winner ? (
+          <h1>We have winner</h1>
         ) : resultTime ? (
           <Result
             gameKey={gameKey}
@@ -154,6 +161,7 @@ function Start({
             socket={socket}
             playAgain={playAgain}
             answers={answers}
+            weHaveWinner={weHaveWinner}
           />
         ) : answerTime ? (
           <AnswerTime

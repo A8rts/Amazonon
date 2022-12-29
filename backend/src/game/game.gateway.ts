@@ -121,4 +121,11 @@ export class GameGateway
   async handlePlayAgain(client: any) {
     this.server.emit(`startAgain${client.handshake.query['gameKey']}`);
   }
+
+  @SubscribeMessage('checkPoints')
+  async handleCheckPoints(client: any) {
+    this.server.emit(
+      `getYourCoinAndCheckWinner${client.handshake.query['gameKey']}`,
+    );
+  }
 }
