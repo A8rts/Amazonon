@@ -9,6 +9,7 @@ function Result({
   userData,
   socket,
   playAgain,
+  answers,
 }: {
   gameKey: string;
   questionDetail: any;
@@ -16,6 +17,7 @@ function Result({
   userData: any;
   socket: any;
   playAgain: any;
+  answers: any;
 }) {
   const [result, setResult] = useState([]);
   const [playerCoin, setPlayerCoin] = useState(0);
@@ -81,22 +83,24 @@ function Result({
 
     // to save betting list and answers
     let bettingList: any = [];
-    let answersList: any = [];
-
     axios
       .post("http://localhost:3001/betting/getBettingList", {
         gameKey: gameKey,
       })
       .then((res) => {
         bettingList.push(res.data);
-        axios
-          .post("http://localhost:3001/answers/getAnswers", {
-            gameKey: gameKey,
-          })
-          .then((res) => {
-            answersList.push(res.data);
-            answers_checker(bettingList[0], res.data);
-          });
+
+        if (answers.length <= 0) {
+          axios // to get all answers
+            .post("http://localhost:3001/answers/getAnswers", {
+              gameKey: gameKey,
+            })
+            .then((res) => {
+              answers_checker(bettingList[0], res.data);
+            });
+        } else {
+          answers_checker(bettingList[0], answers); // start work to make results
+        }
       });
   }, []);
 
@@ -200,9 +204,17 @@ function Result({
     if (gameData.creator == userData.username) {
       apply_results(betting_result);
     }
+
+    axios
+      .post("http://localhost:3001/points/getCoint", {
+        gameKey: gameKey,
+        username: userData.username,
+      })
+      .then((res) => setPlayerCoin(res.data.coins));
   }
 
   let countOfApplyResults = 0; // for count requests to apply result
+
   function apply_results(betting_result: any) {
     // apply result on databse(add coin or remove coin)
     if (countOfApplyResults == 0) {
@@ -217,7 +229,9 @@ function Result({
                 gameKey: gameKey,
                 result: betting_result,
               })
-              .then(() => countOfApplyResults++);
+              .then(() => {
+                countOfApplyResults++;
+              });
             axios.post("http://localhost:3001/game-times/finishGameTime", {
               gameKey: gameKey,
             });

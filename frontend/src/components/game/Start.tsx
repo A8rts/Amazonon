@@ -30,16 +30,11 @@ function Start({
   const [resultTime, setResultTime] = useState(false);
   const [questionDetail, setQuestionDetail] = useState([]); // detail of question
   const [userCoin, setUserCoin] = useState(0);
+  const [answers, setAnswers] = useState<any>([]);
 
   useEffect(() => {
     // for get question details in this game time
-    axios
-      .post("http://localhost:3001/questions/getQuestion", {
-        gameKey: gameKey,
-      })
-      .then((res) => {
-        setQuestionDetail(res.data);
-      });
+    getQuestionDetail();
   }, []);
 
   useEffect(() => {
@@ -53,14 +48,26 @@ function Start({
       });
   }, []);
 
+  function getQuestionDetail() {
+    axios
+      .post("http://localhost:3001/questions/getQuestion", {
+        gameKey: gameKey,
+      })
+      .then((res) => {
+        setQuestionDetail(res.data);
+      });
+  }
+
   function changeBetting() {
     // when betting is true we chnage true in state(used in beads component)
     setBetting(true);
   }
 
   function itIsAnswerTime() {
+    // we go to answer to question
     setBetting(false);
     setAnswerTime(true);
+    setAnswers([]);
 
     if (userData.username == gameData.creator) {
       // create new answer time in database
@@ -71,9 +78,22 @@ function Start({
   }
 
   function itIsShowResultTime() {
-    setAnswerTime(false);
-    setResultTime(true);
-    setBetting(false);
+    // players go to see result game
+
+    axios // to get all answers
+      .post("http://localhost:3001/answers/getAnswers", {
+        gameKey: gameKey,
+      })
+      .then((res) => {
+        const uniques_answers = [
+          ...new Map(res.data.map((a: any) => [a.username, a])).values(),
+        ];
+        setAnswers(uniques_answers);
+
+        setAnswerTime(false);
+        setResultTime(true);
+        setBetting(false);
+      });
   }
 
   function setTheUserCoin(coin: number) {
@@ -133,6 +153,7 @@ function Start({
             gameData={gameData}
             socket={socket}
             playAgain={playAgain}
+            answers={answers}
           />
         ) : answerTime ? (
           <AnswerTime
@@ -142,6 +163,7 @@ function Start({
             questionDetail={questionDetail}
             gameData={gameData}
             itIsShowResultTime={itIsShowResultTime}
+            getQuestionDetail={getQuestionDetail}
           />
         ) : betting ? (
           <Betting

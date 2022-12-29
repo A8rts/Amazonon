@@ -195,13 +195,9 @@ function Beads({
     if (beads.length == gameData.capacity) {
       changeBetting();
       if (userData.username == gameData.creator) {
-        axios
-          .post("http://localhost:3001/beads/chooseBeadsFinished", {
-            gameKey: gameKey,
-          })
-          .then((res) => {
-            console.log(res.data);
-          });
+        axios.post("http://localhost:3001/game/chooseBeadsFinished", {
+          gameKey: gameKey,
+        });
       }
 
       socket.emit("clearBeads"); // when choose bead section is done, clear all choosed bead from beads array in backend

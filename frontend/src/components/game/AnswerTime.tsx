@@ -9,6 +9,7 @@ function AnswerTime({
   questionDetail,
   gameData,
   itIsShowResultTime,
+  getQuestionDetail,
 }: {
   gameKey: string;
   socket: any;
@@ -16,6 +17,7 @@ function AnswerTime({
   questionDetail: any;
   gameData: any;
   itIsShowResultTime: any;
+  getQuestionDetail: any;
 }) {
   const [counter, setCounter] = useState(30);
   const [answer, setAnswer] = useState("");
@@ -35,6 +37,8 @@ function AnswerTime({
   }, [counter]);
 
   useEffect(() => {
+    getQuestionDetail(); // for update question detail
+
     axios
       .post("http://localhost:3001/answer-times/getTime", {
         gameKey: gameKey,
@@ -83,18 +87,20 @@ function AnswerTime({
               answer: answer,
               username: userData.username,
             })
-            .then((res) => console.log(res.data));
+            .then((res) => {
+              if (gameData.creator == userData.username) {
+                // set result_time to true in databsae
+                axios
+                  .post("http://localhost:3001/game/itIsResultTime", {
+                    gameKey: gameKey,
+                  })
+                  .then(() => itIsShowResultTime());
+              } else {
+                itIsShowResultTime();
+              }
+            });
         }
       });
-
-    if (gameData.creator == userData.username) {
-      // set result_time to true in databsae
-      axios.post("http://localhost:3001/game/itIsResultTime", {
-        gameKey: gameKey,
-      });
-    }
-
-    itIsShowResultTime();
   };
 
   useEffect(() => {
