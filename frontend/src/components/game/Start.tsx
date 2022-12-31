@@ -5,6 +5,7 @@ import Beads from "@game/Beads";
 import Betting from "@game/Betting";
 import Result from "@game/Result";
 import "@game/styles/Start.css";
+import Winners from "./Winners";
 
 function Start({
   beads,
@@ -50,7 +51,10 @@ function Start({
   }, []);
 
   function weHaveWinner() {
-    setWinner(true);
+    // when game is ended
+    axios
+      .post("http://localhost:3001/game/gameEnded", { gameKey: gameKey })
+      .then(() => setWinner(true));
   }
 
   function getQuestionDetail() {
@@ -116,16 +120,24 @@ function Start({
       .post("http://localhost:3001/game/info", { key: gameKey })
       .then((res) => {
         const info = res.data;
-
-        if (info.result_time) {
+        if (info.ended) {
+          // for when game is ended
+          setWinner(true);
+          setBetting(false);
+          setAnswerTime(false);
+          setResultTime(false);
+        } else if (info.result_time) {
+          // for when result is ready to show
           setBetting(false);
           setAnswerTime(false);
           setResultTime(true);
         } else if (info.answer_time) {
+          // for when it is time for answer to question
           setBetting(false);
           setAnswerTime(true);
           setResultTime(false);
         } else if (info.betting) {
+          // for when it is time to bet on answers
           setBetting(true);
           setAnswerTime(false);
           setResultTime(false);
@@ -151,7 +163,7 @@ function Start({
         showingQuesiton ? (
           <></>
         ) : winner ? (
-          <h1>We have winner</h1>
+          <Winners />
         ) : resultTime ? (
           <Result
             gameKey={gameKey}

@@ -45,6 +45,7 @@ export class GameService {
     game.betting = false;
     game.answer_time = false;
     game.result_time = false;
+    game.ended = false;
 
     this.gameRepository.save(game);
     return game;
@@ -142,6 +143,22 @@ export class GameService {
         betting: false,
         answer_time: false,
         result_time: false,
+      })
+      .where('key = :gameKey', { gameKey: gameKey })
+      .execute();
+  }
+
+  gameEnded(gameKey: string) {
+    return this.gameRepository
+      .createQueryBuilder()
+      .update(Game)
+      .set({
+        start: true,
+        choose_beads: false,
+        betting: false,
+        answer_time: false,
+        result_time: false,
+        ended: true,
       })
       .where('key = :gameKey', { gameKey: gameKey })
       .execute();

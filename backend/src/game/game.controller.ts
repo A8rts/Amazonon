@@ -63,4 +63,10 @@ export class GameController {
   setPlayAgain(@Req() req) {
     return this.gameService.setPlayAgain(req.body.gameKey);
   }
+
+  @Post('/gameEnded')
+  // set ended to true (for show winners)
+  gameEnded(@Req() req) {
+    return this.gameService.gameEnded(req.body.gameKey);
+  }
 }

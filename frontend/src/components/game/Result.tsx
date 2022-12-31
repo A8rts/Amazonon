@@ -248,6 +248,8 @@ function Result({
   };
 
   const getYourCoinAndCheckWinnerListener = () => {
+    countOfApplyResults++;
+
     const players_coins: any = [];
     axios
       .post("http://localhost:3001/points/getAllCoinsFromGame", {
@@ -266,10 +268,23 @@ function Result({
         );
 
         //to check if one player coins are bigger than 10 coins we say that player is winner :)))
+        const winners = [];
         for (let c = 0; c < res.data.length; c++) {
-          if (res.data[c].coins > 2) {
-            weHaveWinner(); // call this function for show winner page
+          if (res.data[c].coins >= 10) {
+            winners.push(res.data[c].username);
           }
+        }
+
+        if (winners.length > 0) {
+          // if we have winner we save that on database
+          axios
+            .post("http://localhost:3001/winners/create", {
+              gameKey: gameKey,
+              winners: winners,
+            })
+            .then(
+              () => weHaveWinner() // call this function for show winner page
+            );
         }
       });
   };
