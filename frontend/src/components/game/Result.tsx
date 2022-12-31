@@ -216,6 +216,7 @@ function Result({
   }
 
   let countOfApplyResults = 0; // for count requests to apply result
+  let countOfCreatedWinner = 0;
 
   function apply_results(betting_result: any) {
     // apply result on databse(add coin or remove coin)
@@ -275,16 +276,18 @@ function Result({
           }
         }
 
-        if (winners.length > 0) {
+        if (winners.length > 0 && countOfCreatedWinner == 0) {
           // if we have winner we save that on database
           axios
             .post("http://localhost:3001/winners/create", {
               gameKey: gameKey,
               winners: winners,
             })
-            .then(
-              () => weHaveWinner() // call this function for show winner page
-            );
+            .then(() => {
+              weHaveWinner(); // call this function for show winner page
+              countOfApplyResults++;
+              countOfCreatedWinner++;
+            });
         }
       });
   };
@@ -306,7 +309,9 @@ function Result({
 
   return (
     <div className="mb-5">
-      <header className="start-header">{counter}</header>
+      <header className="start-header">
+        {counter} ثانیه تا شروع دوباره بازی :)
+      </header>
 
       <div className="result">
         <img src="../../../public/result.png" className="result-icon"></img>

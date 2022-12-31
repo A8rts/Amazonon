@@ -17,4 +17,8 @@ export class WinnersService {
 
     return this.winnersRepository.save(wins);
   }
+
+  getAll(gameKey: string) {
+    return this.winnersRepository.findOneBy({ game_key: gameKey });
+  }
 }

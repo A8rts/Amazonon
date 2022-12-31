@@ -163,7 +163,7 @@ function Start({
         showingQuesiton ? (
           <></>
         ) : winner ? (
-          <Winners />
+          <Winners gameKey={gameKey} userData={userData}/>
         ) : resultTime ? (
           <Result
             gameKey={gameKey}
