@@ -50,9 +50,9 @@ function Winners({ gameKey, userData }: { gameKey: string; userData: any }) {
         <p className="end-txt mb-3">و بقیه شما بازنده هستید! خوش باشید :)))</p>
 
         <div className="winner-icons">
-          <img src="../../../public/win2.png" className="win-icon"></img>
-          <img src="../../../public/win.png" className="win-icon"></img>
-          <img src="../../../public/4819817.png" className="win-icon"></img>
+          <img src="../../../public/win2.png" className="win1-icon"></img>
+          <img src="../../../public/win.png" className="win2-icon"></img>
+          <img src="../../../public/4819817.png" className="win3-icon"></img>
         </div>
       </div>
     </main>
