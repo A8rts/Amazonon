@@ -1,0 +1,64 @@
+.notfound-icon {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+}
+
+.notfound-txt {
+  font-family: Lalezar Regular;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  text-align: center;
+  font-size: 2.5rem;
+  color: #c0392b;
+}
+
+.notnot {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  font-family: Lalezar Regular;
+  color: #e74c3c;
+  font-size: 5rem;
+}
+
+.home-link-go {
+  font-family: Lalezar Regular;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  text-align: center;
+  font-size: 2.5rem;
+  display: none;
+}
+
+@media screen and (max-width: 1000px) {
+  .home-link-go {
+    display: flex;
+  }
+
+  .hide-link {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 567px) {
+  .notfound-icon {
+    width: 18rem;
+    height: 18rem;
+  }
+
+  .notfound-txt {
+    font-size: 2rem;
+    margin: 0.5rem;
+  }
+
+  .notnot {
+    font-size: 4rem;
+  }
+
+  .home-link-go {
+    font-size: 2rem;
+  }
+}
