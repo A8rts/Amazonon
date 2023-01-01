@@ -99,7 +99,7 @@ function Login() {
 
   return (
     <main>
-      <Header authenticated={false} />
+      <Header authenticated={false} admin={false} />
       {register ? (
         <Register />
       ) : (

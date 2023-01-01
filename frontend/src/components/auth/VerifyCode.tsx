@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "@auth/VerifyCode.css";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -7,7 +7,15 @@ const MySwal = withReactContent(Swal);
 
 function VerifyCode({ userData }: { userData: any }) {
   const [verifyCode, setVerifyCode] = useState("");
+  const [counter, setCounter] = useState(30);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    const timer: any =
+      counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
+
+    return () => clearInterval(timer);
+  }, [counter]);
 
   function getCode(e: any) {
     e.preventDefault();
@@ -33,9 +41,7 @@ function VerifyCode({ userData }: { userData: any }) {
           MySwal.fire({
             title: <strong style={{ fontFamily: "Vazirmatn" }}>ثبت شد!</strong>,
             html: (
-              <p style={{ fontFamily: "Vazirmatn" }}>
-                حالا شما رو میشناسیم :)
-              </p>
+              <p style={{ fontFamily: "Vazirmatn" }}>حالا شما رو میشناسیم :)</p>
             ),
             icon: "success",
             confirmButtonText: "برو به بازی",
@@ -109,7 +115,7 @@ function VerifyCode({ userData }: { userData: any }) {
               className="name-error mt-3"
               style={{ color: "black", display: "block" }}
             >
-              زمان : (30 ثانیه)
+              زمان : {counter}
             </strong>
 
             <button className="go-btn" type="submit">
