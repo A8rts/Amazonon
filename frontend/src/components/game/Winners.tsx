@@ -1,11 +1,17 @@
 import "@game/styles/Winners.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+const MySwal = withReactContent(Swal);
 
 function Winners({ gameKey, userData }: { gameKey: string; userData: any }) {
   const [winners, setWinners] = useState([]);
   const [amIWinner, setAmIWinner] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [coins, setCoins] = useState<
+    Array<{ username: string; coins: number }>
+  >([]);
 
   useEffect(() => {
     axios
@@ -21,7 +27,42 @@ function Winners({ gameKey, userData }: { gameKey: string; userData: any }) {
         }
         setLoaded(true);
       });
+
+    axios
+      .post("http://localhost:3001/points/getAllCoinsFromGame", {
+        gameKey: gameKey,
+      })
+      .then((res) => {
+        setCoins(res.data);
+      });
   }, []);
+
+  function showPoints() {
+    MySwal.fire({
+      title: <strong style={{ fontFamily: "Vazirmatn" }}>امتیازاتون :)</strong>,
+      html: (
+        <div style={{ fontFamily: "Vazirmatn" }}>
+          {coins.map((coin) => (
+            <p key={coin.username}>
+              {coin.username} دارای {coin.coins} تا سکه است
+            </p>
+          ))}
+        </div>
+      ),
+      confirmButtonText: "به به!",
+      showClass: {
+        popup: "animate__animated animate__backInDown",
+      },
+      hideClass: {
+        popup: "animate__animated animate__backOutDown",
+      },
+      background: "#239954",
+      color: "white",
+      imageUrl: "../../../public/7433051.png",
+      imageHeight: "18rem",
+      confirmButtonColor: "#8e44ad",
+    });
+  }
 
   return (
     <main>
@@ -34,6 +75,12 @@ function Winners({ gameKey, userData }: { gameKey: string; userData: any }) {
           )}
 
           <div className="winners-main-box mt-5 mb-5">
+            <div
+              className="show-players-coins-header"
+              onClick={() => showPoints()}
+            >
+              میخوام امتیاز ها رو ببینم
+            </div>
             <p className="winners-txt mt-3">
               تبریک میگم شما ها به 10 سکه یا بیشتر دست یافتید!!!
             </p>
