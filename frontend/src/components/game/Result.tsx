@@ -284,7 +284,7 @@ function Result({
   }
 
   const startAgainListener = () => {
-    playAgain(); // call playAgain function in (Start.tsx)
+    
   };
 
   const getYourCoinAndCheckWinnerListener = () => {

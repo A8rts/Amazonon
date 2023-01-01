@@ -33,6 +33,7 @@
   margin-right: 2rem;
   width: 8rem;
   height: 8rem;
+  cursor: pointer;
 }
 
 .header-lables {

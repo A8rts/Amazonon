@@ -119,6 +119,12 @@ function PublicGames() {
               </div>
             ))}
           </div>
+          <button
+            className="back-to-home mb-3"
+            onClick={() => (window.location.href = "/home")}
+          >
+            بازگشت به خانه
+          </button>
         </div>
       </div>
     </div>

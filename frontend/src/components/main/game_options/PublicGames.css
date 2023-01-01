@@ -99,6 +99,22 @@
   border: 2px black solid;
 }
 
+.back-to-home {
+  margin: auto;
+  display: flex;
+  font-family: Lalezar Regular;
+  background-color: #2980b9;
+  color: white;
+  border-radius: 15px;
+  border: none;
+  padding: 1rem;
+  font-size: 1.4rem;
+  border: solid black 2px;
+  width: 30%;
+  text-align: center;
+  justify-content: center;
+}
+
 @media screen and (max-width: 1669px) {
   .public-games-icon-box {
     width: 40%;
@@ -106,6 +122,10 @@
 
   .public-games-box {
     width: 45%;
+  }
+
+  .back-to-home {
+    width: 40%;
   }
 }
 
@@ -184,6 +204,11 @@
 }
 
 @media screen and (max-width: 650px) {
+  .back-to-home {
+    font-size: 1.1rem;
+    padding: 0.7rem;
+  }
+
   .public-games-box {
     width: 90%;
   }
@@ -243,6 +268,10 @@
 }
 
 @media screen and (max-width: 400px) {
+  .back-to-home {
+    width: 50%;
+  }
+
   .p-game-icon {
     float: right;
     width: 40%;

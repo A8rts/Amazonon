@@ -25,6 +25,7 @@ function Header({
         <div className="authenticated-header">
           <div className="main-of-header">
             <img
+              onClick={() => (window.location.href = "/home")}
               src="../../../public/book.png"
               className="header-icon animate__animated animate__jello"
             ></img>
