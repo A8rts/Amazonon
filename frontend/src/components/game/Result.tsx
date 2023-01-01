@@ -40,6 +40,15 @@ function Result({
   let countOfPlayAgainTimeCreated = 0;
 
   useEffect(() => {
+    const choosed_beads: any = [];
+    axios // to get all players choosed beads
+      .post("http://localhost:3001/beads/getAllBeadsFromGame", {
+        gameKey: gameKey,
+      })
+      .then((res) => {
+        choosed_beads.push(res.data);
+      });
+
     axios
       .post("http://localhost:3001/points/getCoint", {
         gameKey: gameKey,
@@ -98,10 +107,10 @@ function Result({
               gameKey: gameKey,
             })
             .then((res) => {
-              answers_checker(bettingList[0], res.data);
+              answers_checker(bettingList[0], res.data, choosed_beads);
             });
         } else {
-          answers_checker(bettingList[0], answers); // start work to make results
+          answers_checker(bettingList[0], answers, choosed_beads); // start work to make results
         }
       });
   }, []);
@@ -118,7 +127,11 @@ function Result({
     }
   }
 
-  function answers_checker(bettingList: any, answersList: any) {
+  function answers_checker(
+    bettingList: any,
+    answersList: any,
+    choosed_beads: any
+  ) {
     // check players answers is right or no and save that
     const status_of_answers = [];
     const true_answer = questionDetail.answer;
@@ -137,16 +150,26 @@ function Result({
       }
     }
 
-    bettings_checker(bettingList, status_of_answers);
+    bettings_checker(bettingList, status_of_answers, choosed_beads);
   }
 
-  function bettings_checker(bettingList: any, status_of_answers: any) {
+  function bettings_checker(
+    bettingList: any,
+    status_of_answers: any,
+    choosed_beads: any
+  ) {
     // to know to add coin to player or remove coin from player(with betting list and status of answers)
     const betting_result: any = [];
 
     for (let j = 0; j < bettingList.length; j++) {
       const to_player_answer_status = status_of_answers.filter(
         (answer: any) => answer.username == bettingList[j].to_player
+      );
+      const status_of_answ = status_of_answers.filter(
+        (status: any) => status.username == bettingList[j].username
+      );
+      const player_choosed_beads = choosed_beads[0].filter(
+        (choosed_bead: any) => choosed_bead.username == bettingList[j].username
       );
 
       if (bettingList[j].bet_coin > 0) {
@@ -155,12 +178,16 @@ function Result({
             username: bettingList[j].username,
             coin: Math.abs(bettingList[j].bet_coin),
             type: "add",
+            status_of_answers: status_of_answ[0].status,
+            choosed_bead: player_choosed_beads[0].bead,
           });
         } else {
           betting_result.push({
             username: bettingList[j].username,
             coin: Math.abs(bettingList[j].bet_coin),
             type: "remove",
+            status_of_answers: status_of_answ[0].status,
+            choosed_bead: player_choosed_beads[0].bead,
           });
         }
       } else {
@@ -169,40 +196,22 @@ function Result({
             username: bettingList[j].username,
             coin: Math.abs(bettingList[j].bet_coin),
             type: "add",
+            status_of_answers: status_of_answ[0].status,
+            choosed_bead: player_choosed_beads[0].bead,
           });
         } else {
           betting_result.push({
             username: bettingList[j].username,
             coin: Math.abs(bettingList[j].bet_coin),
             type: "remove",
+            status_of_answers: status_of_answ[0].status,
+            choosed_bead: player_choosed_beads[0].bead,
           });
         }
       }
     }
 
-    const r: any = [];
-
-    for (let o = 0; o < bettingList.length; o++) {
-      const my_answer_status = status_of_answers.filter(
-        (answer: any) => answer.username == bettingList[o].username
-      );
-      const my_betting_result = betting_result.filter(
-        (b: any) => b.username == bettingList[o].username
-      );
-
-      r.push({
-        // save result data to show that
-        name: bettingList[o].username,
-        answer_status: my_answer_status[0].status,
-        to: bettingList[o].to_player,
-        bet_coin: Math.abs(bettingList[o].bet_coin),
-        type_of_bet: bettingList[o].bet_coin > 0 ? "can" : "can't",
-        work_on_coin_type: my_betting_result[0].type,
-        count_coin: my_betting_result[0].coin,
-      });
-    }
-    setResult(r);
-
+    save_results_to_show(bettingList, status_of_answers, betting_result); // to save results and show
     if (gameData.creator == userData.username) {
       apply_results(betting_result);
     }
@@ -242,6 +251,36 @@ function Result({
           }
         });
     }
+    countOfApplyResults++;
+  }
+
+  function save_results_to_show(
+    bettingList: any,
+    status_of_answers: any,
+    betting_result: any
+  ) {
+    const r: any = [];
+
+    for (let o = 0; o < bettingList.length; o++) {
+      const my_answer_status = status_of_answers.filter(
+        (answer: any) => answer.username == bettingList[o].username
+      );
+      const my_betting_result = betting_result.filter(
+        (b: any) => b.username == bettingList[o].username
+      );
+
+      r.push({
+        // save result data to show that
+        name: bettingList[o].username,
+        answer_status: my_answer_status[0].status,
+        to: bettingList[o].to_player,
+        bet_coin: Math.abs(bettingList[o].bet_coin),
+        type_of_bet: bettingList[o].bet_coin > 0 ? "can" : "can't",
+        work_on_coin_type: my_betting_result[0].type,
+        count_coin: my_betting_result[0].coin,
+      });
+    }
+    setResult(r);
   }
 
   const startAgainListener = () => {
@@ -333,7 +372,7 @@ function Result({
               <td className="td-result">روی کسی که شرط بسته</td>
               <td className="td-result">تعداد سکه ای که شرط بسته</td>
               <td className="td-result">روی چه چیزی شرط بسته؟</td>
-              <td className="td-result">سود و زیان بازیکن</td>
+              <td className="td-result">سود و زیان بازیکن از شرط ها</td>
             </tr>
             {result.map((r: any) => (
               <tr className="result-line" key={r.name}>

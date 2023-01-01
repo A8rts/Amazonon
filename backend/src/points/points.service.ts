@@ -45,29 +45,63 @@ export class PointsService {
         username: result[i].username,
       });
 
-      if (result[i].type == 'add') {
+      if (result[i].status_of_answers !== 'wrong') {
+        // if player answer to question is right, add coin to player :)
+        const new_old_coin = old_coin.coins + result[i].choosed_bead;
+
         this.pointsRepository
           .createQueryBuilder()
           .update(Points)
-          .set({ coins: old_coin.coins + result[i].coin }) // add some coin to player
+          .set({ coins: old_coin.coins + result[i].choosed_bead })
           .where('game_key = :gameKey', { gameKey: gameKey })
           .andWhere('username = :username', { username: result[i].username })
           .execute();
-      } else if (
-        result[i].type == 'remove' &&
-        old_coin.coins - result[i].coin >= 0
-      ) {
-        this.pointsRepository
-          .createQueryBuilder()
-          .update(Points)
-          .set({ coins: old_coin.coins - result[i].coin }) // delete some coin from player
-          .where('game_key = :gameKey', { gameKey: gameKey })
-          .andWhere('username = :username', { username: result[i].username })
-          .execute();
+
+        if (result[i].type == 'add') {
+          this.pointsRepository
+            .createQueryBuilder()
+            .update(Points)
+            .set({ coins: new_old_coin + result[i].coin }) // add some coin to player
+            .where('game_key = :gameKey', { gameKey: gameKey })
+            .andWhere('username = :username', { username: result[i].username })
+            .execute();
+        } else if (
+          result[i].type == 'remove' &&
+          new_old_coin - result[i].coin >= 0
+        ) {
+          this.pointsRepository
+            .createQueryBuilder()
+            .update(Points)
+            .set({ coins: new_old_coin - result[i].coin }) // delete some coin from player
+            .where('game_key = :gameKey', { gameKey: gameKey })
+            .andWhere('username = :username', { username: result[i].username })
+            .execute();
+        }
+      } else {
+        if (result[i].type == 'add') {
+          this.pointsRepository
+            .createQueryBuilder()
+            .update(Points)
+            .set({ coins: old_coin.coins + result[i].coin }) // add some coin to player
+            .where('game_key = :gameKey', { gameKey: gameKey })
+            .andWhere('username = :username', { username: result[i].username })
+            .execute();
+        } else if (
+          result[i].type == 'remove' &&
+          old_coin.coins - result[i].coin >= 0
+        ) {
+          this.pointsRepository
+            .createQueryBuilder()
+            .update(Points)
+            .set({ coins: old_coin.coins - result[i].coin }) // delete some coin from player
+            .where('game_key = :gameKey', { gameKey: gameKey })
+            .andWhere('username = :username', { username: result[i].username })
+            .execute();
+        }
       }
     }
 
-    return 'done';
+    return 'results are applyded :)))';
   }
 
   getAllCoinsFromGame(gameKey: string) {

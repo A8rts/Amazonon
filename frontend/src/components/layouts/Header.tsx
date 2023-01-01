@@ -53,7 +53,7 @@ function Header({
         </div>
       ) : (
         <div className="not-authenticated-header">
-          <p>به بازی آمازونوم خوش آمدید :)</p>
+          <p>به بازی اَمزونون خوش آمدید :)</p>
         </div>
       )}
     </header>

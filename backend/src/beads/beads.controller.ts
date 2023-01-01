@@ -1,5 +1,5 @@
 import { Controller, Post, Req } from '@nestjs/common';
-import { BeadsService } from "@/beads/beads.service";
+import { BeadsService } from '@/beads/beads.service';
 
 @Controller('beads')
 export class BeadsController {
@@ -33,5 +33,11 @@ export class BeadsController {
   //check how many beads is open!
   getBead(@Req() req) {
     return this.beadsService.getBead(req.body.gameKey, req.body.username);
+  }
+
+  @Post('/getAllBeadsFromGame')
+  //get all players choosed beads on game
+  getAllBeadsFromGame(@Req() req) {
+    return this.beadsService.getAllBeadsFromGame(req.body.gameKey);
   }
 }
