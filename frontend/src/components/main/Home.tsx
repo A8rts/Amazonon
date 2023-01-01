@@ -58,7 +58,7 @@ function Home() {
         axios
           .post("http://localhost:3001/game/info", { key: result.value })
           .then((res) => {
-            if (res.data.status !== "close") {
+            if (res.data.status !== "close" && res.data.start !== true) {
               window.location.href = `/game/${result.value}`;
             } else {
               MySwal.fire({
@@ -68,7 +68,13 @@ function Home() {
                   </strong>
                 ),
                 html: (
-                  <p style={{ fontFamily: "Vazirmatn", fontSize: "1rem" }}>
+                  <p
+                    style={{
+                      fontFamily: "Vazirmatn",
+                      fontSize: "1rem",
+                      fontWeight: "bold",
+                    }}
+                  >
                     ظرفیت تعداد بازیکنان این بازی پر است!
                   </p>
                 ),

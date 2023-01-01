@@ -13,7 +13,7 @@ function PublicGames() {
     axios.get("http://localhost:3001/game/public").then((res) => {
       const publigGames = [];
       for (let i = 0; i < res.data.length; i++) {
-        if (res.data[i].status !== "close") {
+        if (res.data[i].status !== "close" && res.data[i].start !== true) {
           publigGames.push(res.data[i]);
         }
       }
@@ -61,7 +61,7 @@ function PublicGames() {
   function joinPublicGame(key: string) {
     axios.post("http://localhost:3001/game/info", { key: key }).then((res) => {
       // for check that game is closed or open
-      if (res.data.status !== "close") {
+      if (res.data.status !== "close" && res.data.start !== true) {
         window.location.href = `/game/${key}`;
       } else {
         MySwal.fire({
@@ -71,8 +71,14 @@ function PublicGames() {
             </strong>
           ),
           html: (
-            <p style={{ fontFamily: "Vazirmatn", fontSize: "1rem" }}>
-              ظرفیت تعداد بازیکنان این بازی پر است!
+            <p
+              style={{
+                fontFamily: "Vazirmatn",
+                fontSize: "1rem",
+                fontWeight: "bold",
+              }}
+            >
+              این بازی یا تعداد جمعیتش پر است و یا بازی شروع شده است
             </p>
           ),
           icon: "warning",
