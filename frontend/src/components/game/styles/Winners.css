@@ -152,6 +152,10 @@
 }
 
 @media screen and (max-width: 600px) {
+  .show-players-coins-header {
+    font-size: 1.5rem;
+  }
+
   .winner-header {
     padding: 2rem;
     font-size: 2.3rem;

@@ -37,9 +37,12 @@ function Start({
   useEffect(() => {
     // for get question details in this game time
     getQuestionDetail();
+
+    // for get player coin
+    getCoin();
   }, []);
 
-  useEffect(() => {
+  function getCoin() {
     axios
       .post("http://localhost:3001/points/getCoint", {
         gameKey: gameKey,
@@ -48,7 +51,7 @@ function Start({
       .then((res) => {
         setUserCoin(res.data.coins);
       });
-  }, []);
+  }
 
   function weHaveWinner() {
     // when game is ended
@@ -195,6 +198,7 @@ function Start({
             userCoin={userCoin}
             itIsAnswerTime={itIsAnswerTime}
             setTheUserCoin={setTheUserCoin}
+            getCoin={getCoin}
           />
         ) : beads ? (
           <Beads

@@ -14,6 +14,7 @@ function Betting({
   userCoin,
   itIsAnswerTime,
   setTheUserCoin,
+  getCoin,
 }: {
   users: any;
   gameKey: string;
@@ -23,6 +24,7 @@ function Betting({
   userCoin: any;
   itIsAnswerTime: any;
   setTheUserCoin: any;
+  getCoin: any;
 }) {
   const [betting, setBetting] = useState<
     Array<{ username: string; to_player: string; id: number }>
@@ -39,6 +41,8 @@ function Betting({
   let countCreatedPoints = 0;
 
   useEffect(() => {
+    getCoin(); // update player coin to bet
+
     axios // to check the player point created or not
       .post("http://localhost:3001/points/checkCreatedPoints", {
         gameKey: gameKey,
