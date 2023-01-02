@@ -82,14 +82,12 @@ function Winners({ gameKey, userData }: { gameKey: string; userData: any }) {
               میخوام امتیاز ها رو ببینم
             </div>
             <p className="winners-txt mt-3">
-              تبریک میگم شما ها به 10 سکه یا بیشتر دست یافتید!!!
+              خب خب! چه زود تموم شد. اسم هر کسی این پایین باشه یعنی برندست!
             </p>
-
             <img
               src="../../../public/winwin.png"
               className="winwin-png mt-2 animate__animated animate__jello"
             ></img>
-
             <div className="winners-names">
               {winners.map((winner) => (
                 <div className="winner-name" key={winner}>
@@ -97,11 +95,9 @@ function Winners({ gameKey, userData }: { gameKey: string; userData: any }) {
                 </div>
               ))}
             </div>
-
             <p className="end-txt mb-3">
               و بقیه شما بازنده هستید! خوش باشید :)))
             </p>
-
             <div className="winner-icons">
               <img src="../../../public/win2.png" className="win1-icon"></img>
               <img src="../../../public/win.png" className="win2-icon"></img>
@@ -110,6 +106,12 @@ function Winners({ gameKey, userData }: { gameKey: string; userData: any }) {
                 className="win3-icon"
               ></img>
             </div>
+            <button
+              className="back-home"
+              onClick={() => (window.location.href = "/home")}
+            >
+              بریم خونه
+            </button>
           </div>
         </div>
       ) : (

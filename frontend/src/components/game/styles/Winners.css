@@ -73,8 +73,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
   border-top: 3px dashed black;
 }
 
@@ -101,6 +99,18 @@
 
 .show-players-coins-header:hover {
   background-color: #9b59b6;
+}
+
+.back-home {
+  width: 100%;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border: none;
+  font-family: Lalezar Regular;
+  background-color: #e74c3c;
+  color: white;
+  font-size: 2rem;
+  padding: 0.8rem;
 }
 
 @media screen and (max-width: 1669px) {
@@ -152,6 +162,11 @@
 }
 
 @media screen and (max-width: 600px) {
+  .back-home {
+    font-size: 1.7rem;
+    padding: 0.5rem;
+  }
+
   .show-players-coins-header {
     font-size: 1.5rem;
   }
