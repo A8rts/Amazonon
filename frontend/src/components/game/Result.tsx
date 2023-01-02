@@ -278,6 +278,10 @@ function Result({
         type_of_bet: bettingList[o].bet_coin > 0 ? "can" : "can't",
         work_on_coin_type: my_betting_result[0].type,
         count_coin: my_betting_result[0].coin,
+        added_coins_with_answers:
+          my_answer_status[0].status == "right"
+            ? my_betting_result[0].choosed_bead
+            : 0,
       });
     }
     setResult(r);
@@ -373,6 +377,7 @@ function Result({
               <td className="td-result">تعداد سکه ای که شرط بسته</td>
               <td className="td-result">روی چه چیزی شرط بسته؟</td>
               <td className="td-result">سود و زیان بازیکن از شرط ها</td>
+              <td className="td-result">سود بازیکن از جوابش</td>
             </tr>
             {result.map((r: any) => (
               <tr className="result-line" key={r.name}>
@@ -396,6 +401,7 @@ function Result({
                     <>-{r.count_coin}</>
                   )}
                 </td>
+                <td className="td-result">{r.added_coins_with_answers}</td>
               </tr>
             ))}
           </tbody>
