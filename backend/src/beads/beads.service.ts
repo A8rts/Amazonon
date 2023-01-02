@@ -48,14 +48,18 @@ export class BeadsService {
       game_key: gameKey,
       username: username,
     });
-    const lastBead = beads.slice(-1)[0];
-    console.log(gameTimes);
 
-    if (
-      lastBead.game_time_id !== undefined &&
-      lastGame.id == lastBead.game_time_id
-    ) {
-      return true;
+    if (beads.length > 0) {
+      const lastBead = beads.slice(-1)[0];
+
+      if (
+        lastBead.game_time_id !== undefined &&
+        lastGame.id == lastBead.game_time_id
+      ) {
+        return true;
+      } else {
+        return 'no';
+      }
     } else {
       return 'no';
     }

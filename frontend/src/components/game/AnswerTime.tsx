@@ -45,18 +45,20 @@ function AnswerTime({
       })
       .then((res) => {
         // get the diff of dates and set counter of that
-        const answerTimeDate = new Date(String(res.data[0].date));
-        const nowDate = new Date();
+        if (res.data.length > 0) {
+          const answerTimeDate = new Date(String(res.data[0].date));
+          const nowDate = new Date();
 
-        const diffDate = nowDate.getTime() - answerTimeDate.getTime();
+          const diffDate = nowDate.getTime() - answerTimeDate.getTime();
 
-        const total_seconds = parseInt(String(Math.floor(diffDate / 1000))); // the seconds passed
+          const total_seconds = parseInt(String(Math.floor(diffDate / 1000))); // the seconds passed
 
-        if (total_seconds < 30) {
-          setCounter(30 - total_seconds);
-        } else {
-          setCounter(0);
-          socket.emit("answetTimeFinished"); // when answer time is ended, send event
+          if (total_seconds < 30) {
+            setCounter(30 - total_seconds);
+          } else {
+            setCounter(0);
+            socket.emit("answetTimeFinished"); // when answer time is ended, send event
+          }
         }
       });
   }, []);

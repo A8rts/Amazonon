@@ -284,7 +284,7 @@ function Result({
   }
 
   const startAgainListener = () => {
-    
+    playAgain(); // play again the game
   };
 
   const getYourCoinAndCheckWinnerListener = () => {

@@ -37,7 +37,7 @@ function Header({
                 پروفایل
               </Link>
               <Link className="header-lable" to="/about">
-                درباره
+                درباره بازی
               </Link>
               {admin ? (
                 <Link className="header-lable" to="/admin">

@@ -312,7 +312,7 @@ function Betting({
             ) : (
               betting.map((bet) =>
                 bet.to_player == myBet.to_player ? (
-                  <div className="king-player-bet mt-4 mb-4" key={bet.id}>
+                  <div className="king-player-bet mt-4 mb-4" key={bet.to_player}>
                     <div className="player-bet">
                       <button
                         className="bet-coin coin-bet-icon-add"
@@ -344,7 +344,7 @@ function Betting({
                 ) : (
                   <div
                     className="player-bet mt-4 mb-4 disable-player-bet"
-                    key={bet.id}
+                    key={bet.to_player}
                   >
                     <p className="bet-coin coin-bet-icon-add disable-coin">+</p>
                     <p className="player-name disable-name">{bet.to_player}</p>
