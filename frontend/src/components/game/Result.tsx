@@ -27,7 +27,7 @@ function Result({
   const [result, setResult] = useState([]);
   const [playerCoin, setPlayerCoin] = useState(0);
   const [chagneCategory, setChangeCategory] = useState(false);
-  const [counter, setCounter] = useState(50000);
+  const [counter, setCounter] = useState(60);
 
   useEffect(() => {
     const timer: any =
@@ -88,10 +88,10 @@ function Result({
 
           const total_seconds = parseInt(String(Math.floor(diffDate / 1000)));
 
-          if (total_seconds > 50000) {
+          if (total_seconds > 60) {
             sendPlayAgainEvent();
           } else {
-            setCounter(50000 - total_seconds);
+            setCounter(60 - total_seconds);
           }
         }
       });
