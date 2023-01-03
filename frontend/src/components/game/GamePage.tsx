@@ -24,9 +24,11 @@ function GamePage({
   const [show, setShow] = useState(true);
   const [beads, setBeads] = useState(false);
   const [showingQuesiton, setShowingQuesiton] = useState(false);
+  const [gameSubjects, setGameSubjects] = useState<string[]>([]);
   const [start, setStart] = useState(false);
 
   useEffect(() => {
+    setGameSubjects(gameData.subjects);
     setStart(gameData.start);
 
     // make conneciton to Websocket server
@@ -185,10 +187,15 @@ function GamePage({
     } else {
       socket?.emit("startGame", {
         game_key: gameKey,
-        gameSubjects: gameData.subjects,
+        gameSubjects: gameSubjects,
         creator: gameData.creator,
       });
     }
+  }
+
+  function changeGameSubjects(subjects: any) {
+    // update game subjects
+    setGameSubjects(subjects);
   }
 
   return (
@@ -217,6 +224,7 @@ function GamePage({
           gameData={gameData}
           allUsers={allUsers}
           startGame={startGame}
+          changeGameSubjects={changeGameSubjects}
         />
       ) : (
         <></>

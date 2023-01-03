@@ -64,6 +64,15 @@ export class GameController {
     return this.gameService.setPlayAgain(req.body.gameKey);
   }
 
+  @Post('/changeGameSubjects')
+  // set ended to true (for show winners)
+  changeGameSubjects(@Req() req) {
+    return this.gameService.changeGameSubjects(
+      req.body.gameKey,
+      req.body.subjects,
+    );
+  }
+
   @Post('/gameEnded')
   // set ended to true (for show winners)
   gameEnded(@Req() req) {

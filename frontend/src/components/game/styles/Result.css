@@ -75,9 +75,29 @@
   border: #8395a7 3px dashed;
 }
 
+.change-category {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  font-family: Lalezar Regular;
+  font-size: 1.5rem;
+  background-color: #8e44ad;
+  color: white;
+  border: none;
+  font-weight: normal;
+  padding: 1rem;
+  border-radius: 15px;
+  border: 3px dashed black;
+  width: 20%;
+}
+
 @media screen and (max-width: 1777px) {
   .result-table {
     width: 90%;
+  }
+
+  .change-category {
+    width: 30%;
   }
 }
 
@@ -101,12 +121,20 @@
 }
 
 @media screen and (max-width: 1280px) {
+  .change-category {
+    width: 35%;
+  }
+
   .result-table {
     width: 95%;
   }
 }
 
 @media screen and (max-width: 1050px) {
+  .change-category {
+    width: 45%;
+  }
+
   .result-table {
     width: 98%;
   }
@@ -140,6 +168,12 @@
 }
 
 @media screen and (max-width: 731px) {
+  .change-category {
+    font-size: 1.3rem;
+    padding: 0.8rem;
+    width: 58%;
+  }
+
   .result-txt {
     font-size: 2rem;
   }
@@ -166,6 +200,12 @@
 }
 
 @media screen and (max-width: 497px) {
+  .change-category {
+    font-size: 1.1rem;
+    padding: 0.7rem;
+    width: 65%;
+  }
+
   .result-txt {
     font-size: 1.8rem;
   }
@@ -204,6 +244,10 @@
 }
 
 @media screen and (max-width: 450px) {
+  .change-category {
+    width: 85%;
+  }
+
   .result-txt {
     font-size: 1.8rem;
   }

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "@game/styles/Result.css";
+import ChagneCategory from "./ChangeCategory";
 
 function Result({
   gameKey,
@@ -11,6 +12,7 @@ function Result({
   playAgain,
   answers,
   weHaveWinner,
+  changeGameSubjects,
 }: {
   gameKey: string;
   questionDetail: any;
@@ -20,10 +22,12 @@ function Result({
   playAgain: any;
   answers: any;
   weHaveWinner: any;
+  changeGameSubjects: any;
 }) {
   const [result, setResult] = useState([]);
   const [playerCoin, setPlayerCoin] = useState(0);
-  const [counter, setCounter] = useState(60);
+  const [chagneCategory, setChangeCategory] = useState(false);
+  const [counter, setCounter] = useState(50000);
 
   useEffect(() => {
     const timer: any =
@@ -84,10 +88,10 @@ function Result({
 
           const total_seconds = parseInt(String(Math.floor(diffDate / 1000)));
 
-          if (total_seconds > 60) {
+          if (total_seconds > 50000) {
             sendPlayAgainEvent();
           } else {
-            setCounter(60 - total_seconds);
+            setCounter(50000 - total_seconds);
           }
         }
       });
@@ -359,7 +363,23 @@ function Result({
       <div className="result">
         <img src="../../../public/result.png" className="result-icon"></img>
         <p className="result-txt">خب خب این دست تمام شد! ببینید چه کردید!</p>
-
+        {gameData.creator == userData.username ? (
+          chagneCategory ? (
+            <ChagneCategory
+              gameKey={gameKey}
+              changeGameSubjects={changeGameSubjects}
+            /> // if creator want to change the questions category, we handle that
+          ) : (
+            <button
+              className="change-category mb-3"
+              onClick={() => setChangeCategory(true)}
+            >
+              میخوام دسته بندی سوالا رو تغییر بدم
+            </button>
+          )
+        ) : (
+          <></>
+        )}
         <div className="count-player-coin mb-3">
           <p className="mt-4">{playerCoin} : </p>
           <img src="../../../public/coin.png" className="coin-icon-2"></img>

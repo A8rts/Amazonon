@@ -148,6 +148,17 @@ export class GameService {
       .execute();
   }
 
+  changeGameSubjects(gameKey: string, subjects: any) {
+    return this.gameRepository
+      .createQueryBuilder()
+      .update(Game)
+      .set({
+        subjects: subjects,
+      })
+      .where('key = :gameKey', { gameKey: gameKey })
+      .execute();
+  }
+
   gameEnded(gameKey: string) {
     return this.gameRepository
       .createQueryBuilder()

@@ -16,6 +16,7 @@ function Start({
   gameData,
   allUsers,
   startGame,
+  changeGameSubjects,
 }: {
   beads: boolean;
   showingQuesiton: boolean;
@@ -25,6 +26,7 @@ function Start({
   gameData: any;
   allUsers: any;
   startGame: any;
+  changeGameSubjects: any;
 }) {
   const [betting, setBetting] = useState(false);
   const [answerTime, setAnswerTime] = useState(false);
@@ -177,6 +179,7 @@ function Start({
             playAgain={playAgain}
             answers={answers}
             weHaveWinner={weHaveWinner}
+            changeGameSubjects={changeGameSubjects}
           />
         ) : answerTime ? (
           <AnswerTime
