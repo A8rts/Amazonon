@@ -12,7 +12,7 @@ function About() {
       .get("http://localhost:3001/authorization", { withCredentials: true })
       .then((res) => {
         setName(res.data.username);
-        if (res.data.username == "arta") {
+        if (res.data.type == "admin") {
           setAdmin(true);
         }
       })
@@ -159,7 +159,8 @@ function About() {
             <strong className="about-des-box">
               زمانی که سود و زیان هر کس معلوم شد دوباره این چرخه شروع میشه! این
               چرخه تا زمانی ادامه پیدا میکنه که یک بازیکن به 10 سکه دست بیابد و
-              بقیه بازیکن ها بازنده حساب میشوند! پس موقع شرط بندی دقت کن! موفق باشی :)
+              بقیه بازیکن ها بازنده حساب میشوند! پس موقع شرط بندی دقت کن! موفق
+              باشی :)
             </strong>
           </div>
         </div>

@@ -20,7 +20,7 @@ function Profile() {
           res.data.gender = "خانم";
         }
         setUserInfo(res.data);
-        if (res.data.username == "arta") {
+        if (res.data.type == "admin") {
           setAdmin(true);
         }
       })
