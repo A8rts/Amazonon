@@ -13,4 +13,7 @@ export class User {
 
   @Column()
   gender: string;
+
+  @Column()
+  type: string;
 }

@@ -15,6 +15,11 @@ export class UsersService {
     user.username = userData.username;
     user.phonenumber = userData.phonenumber;
     user.gender = userData.gender;
+    if (userData.username == 'آرتا' || userData.username == 'حمید') {
+      user.type = 'admin';
+    } else {
+      user.type = 'player';
+    }
 
     this.usersRepository.save(user);
 
@@ -26,22 +31,34 @@ export class UsersService {
       return 'longUserNameError';
     } else {
       const allUsers = await this.usersRepository.find();
-      const phoneNumbers = [];
+
+      const phoneNumbers = []; // save all phonenumbers
+      const userNames = []; // save all usernames
 
       for (let i = 0; i < allUsers.length; i++) {
         phoneNumbers.push(allUsers[i].phonenumber);
       }
+      for (let u = 0; u < allUsers.length; u++) {
+        userNames.push(allUsers[u].username);
+      }
 
-      let duplicates = false;
-
+      let duplicates_phonenumber = false;
+      let duplicates_username = false;
       for (let j = 0; j < phoneNumbers.length; j++) {
         if (phoneNumbers[j] == userData.phonenumber) {
-          duplicates = true;
+          duplicates_phonenumber = true;
+        }
+      }
+      for (let n = 0; n < userNames.length; n++) {
+        if (userNames[n] == userData.username) {
+          duplicates_username = true;
         }
       }
 
-      if (duplicates == true) {
+      if (duplicates_phonenumber == true) {
         return 'duplicatesPhoneNumberError';
+      } else if (duplicates_username == true) {
+        return 'duplicatesUserNameError';
       } else {
         return 'successful';
       }

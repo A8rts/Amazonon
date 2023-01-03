@@ -16,7 +16,7 @@ function Admin() {
       .get("http://localhost:3001/authorization", { withCredentials: true })
       .then((res) => {
         setName(res.data.username);
-        if (res.data.username == "arta") {
+        if (res.data.type == "admin") {
           setAdmin(true);
         } else {
           window.location.href = "/home"; // if user is not admin back to the home page

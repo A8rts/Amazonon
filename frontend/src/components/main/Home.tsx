@@ -20,8 +20,9 @@ function Home() {
       .get("http://localhost:3001/authorization", { withCredentials: true })
       .then((res) => {
         setName(res.data.username);
-        if (res.data.username == "arta") {
-          setAdmin(true);
+
+        if (res.data.type == "admin") {
+          setAdmin(true); // when player is admin the game
         }
       })
       .catch(() => {

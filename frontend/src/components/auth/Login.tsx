@@ -109,7 +109,7 @@ function Login() {
             className="login-icon animate__animated animate__jackInTheBox"
           ></img>
           {codeSended ? (
-            <VerifyCode userData={userData} />
+            <VerifyCode userData={userData} type={"login"}/>
           ) : (
             <form onSubmit={(e) => loginUser(e)}>
               <div className="login">

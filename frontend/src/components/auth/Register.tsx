@@ -35,6 +35,8 @@ function Register() {
           setError("نام شما بیشتر از 13 کاراکتر میباشد");
         } else if (res.data == "duplicatesPhoneNumberError") {
           setError("شماره شما قبلا وارد شده است");
+        } else if (res.data == "duplicatesUserNameError") {
+          setError("نام انتخاب شده  قبلا وارد شده است!");
         } else if (res.data == "successful") {
           axios
             .post("http://localhost:3001/verification-code", {
@@ -81,7 +83,7 @@ function Register() {
           className="register-icon animate__animated animate__jackInTheBox"
         ></img>
         {codeSended ? (
-          <VerifyCode userData={userData} />
+          <VerifyCode userData={userData} type={"register"} />
         ) : (
           <form onSubmit={(e) => registerUser(e)}>
             <div className="register">

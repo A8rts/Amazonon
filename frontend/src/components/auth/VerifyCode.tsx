@@ -5,7 +5,7 @@ import withReactContent from "sweetalert2-react-content";
 import axios from "axios";
 const MySwal = withReactContent(Swal);
 
-function VerifyCode({ userData }: { userData: any }) {
+function VerifyCode({ userData, type }: { userData: any; type: string }) {
   const [verifyCode, setVerifyCode] = useState("");
   const [counter, setCounter] = useState(30);
   const [error, setError] = useState("");
@@ -32,61 +32,101 @@ function VerifyCode({ userData }: { userData: any }) {
   }
 
   function createUser() {
-    axios
-      .post("http://localhost:3001/users/create", {
-        userData: userData,
-      })
-      .then((res) => {
-        if (res.data) {
-          MySwal.fire({
-            title: <strong style={{ fontFamily: "Vazirmatn" }}>ثبت شد!</strong>,
-            html: (
-              <p style={{ fontFamily: "Vazirmatn" }}>حالا شما رو میشناسیم :)</p>
-            ),
-            icon: "success",
-            confirmButtonText: "برو به بازی",
-          }).then(() => {
-            axios
-              .post(
-                "http://localhost:3001/login",
-                {
-                  username: userData.username,
-                  phonenumber: userData.phonenumber,
-                },
-                { withCredentials: true }
-              )
-              .then((res) => {
-                window.location.href = "http://localhost:3000/home";
-              })
-              .catch((err) => {
-                MySwal.fire({
-                  title: (
-                    <strong style={{ fontFamily: "Vazirmatn" }}>خطا</strong>
-                  ),
-                  html: (
-                    <p style={{ fontFamily: "Vazirmatn" }}>
-                      یک مشکلی به وجود امده است! دوباره تلاش کنید
-                    </p>
-                  ),
-                  icon: "error",
-                  confirmButtonText: "باشه",
-                });
-              });
+    if (type == "login") {
+      MySwal.fire({
+        title: <strong style={{ fontFamily: "Vazirmatn" }}>ثبت شد!</strong>,
+        html: (
+          <p style={{ fontFamily: "Vazirmatn" }}>حالا شما رو میشناسیم :)</p>
+        ),
+        icon: "success",
+        confirmButtonText: "برو به بازی",
+      }).then(() => {
+        axios
+          .post(
+            "http://localhost:3001/login",
+            {
+              username: userData.username,
+              phonenumber: userData.phonenumber,
+            },
+            { withCredentials: true }
+          )
+          .then((res) => {
+            window.location.href = "http://localhost:3000/home";
+          })
+          .catch((err) => {
+            MySwal.fire({
+              title: <strong style={{ fontFamily: "Vazirmatn" }}>خطا</strong>,
+              html: (
+                <p style={{ fontFamily: "Vazirmatn" }}>
+                  یک مشکلی به وجود امده است! دوباره تلاش کنید
+                </p>
+              ),
+              icon: "error",
+              confirmButtonText: "باشه",
+            });
           });
-        }
-      })
-      .catch((err) => {
-        MySwal.fire({
-          title: <strong style={{ fontFamily: "Vazirmatn" }}>خطا</strong>,
-          html: (
-            <p style={{ fontFamily: "Vazirmatn" }}>
-              یک مشکلی به وجود امده است! دوباره تلاش کنید
-            </p>
-          ),
-          icon: "error",
-          confirmButtonText: "باشه",
-        });
       });
+    } else {
+      axios
+        .post("http://localhost:3001/users/create", {
+          userData: userData,
+        })
+        .then((res) => {
+          if (res.data) {
+            MySwal.fire({
+              title: (
+                <strong style={{ fontFamily: "Vazirmatn" }}>ثبت شد!</strong>
+              ),
+              html: (
+                <p style={{ fontFamily: "Vazirmatn" }}>
+                  حالا شما رو میشناسیم :)
+                </p>
+              ),
+              icon: "success",
+              confirmButtonText: "برو به بازی",
+            }).then(() => {
+              axios
+                .post(
+                  "http://localhost:3001/login",
+                  {
+                    username: userData.username,
+                    phonenumber: userData.phonenumber,
+                  },
+                  { withCredentials: true }
+                )
+                .then((res) => {
+                  window.location.href = "http://localhost:3000/home";
+                })
+                .catch((err) => {
+                  MySwal.fire({
+                    title: (
+                      <strong style={{ fontFamily: "Vazirmatn" }}>خطا</strong>
+                    ),
+                    html: (
+                      <p style={{ fontFamily: "Vazirmatn" }}>
+                        یک مشکلی به وجود امده است! دوباره تلاش کنید
+                      </p>
+                    ),
+                    icon: "error",
+                    confirmButtonText: "باشه",
+                  });
+                });
+            });
+          }
+        })
+        .catch((err) => {
+          MySwal.fire({
+            title: <strong style={{ fontFamily: "Vazirmatn" }}>خطا</strong>,
+            html: (
+              <p style={{ fontFamily: "Vazirmatn" }}>
+                یک مشکلی به وجود امده است! دوباره تلاش کنید
+              </p>
+            ),
+            icon: "error",
+            confirmButtonText: "باشه",
+          });
+        });
+    }
   }
 
   return (
