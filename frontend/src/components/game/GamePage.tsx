@@ -208,7 +208,12 @@ function GamePage({
             <p className="start-game-txt">شروع بازی</p>
           </button>
 
-          <Users users={allUsers} gameData={gameData} />
+          <Users
+            users={allUsers}
+            gameData={gameData}
+            userData={userData}
+            socket={socket}
+          />
         </div>
       ) : (
         <></>

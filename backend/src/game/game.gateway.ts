@@ -52,6 +52,11 @@ export class GameGateway
     this.server.emit(`${client.handshake.query['gameKey']}`, this.users);
   }
 
+  @SubscribeMessage('kickPlayer') // kick player events
+  async handleKickPlayer(client: any, username) {
+    this.server.emit(`kick${username.username}`);
+  }
+
   @SubscribeMessage('startGame') // for start games events
   async handleStartsGames(client: any, messageData) {
     const question = await this.questionsService.findQuestion(
