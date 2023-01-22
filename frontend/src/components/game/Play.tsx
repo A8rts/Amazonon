@@ -53,26 +53,13 @@ function Play() {
     });
   }, []);
 
-  function updateGameData() {
-    axios.post("http://localhost:3001/game/info", { key: key }).then((res) => {
-      let gameInfo = res.data;
-      gameInfo.start = false;
-      setGameData(gameInfo);
-    });
-  }
-
   return (
     <main>
       {show ? (
         loading ? (
           <>loading</>
         ) : (
-          <GamePage
-            userData={userData}
-            gameKey={key}
-            gameData={gameData}
-            updateGameData={updateGameData}
-          />
+          <GamePage userData={userData} gameKey={key} gameData={gameData} />
         )
       ) : (
         <></>

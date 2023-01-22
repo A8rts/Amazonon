@@ -12,7 +12,7 @@ export class GameTimes {
   creator: string;
 
   @Column()
-  question_id: string;
+  question_id: number;
 
   @Column()
   status: string;

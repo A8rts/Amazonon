@@ -61,9 +61,10 @@ export class GameGateway
   async handleStartsGames(client: any, messageData) {
     const question = await this.questionsService.findQuestion(
       messageData.gameSubjects,
+      client.handshake.query['gameKey'],
     );
     const randLength = Math.floor(Math.random() * question.length);
-    const rand_question = question[randLength][0]; // find question for show to players
+    const rand_question = question[randLength]; // find question for show to players
 
     const game_time = this.gameService.createGameTime({
       game_key: messageData.game_key,

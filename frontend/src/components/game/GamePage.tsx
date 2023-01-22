@@ -12,12 +12,10 @@ function GamePage({
   userData,
   gameKey,
   gameData,
-  updateGameData,
 }: {
   userData: any;
   gameKey: any;
   gameData: any;
-  updateGameData: any;
 }) {
   const [socket, setSocket] = useState<Socket>();
   const [allUsers, setAllUsers] = useState<any[]>([]);
