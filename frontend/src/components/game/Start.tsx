@@ -28,6 +28,7 @@ function Start({
   startGame: any;
   changeGameSubjects: any;
 }) {
+  const [maximumCoin, setMaximumCoin] = useState<number>();
   const [betting, setBetting] = useState(false);
   const [answerTime, setAnswerTime] = useState(false);
   const [resultTime, setResultTime] = useState(false);
@@ -42,7 +43,20 @@ function Start({
 
     // for get player coin
     getCoin();
+
+    // to get maximum coin
+    getMaxCoin();
   }, []);
+
+  function getMaxCoin() {
+    axios
+      .post("http://localhost:3001/game/getMaxCoin", {
+        gameKey: gameKey,
+      })
+      .then((res) => {
+        setMaximumCoin(res.data);
+      });
+  }
 
   function getCoin() {
     axios
@@ -180,6 +194,7 @@ function Start({
             answers={answers}
             weHaveWinner={weHaveWinner}
             changeGameSubjects={changeGameSubjects}
+            maximumCoin={maximumCoin}
           />
         ) : answerTime ? (
           <AnswerTime

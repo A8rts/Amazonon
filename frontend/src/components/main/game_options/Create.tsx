@@ -4,9 +4,11 @@ const MySwal = withReactContent(Swal);
 import withReactContent from "sweetalert2-react-content";
 import { useState } from "react";
 import axios from "axios";
+import SetMaxScore from "@main/game_options/SetMaxScore";
 
 function Create({ name }: { name: string }) {
   const [topics, setTopics] = useState<string[]>([]);
+  const [maxCoin, setMaxCoin] = useState<number>();
 
   function guideMessage() {
     MySwal.fire({
@@ -18,7 +20,8 @@ function Create({ name }: { name: string }) {
           در بخش بازی های عمومی قرار داده میشه! اگر هم نه که فقط با کد الحاق
           بازی میشود وارد آن شد. بعدش باید موضوع های دلخواه که از آن ها در بازی
           سوال میاد رو انتخاب کنیم و بعدش هم تعداد بازیکن های آن بازی :) اگر
-          نمیدانید بازی چگونه است به بخش درباره ی بازی بروید.
+          نمیدانید بازی چگونه است به بخش درباره ی بازی بروید. (حداکثر امتیاز
+          مشخص میکنه کی تا کی بازی ادامه پیدا کنه! تا 20 امتیاز تا 30 و ...)
         </p>
       ),
       icon: "info",
@@ -35,13 +38,18 @@ function Create({ name }: { name: string }) {
     }
   }
 
+  function updateMaximumCoin(maxCoin: number) {
+    setMaxCoin(maxCoin); // set maximum coin
+  }
+
   function createGame(e: any) {
     e.preventDefault();
 
     if (
       e.target.gameTitle.value !== "" &&
       e.target.numOfPlayers.value !== "" &&
-      topics.length > 0
+      topics.length > 0 &&
+      maxCoin !== undefined
     ) {
       axios
         .post("http://localhost:3001/game/create", {
@@ -49,6 +57,7 @@ function Create({ name }: { name: string }) {
           type: e.target.gameTitle.value,
           subjects: topics,
           capacity: e.target.numOfPlayers.value,
+          maximum_score: maxCoin,
         })
         .then((res) =>
           MySwal.fire({
@@ -269,6 +278,8 @@ function Create({ name }: { name: string }) {
                   </li>
                 </ul>
               </div>
+
+              <SetMaxScore updateMaximumCoin={updateMaximumCoin} />
             </div>
             <div className="end-create-buttons">
               <button className="create-game-btn" type="submit">

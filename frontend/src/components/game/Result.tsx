@@ -13,6 +13,7 @@ function Result({
   answers,
   weHaveWinner,
   changeGameSubjects,
+  maximumCoin,
 }: {
   gameKey: string;
   questionDetail: any;
@@ -23,6 +24,7 @@ function Result({
   answers: any;
   weHaveWinner: any;
   changeGameSubjects: any;
+  maximumCoin: any;
 }) {
   const [result, setResult] = useState([]);
   const [playerCoin, setPlayerCoin] = useState(0);
@@ -315,10 +317,10 @@ function Result({
           )
         );
 
-        //to check if one player coins are bigger than 10 coins we say that player is winner :)))
+        //to check if one player coins are bigger than maximumCoin coins we say that player is winner :)))
         const winners = [];
         for (let c = 0; c < res.data.length; c++) {
-          if (res.data[c].coins >= 10) {
+          if (res.data[c].coins >= maximumCoin) {
             winners.push(res.data[c].username);
           }
         }

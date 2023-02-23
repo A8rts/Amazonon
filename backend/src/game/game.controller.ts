@@ -40,6 +40,11 @@ export class GameController {
     return this.gameService.changeBeads(req.body.key);
   }
 
+  @Post('/getMaxCoin')
+  getMaxCoin(@Req() req) {
+    return this.gameService.getMaxCoin(req.body.gameKey);
+  }
+
   @Post('/chooseBeadsFinished')
   // change choose_beads cloumn false true in database
   chooseBeadsFinished(@Req() req) {

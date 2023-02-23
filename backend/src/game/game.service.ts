@@ -39,6 +39,7 @@ export class GameService {
     game.type = gameData.type;
     game.subjects = gameData.subjects;
     game.capacity = gameData.capacity;
+    game.maximum_score = gameData.maximum_score;
     game.status = 'open';
     game.start = false;
     game.choose_beads = false;
@@ -57,6 +58,11 @@ export class GameService {
 
   getInfo(key: string) {
     return this.gameRepository.findOneBy({ key: key });
+  }
+
+  async getMaxCoin(gameKey: string) {
+    const game = await this.gameRepository.findOneBy({ key: gameKey });
+    return game.maximum_score;
   }
 
   changeStatus(key: string, type: string) {

@@ -1,4 +1,5 @@
 import "@game/styles/Users.css";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -15,12 +16,22 @@ function Users({
   userData: any;
   socket: any;
 }) {
+  const [maxCoin, setMaxCoin] = useState<number>();
   const [isCreator, setIsCreator] = useState(false);
   const [kickStatus, setKickStatus] = useState(false);
 
   useEffect(() => {
     // check player is creator or no
     gameData.creator == userData.username ? setIsCreator(true) : null;
+
+    //get max score
+    axios
+      .post("http://localhost:3001/game/getMaxCoin", {
+        gameKey: gameData.key,
+      })
+      .then((res) => {
+        setMaxCoin(res.data);
+      });
   });
 
   function kickPlayer(username: string) {
@@ -68,11 +79,14 @@ function Users({
           <div className="users-content">
             <p className="users-txt">بازیکن های این بازی</p>
             <button
-              className="game-key-copy mb-3"
+              className="game-key-copy "
               onClick={() => navigator.clipboard.writeText(gameData.key)}
             >
               کد الحاق به بازی : {gameData.key}
             </button>
+
+            <p className="max-coin-txt">به {maxCoin} سکه برسی برنده ای </p>
+
             <div className="users-box mb-3">
               <p className="count-users">تعداد بازیکنان : {users.length}</p>
               {users.map((user) =>

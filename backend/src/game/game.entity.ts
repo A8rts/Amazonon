@@ -21,6 +21,9 @@ export class Game {
   capacity: number;
 
   @Column()
+  maximum_score: number;
+
+  @Column()
   status: string; // this is for when capacity of room is full and we do not allow other users join the game
 
   @Column()
