@@ -26,6 +26,10 @@ export class UsersService {
     return true;
   }
 
+  getAll() {
+    return this.usersRepository.find();
+  }
+
   async verifyUser(userData: any) {
     if (userData.username.length > 13) {
       return 'longUserNameError';

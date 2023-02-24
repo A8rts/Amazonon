@@ -7,6 +7,7 @@ import Profile from "@main/Profile";
 import Play from "@game/Play";
 import About from "@main/About";
 import Admin from "@main/Admin";
+import BestPlayers from "@main/BestPlayers";
 
 function Game() {
   return (
@@ -19,6 +20,7 @@ function Game() {
           <Route path="/game/:key" element={<Play />} />
           <Route path="/about" element={<About />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/bestPlayers" element={<BestPlayers />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

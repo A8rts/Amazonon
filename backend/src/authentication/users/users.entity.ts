@@ -16,4 +16,7 @@ export class User {
 
   @Column()
   type: string;
+
+  @Column()
+  number_of_wins: number;
 }

@@ -76,6 +76,24 @@
   background-color: #e74c3c;
 }
 
+.best-players {
+  animation: bestPlayers infinite 10s;
+}
+
+@keyframes bestPlayers {
+  0% {
+    border: #e84393 2px solid;
+  }
+
+  50% {
+    border: red 2px solid;
+  }
+
+  100% {
+    border: #e84393 2px solid;
+  }
+}
+
 @media screen and (max-width: 894px) {
   .header-icon {
     margin-right: 0rem;

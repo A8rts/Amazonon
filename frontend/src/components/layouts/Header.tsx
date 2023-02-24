@@ -39,6 +39,9 @@ function Header({
               <Link className="header-lable" to="/about">
                 درباره بازی
               </Link>
+              <Link className="header-lable best-players" to="/bestPlayers">
+                بازیکنان برتر
+              </Link>
               {admin ? (
                 <Link className="header-lable" to="/admin">
                   مدیریت

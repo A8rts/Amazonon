@@ -1,0 +1,104 @@
+.best-players-game {
+  font-family: Lalezar Regular;
+  font-size: 2.7rem;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  justify-content: center;
+}
+
+.cup {
+  width: 11rem;
+  height: 11rem;
+  margin: auto;
+  display: flex;
+}
+
+.best-players-box {
+  margin: auto;
+  width: 46%;
+  background-color: #feac01;
+  border: 4px solid black;
+  border-radius: 15px;
+  animation: borderColor 5s infinite;
+}
+
+@keyframes borderColor {
+  0% {
+    border: red 4px solid;
+  }
+
+  25% {
+    border: #D80044 4px solid;
+  }
+
+  55% {
+    border: #FF6C33 5px solid;
+  }
+
+  85% {
+    border: #D80044 4px solid;
+  }
+
+  100% {
+    border: red 4px solid;
+  }
+}
+
+.about-me {
+  width: 100%;
+  font-family: Lalezar Regular;
+  border: none;
+  background-color: #8e44ad;
+  color: white;
+  font-size: 1.7rem;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 0.8rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.about-me:hover {
+  background-color: #783894;
+}
+
+.best-player-info {
+  margin: auto;
+  align-items: center;
+  width: 75%;
+  background-color: #fed330;
+  border: 3px solid black;
+  border-radius: 10px;
+  padding: 0.5rem;
+}
+
+.medal {
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  margin: auto;
+}
+
+.name-best-player {
+  font-family: Lalezar Regular;
+  font-size: 1.7rem;
+  text-align: center;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.number_of_wins_player {
+  width: 50%;
+  margin: auto;
+  display: flex;
+  text-align: center;
+  border: 4px dashed #5e140c;
+  border-radius: 50px;
+  align-items: center;
+  justify-content: center;
+  font-family: Lalezar Regular;
+  font-size: 1.3rem;
+}
