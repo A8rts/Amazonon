@@ -318,12 +318,13 @@ function Result({
         );
 
         //to check if one player coins are bigger than maximumCoin coins we say that player is winner :)))
-        const winners = [];
+        const winners: any = [];
         for (let c = 0; c < res.data.length; c++) {
           if (res.data[c].coins >= maximumCoin) {
             winners.push(res.data[c].username);
           }
         }
+        console.log();
 
         if (winners.length > 0 && countOfCreatedWinner == 0) {
           // if we have winner we save that on database
@@ -333,9 +334,21 @@ function Result({
               winners: winners,
             })
             .then(() => {
-              weHaveWinner(); // call this function for show winner page
-              countOfApplyResults++;
-              countOfCreatedWinner++;
+              {
+                axios
+                  .post(
+                    "http://localhost:3001/winners/updateNumberOfWinsUsers",
+                    {
+                      gameKey: gameKey,
+                      winners: winners,
+                    }
+                  )
+                  .then(() => {
+                    weHaveWinner(); // call this function for show winner page
+                    countOfApplyResults++;
+                    countOfCreatedWinner++;
+                  });
+              }
             });
         }
       });

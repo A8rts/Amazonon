@@ -24,4 +24,9 @@ export class UsersController {
   findUserName(@Req() req) {
     return this.usersService.findUserName(req.body.phonenumber);
   }
+
+  @Post('getNumberOfWins')
+  getNumberOfWins(@Req() req) {
+    return this.usersService.getNumberOfWins(req.body.username);
+  }
 }

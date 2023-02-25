@@ -78,4 +78,8 @@ export class UsersService {
     const user = await this.usersRepository.findOneBy({ phonenumber });
     return user;
   }
+
+  getNumberOfWins(username: string) {
+    return this.usersRepository.findOneBy({ username: username });
+  }
 }

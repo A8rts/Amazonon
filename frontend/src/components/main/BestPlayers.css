@@ -30,15 +30,15 @@
   }
 
   25% {
-    border: #D80044 4px solid;
+    border: #d80044 4px solid;
   }
 
   55% {
-    border: #FF6C33 5px solid;
+    border: #ff6c33 5px solid;
   }
 
   85% {
-    border: #D80044 4px solid;
+    border: #d80044 4px solid;
   }
 
   100% {
@@ -101,4 +101,148 @@
   justify-content: center;
   font-family: Lalezar Regular;
   font-size: 1.3rem;
+}
+
+.count-of-best-players {
+  float: right;
+  font-size: 3.5rem;
+  font-family: Lalezar Regular;
+  margin-right: 2rem;
+}
+
+@media screen and (max-width: 1808px) {
+  .number_of_wins_player {
+    width: 60%;
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 1565px) {
+  .best-players-box {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 1370px) {
+  .best-players-box {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 1160px) {
+  .best-players-box {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 929px) {
+  .best-players-box {
+    width: 78%;
+  }
+}
+
+@media screen and (max-width: 894px) {
+  .best-players-box {
+    width: 90%;
+  }
+
+  .best-players-game {
+    font-size: 2.5rem;
+  }
+
+  .count-of-best-players {
+    font-size: 3rem;
+    margin-right: 2rem;
+  }
+
+  .name-best-player {
+    margin-right: 3rem;
+  }
+}
+
+@media screen and (max-width: 678px) {
+  .cup {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .best-players-box {
+    width: 95%;
+  }
+
+  .best-players-game {
+    font-size: 2.3rem;
+  }
+
+  .about-me {
+    font-size: 1.5rem;
+  }
+
+  .count-of-best-players {
+    font-size: 2.5rem;
+    margin-right: 1.5rem;
+  }
+
+  .name-best-player {
+    margin-right: 2.5rem;
+  }
+
+  .number_of_wins_player {
+    width: 70%;
+    border: 3px dashed #5e140c;
+    font-size: 1.1rem;
+  }
+
+  .best-player-info {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 536px) {
+  .about-me {
+    font-size: 1.4rem;
+  }
+
+  .number_of_wins_player {
+    width: 80%;
+    border: 3px dashed #5e140c;
+    font-size: 1rem;
+  }
+
+  .best-player-info {
+    width: 80%;
+  }
+
+  .medal {
+    width: 3.8rem;
+    height: 3.8rem;
+  }
+
+  .name-best-player {
+    font-size: 1.3rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .best-players-game {
+    font-size: 1.9rem;
+    text-align: center;
+    padding: 0.7rem;
+  }
+
+  .best-player-info {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 384px) {
+  .number_of_wins_player {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 317px) {
+  .number_of_wins_player {
+    width: 95%;
+  }
 }

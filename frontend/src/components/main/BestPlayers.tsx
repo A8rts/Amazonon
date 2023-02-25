@@ -15,6 +15,7 @@ function BestPlayers() {
     gender: "",
     number_of_wins: "",
   });
+  const [countOfBestPlayers, setCountOfBestPlayers] = useState(0);
 
   useEffect(() => {
     axios
@@ -63,7 +64,15 @@ function BestPlayers() {
       if (users[i] == undefined) {
         break;
       }
-      limitedUsers.push(users[i]);
+
+      const winner = {
+        username: users[i].username,
+        number_of_wins: users[i].number_of_wins,
+        gender: users[i].gender,
+        num: i + 1,
+      };
+
+      limitedUsers.push(winner);
 
       i++;
     }
@@ -72,36 +81,51 @@ function BestPlayers() {
       const threePlayers = [limitedUsers[0], limitedUsers[1], limitedUsers[2]];
 
       setThreeFirstPlayers(threePlayers);
+    } else {
+      let allBestPlayers = [];
+
+      limitedUsers.length == 2
+        ? allBestPlayers.push(limitedUsers[0], limitedUsers[1])
+        : limitedUsers.length == 1
+        ? allBestPlayers.push(limitedUsers[0], limitedUsers[1])
+        : null;
+
+      setThreeFirstPlayers(allBestPlayers);
     }
 
     setBestPlayers(limitedUsers);
   }
 
   function showAboutMe() {
-    console.log(userData);
-
-    MySwal.fire({
-      title: (
-        <strong style={{ fontFamily: "Vazirmatn" }}>
-          {userData.username} عزیز
-        </strong>
-      ),
-      html: (
-        <p style={{ fontFamily: "Vazirmatn" }}>
-          شما {userData.number_of_wins} بار در بازی ها برنده شده اید!
-        </p>
-      ),
-      confirmButtonText: "باشه",
-      background: "#8e44ad",
-      color: "white",
-      showClass: {
-        popup: "animate__animated animate__bounceIn",
-      },
-      hideClass: {
-        popup: "animate__animated animate__bounceOut",
-      },
-      confirmButtonColor: "#27ae60",
-    });
+    axios
+      .post("http://localhost:3001/users/getNumberOfWins", {
+        username: userData.username,
+      })
+      .then((res) => {
+        MySwal.fire({
+          title: (
+            <strong style={{ fontFamily: "Vazirmatn" }}>
+              {userData.username} عزیز
+            </strong>
+          ),
+          html: (
+            <p style={{ fontFamily: "Vazirmatn" }}>
+              شما {res.data.number_of_wins / 3} بار در بازی ها برنده شده اید!
+            </p>
+          ),
+          confirmButtonText: "باشه",
+          background: "#8e44ad",
+          color: "white",
+          showClass: {
+            popup: "animate__animated animate__bounceIn",
+          },
+          hideClass: {
+            popup: "animate__animated animate__bounceOut",
+          },
+          confirmButtonColor: "#27ae60",
+        });
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -126,6 +150,7 @@ function BestPlayers() {
 
           {bestPlayers.map((player: any) => (
             <div className="best-player-info mb-5" key={player.username}>
+              <strong className="count-of-best-players">{player.num}</strong>
               {player.username == threeFirstPlayers[0].username ||
               player.username == threeFirstPlayers[1].username ||
               player.username == threeFirstPlayers[2].username ? (
@@ -144,7 +169,7 @@ function BestPlayers() {
 
               <div className="number_of_wins_player mt-2 mb-2">
                 <p className="mt-3">
-                  این بازیکن {player.number_of_wins} بار در بازی ها برده است
+                  این بازیکن {player.number_of_wins / 3} بار در بازی ها برده است
                 </p>
               </div>
             </div>

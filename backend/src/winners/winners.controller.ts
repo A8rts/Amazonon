@@ -14,4 +14,12 @@ export class WinnersController {
   getAll(@Req() req) {
     return this.winnersService.getAll(req.body.gameKey);
   }
+
+  @Post('/updateNumberOfWinsUsers')
+  updateNumberOfWinsUsers(@Req() req) {
+    return this.winnersService.updateNumberOfWinsUsers(
+      req.body.gameKey,
+      req.body.winners,
+    );
+  }
 }

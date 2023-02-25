@@ -18,6 +18,14 @@ export class WinnersService {
     wins.game_key = gameKey;
     wins.winners = winners;
 
+    return this.winnersRepository.save(wins);
+  }
+
+  async updateNumberOfWinsUsers(gameKey: string, winners: any) {
+    const wins = new Winners();
+    wins.game_key = gameKey;
+    wins.winners = winners;
+
     for (let i = 0; i < winners.length; i++) {
       const user = await this.usersRepository.findOneBy({
         username: winners[i],
