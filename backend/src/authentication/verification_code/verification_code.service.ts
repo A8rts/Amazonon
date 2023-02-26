@@ -25,4 +25,12 @@ export class VerificationCodeService {
 
     return verification_code;
   }
+
+  async deleteVerifyCode(code: number) {
+    const verifyCodeId = await this.verificationCodeRepository.findOneBy({
+      code: code,
+    });
+
+    return this.verificationCodeRepository.delete(verifyCodeId.id);
+  }
 }

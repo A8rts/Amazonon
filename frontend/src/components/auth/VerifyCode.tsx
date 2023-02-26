@@ -25,13 +25,13 @@ function VerifyCode({ userData, type }: { userData: any; type: string }) {
     const diff = now_date.getTime() - code_date.getTime();
 
     if (verifyCode == userData.code && diff < 30000) {
-      createUser();
+      createUser(userData.code);
     } else {
       setError("کد اشتباه است یا زمان آن تمام شده است");
     }
   }
 
-  function createUser() {
+  function createUser(code: number) {
     if (type == "login") {
       MySwal.fire({
         title: <strong style={{ fontFamily: "Vazirmatn" }}>ثبت شد!</strong>,
@@ -94,10 +94,10 @@ function VerifyCode({ userData, type }: { userData: any; type: string }) {
                   },
                   { withCredentials: true }
                 )
-                .then((res) => {
+                .then(() => {
                   window.location.href = "http://localhost:3000/home";
                 })
-                .catch((err) => {
+                .catch(() => {
                   MySwal.fire({
                     title: (
                       <strong style={{ fontFamily: "Vazirmatn" }}>خطا</strong>
@@ -114,7 +114,7 @@ function VerifyCode({ userData, type }: { userData: any; type: string }) {
             });
           }
         })
-        .catch((err) => {
+        .catch(() => {
           MySwal.fire({
             title: <strong style={{ fontFamily: "Vazirmatn" }}>خطا</strong>,
             html: (
@@ -127,6 +127,15 @@ function VerifyCode({ userData, type }: { userData: any; type: string }) {
           });
         });
     }
+
+    deleteVerifyCode(code);
+  }
+
+  function deleteVerifyCode(code: number) {
+    // delete the verify code to keep clean table :D
+    axios.post("http://localhost:3001/verification-code/deleteVerifyCode", {
+      code: code,
+    });
   }
 
   return (

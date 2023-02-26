@@ -15,7 +15,6 @@ function BestPlayers() {
     gender: "",
     number_of_wins: "",
   });
-  const [countOfBestPlayers, setCountOfBestPlayers] = useState(0);
 
   useEffect(() => {
     axios

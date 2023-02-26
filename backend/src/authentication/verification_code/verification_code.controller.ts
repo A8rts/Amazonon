@@ -11,4 +11,9 @@ export class VerificationCodeController {
   create(@Req() req) {
     return this.verficationCodeService.create(req.body.userData);
   }
+
+  @Post('deleteVerifyCode')
+  deleteVerifyCode(@Req() req) {
+    return this.verficationCodeService.deleteVerifyCode(req.body.code);
+  }
 }
