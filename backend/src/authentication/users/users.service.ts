@@ -15,6 +15,8 @@ export class UsersService {
     user.username = userData.username;
     user.phonenumber = userData.phonenumber;
     user.gender = userData.gender;
+    user.score = 0;
+    user.level = 1;
     if (userData.username == 'آرتا' || userData.username == 'حمید') {
       user.type = 'admin';
     } else {

@@ -8,8 +8,12 @@ function Profile() {
     username: "",
     phonenumber: "",
     gender: "",
+    number_of_wins: 0,
+    score: "",
+    level: "",
   });
   const [admin, setAdmin] = useState(false);
+
   useEffect(() => {
     axios
       .get("http://localhost:3001/authorization", { withCredentials: true })
@@ -27,7 +31,7 @@ function Profile() {
       .catch(() => {
         window.location.href = "/";
       });
-  });
+  }, []);
 
   return (
     <main className="mb-4">
@@ -43,6 +47,11 @@ function Profile() {
             <p className="profile-data">اسم : {userInfo.username}</p>
             <p className="profile-data">شماره : {userInfo.phonenumber}</p>
             <p className="profile-data">جنسیت : {userInfo.gender}</p>
+            <p className="profile-data">
+              تعداد بردتون تا الان : {userInfo.number_of_wins / 3} بار
+            </p>
+            <p className="profile-data">امتیاز : {userInfo.score}</p>
+            <p className="profile-data">سطح : {userInfo.level}</p>
           </div>
         </div>
       </div>
