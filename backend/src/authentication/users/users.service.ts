@@ -15,6 +15,7 @@ export class UsersService {
     user.username = userData.username;
     user.phonenumber = userData.phonenumber;
     user.gender = userData.gender;
+    user.bio = `سلام من ${userData.username} هستم`;
     user.score = 0;
     user.level = 1;
     if (userData.username == 'آرتا' || userData.username == 'حمید') {
