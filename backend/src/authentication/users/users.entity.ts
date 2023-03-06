@@ -15,9 +15,6 @@ export class User {
   gender: string;
 
   @Column()
-  bio: string;
-
-  @Column()
   type: string;
 
   @Column()

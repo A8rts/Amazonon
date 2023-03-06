@@ -1,104 +1,141 @@
 .profile-icon {
-  width: 9rem;
-  height: 9rem;
-  display: flex;
   margin: auto;
+  display: flex;
+  justify-content: center;
+  width: 18rem;
+  height: 18rem;
 }
 
 .profile-box {
-  display: flex;
-  justify-content: center;
-  text-align: center;
+  width: 45%;
   margin: auto;
   background-color: #feac01;
-  width: 37%;
+  border: 3px solid black;
   border-radius: 10px;
-  border: 3px black solid;
 }
 
-.profile-txt {
+.your-profile-txt {
   font-family: Lalezar Regular;
-  font-size: 2.7rem;
+  margin: auto;
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+.profile-content,
+.profile-content-2 {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 
 .profile-data {
   background-color: #fed330;
-  padding: 0.8rem 1rem 0.8rem 1rem;
-  border-radius: 30px;
-  border: 3px black dashed;
   font-family: Lalezar Regular;
-  font-size: 1.3rem;
-  display: inline-flex;
-  margin-bottom: 1.5rem;
-  margin-left: 0.6rem;
+  font-size: 1.5rem;
+  padding: 0.8rem 1rem 0.8rem 1rem;
+  border: 3px dashed black;
+  border-radius: 50px;
+  margin-right: 1rem;
+  margin-left: 1rem;
   cursor: pointer;
-  margin-right: 0.6rem;
 }
 
 .profile-data:hover {
-  border: 3px black solid;
+  border: 3px dashed darkred;
 }
 
-@media screen and (max-width: 1669px) {
-  .profile-box {
-    width: 40%;
-  }
+.profile-hr {
+  border: 2px dashed black;
+  opacity: 1;
 }
 
-@media screen and (max-width: 1448px) {
-  .profile-box {
-    width: 48%;
-  }
+.level-icon {
+  width: 8rem;
+  height: 8rem;
+  margin: auto;
+  display: flex;
 }
 
-@media screen and (max-width: 1200px) {
-  .profile-box {
-    width: 55%;
-  }
+.your-level {
+  text-align: center;
+  font-size: 2rem;
+  background-color: #fed330;
+  font-family: Lalezar Regular;
+  font-size: 1.7rem;
+  padding: 0.8rem 3rem 0.8rem 3rem;
+  border: 3px dashed black;
+  border-radius: 50px;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  cursor: pointer;
+  width: 70%;
+  margin: auto;
 }
 
-@media screen and (max-width: 1000px) {
-  .profile-box {
-    width: 65%;
-  }
+.your-score {
+  text-align: center;
+  background-color: #fed330;
+  font-family: Lalezar Regular;
+  font-size: 1.5rem;
+  padding: 0.8rem 3rem 0.8rem 3rem;
+  border: 3px dashed black;
+  border-radius: 50px;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  cursor: pointer;
+  width: 60%;
+  margin: auto;
 }
 
-@media screen and (max-width: 750px) {
-  .profile-icon {
-    width: 8.5rem;
-    height: 8.5rem;
-  }
-
-  .profile-box {
-    width: 70%;
-  }
+.level-circle,
+.level-circle-top {
+  margin: auto;
+  text-align: center;
+  background-color: #1abc9c;
+  width: 20%;
+  font-size: 2.5rem;
+  font-family: Lalezar Regular;
+  border-radius: 50px;
+  border: 3px dashed black;
 }
 
-@media screen and (max-width: 678px) {
-  .profile-icon {
-    width: 7rem;
-    height: 7rem;
-  }
-
-  .profile-txt {
-    font-size: 2.3rem;
-  }
-
-  .profile-data {
-    padding: 0.7rem 0.8rem 0.7rem 0.8rem;
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-    margin-left: 0.6rem;
-    margin-right: 0.6rem;
-  }
-
-  .profile-box {
-    width: 90%;
-  }
+.level-circle-top {
+  background-color: #3498db;
 }
 
-@media screen and (max-width: 512px) {
-  .profile-txt {
-    font-size: 2.1rem;
-  }
+.about-score-txt {
+  text-align: center;
+  font-family: Vazirmatn;
+  margin: auto;
+  justify-content: center;
+  display: flex;
+}
+
+.chart-txt {
+  font-family: Lalezar Regular;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.about-chart-txt {
+  font-family: Vazirmatn;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.chart {
+  width: 50%;
+  height: 50%;
+  margin: auto;
+  font-family: Vazirmatn;
 }
