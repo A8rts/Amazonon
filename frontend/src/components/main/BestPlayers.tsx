@@ -109,7 +109,7 @@ function BestPlayers() {
           ),
           html: (
             <p style={{ fontFamily: "Vazirmatn" }}>
-              شما {res.data.number_of_wins / 3} بار در بازی ها برنده شده اید!
+              شما {res.data.number_of_wins} بار در بازی ها برنده شده اید!
             </p>
           ),
           confirmButtonText: "باشه",
@@ -168,7 +168,7 @@ function BestPlayers() {
 
               <div className="number_of_wins_player mt-2 mb-2">
                 <p className="mt-3">
-                  این بازیکن {player.number_of_wins / 3} بار در بازی ها برده است
+                  این بازیکن {player.number_of_wins} بار در بازی ها برده است
                 </p>
               </div>
             </div>

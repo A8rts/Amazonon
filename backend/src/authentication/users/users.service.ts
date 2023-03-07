@@ -2,12 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '@users/users.entity';
+import { GameTimes } from '@/game_times/game_times.entity';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
+    @InjectRepository(GameTimes)
+    private gameTimesRepository: Repository<GameTimes>,
   ) {}
 
   create(userData: any) {
@@ -88,7 +91,11 @@ export class UsersService {
     return this.usersRepository.findOneBy({ username: username });
   }
 
-  async updateCorrectAnswersForCategories(subject: string, list: any) {
+  async updateCorrectAnswersForCategories(
+    subject: string,
+    list: any,
+    gameKey: string,
+  ) {
     // update the correct_answers_for_categories column
     let len = 0;
     subject == 'cinema'
@@ -105,6 +112,26 @@ export class UsersService {
       ? (len = 5)
       : null;
 
+    const gameTimes = await this.gameTimesRepository.findBy({
+      game_key: gameKey,
+    });
+    const lastGameTime = gameTimes.slice(-1)[0];
+
+    lastGameTime.updatedCorrectAnswersForCategories == false
+      ? this.updateData(list, lastGameTime, len)
+      : null;
+  }
+
+  async updateData(list: any, lastGameTime, len) {
+    this.gameTimesRepository
+      .createQueryBuilder()
+      .update(GameTimes)
+      .set({
+        updatedCorrectAnswersForCategories: true,
+      })
+      .where('id = :id', { id: lastGameTime.id })
+      .execute();
+
     for (let u = 0; u < list.length; u++) {
       const playerData = await this.usersRepository.findOneBy({
         username: list[u].username,
@@ -113,15 +140,19 @@ export class UsersService {
       let new_correct_answers_for_categories =
         playerData.correct_answers_for_categories;
 
-      new_correct_answers_for_categories[len] = Number(
-        new_correct_answers_for_categories[len] + 1,
-      );
+      const correct_answers: any = [];
+      for (let l = 0; l < new_correct_answers_for_categories.length; l++) {
+        correct_answers.push(
+          parseInt(String(new_correct_answers_for_categories[l])),
+        );
+      }
+      correct_answers[len] = correct_answers[len] + 1;
 
       this.usersRepository
         .createQueryBuilder()
         .update(User)
         .set({
-          correct_answers_for_categories: new_correct_answers_for_categories,
+          correct_answers_for_categories: correct_answers,
         })
         .where('username = :username', { username: list[u].username })
         .execute();

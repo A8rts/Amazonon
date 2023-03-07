@@ -16,4 +16,7 @@ export class GameTimes {
 
   @Column()
   status: string;
+
+  @Column()
+  updatedCorrectAnswersForCategories: boolean;
 }

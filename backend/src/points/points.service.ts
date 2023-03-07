@@ -130,12 +130,12 @@ export class PointsService {
         .execute();
 
       const new_score = oldThings.score + right_answers[s].choosed_bead;
-      const level = new_score % 10;
-      if (level == 0) {
+      const level = new_score / 10;
+      if (level >= 1) {
         this.userRepository
           .createQueryBuilder()
           .update(User)
-          .set({ level: oldThings.level + 1 })
+          .set({ level: parseInt(String(level)) })
           .where('username = :username', {
             username: right_answers[s].username,
           })

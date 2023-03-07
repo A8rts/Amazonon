@@ -35,6 +35,7 @@ export class UsersController {
     return this.usersService.updateCorrectAnswersForCategories(
       req.body.subject,
       req.body.list,
+      req.body.gameKey
     );
   }
 }

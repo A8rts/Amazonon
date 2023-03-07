@@ -18,9 +18,8 @@ function Winners({ gameKey, userData }: { gameKey: string; userData: any }) {
       .post("http://localhost:3001/winners/getAll", { gameKey: gameKey })
       .then((res) => {
         setWinners(res.data.winners);
+        //check player is winner or no
 
-        //check player is winner of no
-        
         for (let i = 0; i < res.data.winners.length; i++) {
           if (res.data.winners[i] == userData.username) {
             setAmIWinner(true);

@@ -47,6 +47,7 @@ export class GameService {
     game.answer_time = false;
     game.result_time = false;
     game.ended = false;
+    game.winner_is_setted = false;
 
     this.gameRepository.save(game);
     return game;

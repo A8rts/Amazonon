@@ -15,6 +15,7 @@ export class GameTimesService {
     gameTime.creator = gameTimeData.creator;
     gameTime.question_id = gameTimeData.question_id;
     gameTime.status = 'running';
+    gameTime.updatedCorrectAnswersForCategories = false;
 
     this.gameTimesRepository.save(gameTime);
   }

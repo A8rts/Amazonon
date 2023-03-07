@@ -43,4 +43,7 @@ export class Game {
 
   @Column()
   ended: boolean;
+
+  @Column()
+  winner_is_setted: boolean;
 }
