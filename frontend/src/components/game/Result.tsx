@@ -157,6 +157,25 @@ function Result({
     }
 
     bettings_checker(bettingList, status_of_answers, choosed_beads);
+    update_players_correct_answers_chart(status_of_answers);
+  }
+
+  function update_players_correct_answers_chart(status_of_answers: any) {
+    // to update the correct_answers_for_categories column on database(that data shows in the profile correct answers chart)
+
+    const right_answers = status_of_answers.filter((answer: any) => {
+      answer.status !== "wrong";
+    });
+    const subject = questionDetail.subject;
+
+    axios
+      .post("http://localhost:3001/users/updateCorrectAnswersForCategories", {
+        subject: subject,
+        list: right_answers,
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
   }
 
   function bettings_checker(

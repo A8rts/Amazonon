@@ -5,38 +5,17 @@ import "@main/Profile.css";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 
+//register the chartjs to the component
 ChartJS.register(ArcElement, Tooltip, Legend);
 ChartJS.defaults.font.family = "Vazirmatn";
 
-export const chartData = {
-  labels: ["سینما", "غذا", "مذهبی", "تاریخ", "طبیعت", "ورزش"],
-  datasets: [
-    {
-      label: "تعداد پاسخ های درست",
-      data: [12, 19, 20, 13, 14, 15],
-      backgroundColor: [
-        "#2c3e50",
-        "#e74c3c",
-        "#16a085",
-        "#8e44ad",
-        "#2ecc71",
-        "#e67e22",
-      ],
-      borderColor: [
-        "#1F2B38",
-        "#B83C30",
-        "#12826C",
-        "#71368A",
-        "#27AB5F",
-        "#CC701E",
-      ],
-      borderWidth: 1,
-      family: "Vazirmatn",
-    },
-  ],
-};
-
-function Profile() {
+function Profile({
+  chartCorrectAnswersData,
+  getCorrectAnswersData,
+}: {
+  chartCorrectAnswersData: any;
+  getCorrectAnswersData: any;
+}) {
   const [userInfo, setUserInfo] = useState({
     username: "",
     phonenumber: "",
@@ -46,6 +25,7 @@ function Profile() {
     level: 0,
   });
   const [admin, setAdmin] = useState(false);
+  const [emptyScore, setEmptyScore] = useState(false);
 
   useEffect(() => {
     // check user is authenticated then get the player informtaion
@@ -53,12 +33,16 @@ function Profile() {
       .get("http://localhost:3001/authorization", { withCredentials: true })
       .then((res) => {
         const name = res.data.username;
+        res.data.type == "admin" ? setAdmin(true) : null;
 
+        getCorrectAnswersData(); // this func is in the Game.tsx
         axios
           .post("http://localhost:3001/users/getNumberOfWins", {
             username: name,
           })
           .then((res) => {
+            res.data.score == 0 ? setEmptyScore(true) : null;
+
             if (res.data.gender == "man") {
               res.data.gender = "آقا";
             } else if (res.data.gender == "woman") {
@@ -72,6 +56,35 @@ function Profile() {
         window.location.href = "/";
       });
   }, []);
+
+  // create the chart
+  const chartData = {
+    labels: ["سینما", "غذا", "مذهبی", "تاریخ", "طبیعت", "ورزش"],
+    datasets: [
+      {
+        label: "تعداد پاسخ های درست",
+        data: chartCorrectAnswersData,
+        backgroundColor: [
+          "#2c3e50",
+          "#e74c3c",
+          "#16a085",
+          "#8e44ad",
+          "#2ecc71",
+          "#e67e22",
+        ],
+        borderColor: [
+          "#1F2B38",
+          "#B83C30",
+          "#12826C",
+          "#71368A",
+          "#27AB5F",
+          "#CC701E",
+        ],
+        borderWidth: 1,
+        family: "Vazirmatn",
+      },
+    ],
+  };
 
   return (
     <main className="mb-4">
@@ -132,9 +145,16 @@ function Profile() {
             در نمودار زیر تعداد درست جواب دادن شما به سوالات هر دسته بندی ای
             نمایش داده میشود. این نمودار بر اساس پاسخ های شما طبقه بندی شده است.
           </strong>
-          <div className="chart mb-3">
-            <Doughnut data={chartData} />
-          </div>
+
+          {emptyScore ? (
+            <p className="empty-score mb-4">
+              شما تا حالا هیچ جواب درستی نداشته اید!
+            </p>
+          ) : (
+            <div className="chart mb-3">
+              <Doughnut data={chartData} />
+            </div>
+          )}
         </div>
       </div>
     </main>

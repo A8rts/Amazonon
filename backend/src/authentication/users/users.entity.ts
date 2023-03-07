@@ -25,4 +25,7 @@ export class User {
 
   @Column()
   level: number;
+
+  @Column('simple-array')
+  correct_answers_for_categories: number[];
 }

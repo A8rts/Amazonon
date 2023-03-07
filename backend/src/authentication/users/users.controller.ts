@@ -29,4 +29,12 @@ export class UsersController {
   getNumberOfWins(@Req() req) {
     return this.usersService.getNumberOfWins(req.body.username);
   }
+
+  @Post('updateCorrectAnswersForCategories')
+  updateCorrectAnswersForCategories(@Req() req) {
+    return this.usersService.updateCorrectAnswersForCategories(
+      req.body.subject,
+      req.body.list,
+    );
+  }
 }

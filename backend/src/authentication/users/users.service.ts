@@ -17,6 +17,9 @@ export class UsersService {
     user.gender = userData.gender;
     user.score = 0;
     user.level = 1;
+
+    //length 1 is for cinema , length 2 is for food , 3 is for religious , 4 is for history, 5 is for nature and 6 is for sport :)
+    user.correct_answers_for_categories = [0, 0, 0, 0, 0, 0];
     if (userData.username == 'آرتا' || userData.username == 'حمید') {
       user.type = 'admin';
     } else {
@@ -83,5 +86,45 @@ export class UsersService {
 
   getNumberOfWins(username: string) {
     return this.usersRepository.findOneBy({ username: username });
+  }
+
+  async updateCorrectAnswersForCategories(subject: string, list: any) {
+    // update the correct_answers_for_categories column
+    let len = 0;
+    subject == 'cinema'
+      ? (len = 0)
+      : subject == 'food'
+      ? (len = 1)
+      : subject == 'religious'
+      ? (len = 2)
+      : subject == 'history'
+      ? (len = 3)
+      : subject == 'nature'
+      ? (len = 4)
+      : subject == 'sport'
+      ? (len = 5)
+      : null;
+
+    for (let u = 0; u < list.length; u++) {
+      const playerData = await this.usersRepository.findOneBy({
+        username: list[u].username,
+      });
+
+      let new_correct_answers_for_categories =
+        playerData.correct_answers_for_categories;
+
+      new_correct_answers_for_categories[len] = Number(
+        new_correct_answers_for_categories[len] + 1,
+      );
+
+      this.usersRepository
+        .createQueryBuilder()
+        .update(User)
+        .set({
+          correct_answers_for_categories: new_correct_answers_for_categories,
+        })
+        .where('username = :username', { username: list[u].username })
+        .execute();
+    }
   }
 }

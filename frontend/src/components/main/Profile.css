@@ -139,3 +139,14 @@
   margin: auto;
   font-family: Vazirmatn;
 }
+
+.empty-score {
+  font-family: Lalezar Regular;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  margin: 0rem;
+  color: #34495e;
+}
