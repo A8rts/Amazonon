@@ -6,6 +6,7 @@ import "@game/styles/GamePage.css";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 import Start from "@game/Start";
+import PublicProfile from "@game/PublicProfile";
 const MySwal = withReactContent(Swal);
 
 function GamePage({
@@ -24,6 +25,8 @@ function GamePage({
   const [showingQuesiton, setShowingQuesiton] = useState(false);
   const [gameSubjects, setGameSubjects] = useState<string[]>([]);
   const [start, setStart] = useState(false);
+  const [userPublicProfile, setUserPublicProfile] = useState(false);
+  const [publicProfilesUsername, setPublicProfilesUsername] = useState("");
 
   useEffect(() => {
     setGameSubjects(gameData.subjects);
@@ -196,23 +199,35 @@ function GamePage({
     setGameSubjects(subjects);
   }
 
+  function showUserPublicProfile(username: string, show: boolean) {
+    // to show the users public profile
+    show
+      ? (setPublicProfilesUsername(username), setUserPublicProfile(true))
+      : setUserPublicProfile(false);
+  }
+
   return (
     <main>
       {gameData.start ? (
         <></>
       ) : show ? (
-        <div>
-          <button className="game-page-header" onClick={() => startGame()}>
-            <p className="start-game-txt">شروع بازی</p>
-          </button>
+        userPublicProfile ? (
+          <PublicProfile username={publicProfilesUsername} showUserPublicProfile={showUserPublicProfile}/>
+        ) : (
+          <div>
+            <button className="game-page-header" onClick={() => startGame()}>
+              <p className="start-game-txt">شروع بازی</p>
+            </button>
 
-          <Users
-            users={allUsers}
-            gameData={gameData}
-            userData={userData}
-            socket={socket}
-          />
-        </div>
+            <Users
+              users={allUsers}
+              gameData={gameData}
+              userData={userData}
+              socket={socket}
+              showUserPublicProfile={showUserPublicProfile}
+            />
+          </div>
+        )
       ) : (
         <></>
       )}

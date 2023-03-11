@@ -74,6 +74,11 @@
   padding: 0.5rem;
 }
 
+.best-player-info:hover {
+  cursor: pointer;
+  background-color: #fed130d2;
+}
+
 .medal {
   width: 4rem;
   height: 4rem;
@@ -88,6 +93,11 @@
   margin: auto;
   display: flex;
   justify-content: center;
+}
+
+.name-best-player:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .number_of_wins_player {

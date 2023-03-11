@@ -10,11 +10,13 @@ function Users({
   gameData,
   userData,
   socket,
+  showUserPublicProfile,
 }: {
   users: Array<{ username: string; gender: string }>;
   gameData: any;
   userData: any;
   socket: any;
+  showUserPublicProfile: any;
 }) {
   const [maxCoin, setMaxCoin] = useState<number>();
   const [isCreator, setIsCreator] = useState(false);
@@ -95,12 +97,19 @@ function Users({
                     <div
                       className="user-data mb-4 mt-3 can-kick"
                       key={user.username}
-                      onClick={() => kickPlayer(user.username)}
-                      onMouseEnter={() => setKickStatus(true)}
-                      onMouseLeave={() => setKickStatus(false)}
                     >
-                      <p className="user-name">{user.username}</p>
-                      <div className="user-icon">
+                      <p
+                        className="user-name"
+                        onClick={() => showUserPublicProfile(user.username , true)}
+                      >
+                        {user.username}
+                      </p>
+                      <div
+                        className="user-icon"
+                        onClick={() => kickPlayer(user.username)}
+                        onMouseEnter={() => setKickStatus(true)}
+                        onMouseLeave={() => setKickStatus(false)}
+                      >
                         {kickStatus ? (
                           <img
                             src="../../../public/kick.png"
@@ -110,16 +119,19 @@ function Users({
                           <img
                             src="../../../public/crown.png"
                             className="man-user-icon"
+                            onClick={() => showUserPublicProfile(user.username , true)}
                           ></img>
                         ) : user.gender == "man" ? (
                           <img
                             src="../../../public/man.png"
                             className="man-user-icon"
+                            onClick={() => showUserPublicProfile(user.username , true)}
                           ></img>
                         ) : (
                           <img
                             src="../../../public/woman.png"
                             className="man-user-icon"
+                            onClick={() => showUserPublicProfile(user.username , true)}
                           ></img>
                         )}
                       </div>
@@ -140,22 +152,30 @@ function Users({
                   )
                 ) : (
                   <div className="user-data mb-4 mt-3" key={user.username}>
-                    <p className="user-name">{user.username}</p>
+                    <p
+                      className="user-name"
+                      onClick={() => showUserPublicProfile(user.username , true)}
+                    >
+                      {user.username}
+                    </p>
                     <div className="user-icon">
                       {user.username == gameData.creator ? (
                         <img
                           src="../../../public/crown.png"
                           className="man-user-icon"
+                          onClick={() => showUserPublicProfile(user.username , true)}
                         ></img>
                       ) : user.gender == "man" ? (
                         <img
                           src="../../../public/man.png"
                           className="man-user-icon"
+                          onClick={() => showUserPublicProfile(user.username , true)}
                         ></img>
                       ) : (
                         <img
                           src="../../../public/woman.png"
                           className="man-user-icon"
+                          onClick={() => showUserPublicProfile(user.username , true)}
                         ></img>
                       )}
                     </div>

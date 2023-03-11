@@ -1,0 +1,22 @@
+.back-to-game {
+  background-color: #e74c3c;
+  width: 100%;
+  font-family: Lalezar Regular;
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  color: white;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.back-to-game:hover {
+  background-color: #c0392b;
+}
+
+.p-d {
+  width: 30%;
+  text-align: center;
+}

@@ -8,7 +8,7 @@ import Play from "@game/Play";
 import About from "@main/About";
 import Admin from "@main/Admin";
 import BestPlayers from "@main/BestPlayers";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 function Game() {
@@ -44,7 +44,10 @@ function Game() {
           <Route
             path="/profile"
             element={
-              <Profile chartCorrectAnswersData={chartCorrectAnswersData} getCorrectAnswersData={getCorrectAnswersData}/>
+              <Profile
+                chartCorrectAnswersData={chartCorrectAnswersData}
+                getCorrectAnswersData={getCorrectAnswersData}
+              />
             }
           />
           <Route path="/game/:key" element={<Play />} />

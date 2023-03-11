@@ -86,12 +86,21 @@
   height: 4rem;
 }
 
+.man-user-icon:hover {
+  cursor: pointer;
+}
+
 .user-name {
   font-family: Lalezar Regular;
   font-size: 1.5rem;
   float: left;
   margin-top: 1.3rem;
   margin-left: 1rem;
+}
+
+.user-name:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .can-kick:hover {

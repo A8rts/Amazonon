@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 const MySwal = withReactContent(Swal);
+import PublicProfile from "@game/PublicProfile";
 
 function BestPlayers() {
   const [admin, setAdmin] = useState(false);
@@ -15,6 +16,8 @@ function BestPlayers() {
     gender: "",
     number_of_wins: "",
   });
+  const [userPublicProfile, setUserPublicProfile] = useState(false);
+  const [publicProfilesUsername, setPublicProfilesUsername] = useState("");
 
   useEffect(() => {
     axios
@@ -127,54 +130,79 @@ function BestPlayers() {
       .catch((err) => console.log(err));
   }
 
+  function showUserPublicProfile(username: string, show: boolean) {
+    // to show the best player public profile
+    show
+      ? (setPublicProfilesUsername(username), setUserPublicProfile(true))
+      : setUserPublicProfile(false);
+  }
+
   return (
     <main>
-      <Header authenticated={true} admin={admin} />
-
-      <div className="best-players-div mb-5">
-        <strong className="best-players-game mt-4">
-          (( 10 تا از بهترین بازیکنان این بازی ))
-        </strong>
-
-        <img
-          src="../../../public/trophy.png"
-          alt="cup"
-          className="cup animate__animated animate__bounce"
+      {userPublicProfile ? (
+        <PublicProfile
+          showUserPublicProfile={showUserPublicProfile}
+          username={publicProfilesUsername}
         />
+      ) : (
+        <div>
+          <Header authenticated={true} admin={admin} />
 
-        <div className="best-players-box mt-4">
-          <div className="about-me mb-5" onClick={() => showAboutMe()}>
-            وضع من چطوره؟
-          </div>
+          <div className="best-players-div mb-5">
+            <strong className="best-players-game mt-4">
+              (( 10 تا از بهترین بازیکنان این بازی ))
+            </strong>
 
-          {bestPlayers.map((player: any) => (
-            <div className="best-player-info mb-5" key={player.username}>
-              <strong className="count-of-best-players">{player.num}</strong>
-              {player.username == threeFirstPlayers[0].username ||
-              player.username == threeFirstPlayers[1].username ||
-              player.username == threeFirstPlayers[2].username ? (
-                <img
-                  src="../../../public/medal.png"
-                  alt="badge"
-                  className="medal"
-                />
-              ) : (
-                <></>
-              )}
+            <img
+              src="../../../public/trophy.png"
+              alt="cup"
+              className="cup animate__animated animate__bounce"
+            />
 
-              <strong className="name-best-player mt-2">
-                {player.username}
-              </strong>
-
-              <div className="number_of_wins_player mt-2 mb-2">
-                <p className="mt-3">
-                  این بازیکن {player.number_of_wins} بار در بازی ها برده است
-                </p>
+            <div className="best-players-box mt-4">
+              <div className="about-me mb-5" onClick={() => showAboutMe()}>
+                وضع من چطوره؟
               </div>
+
+              {bestPlayers.map((player: any) => (
+                <div
+                  className="best-player-info mb-5"
+                  key={player.username}
+                  onClick={() => showUserPublicProfile(player.username, true)}
+                >
+                  <strong className="count-of-best-players">
+                    {player.num}
+                  </strong>
+                  {player.username == threeFirstPlayers[0].username ||
+                  player.username == threeFirstPlayers[1].username ||
+                  player.username == threeFirstPlayers[2].username ? (
+                    <img
+                      src="../../../public/medal.png"
+                      alt="badge"
+                      className="medal"
+                    />
+                  ) : (
+                    <></>
+                  )}
+
+                  <strong
+                    className="name-best-player mt-2"
+                    onClick={() => showUserPublicProfile(player.username, true)}
+                  >
+                    {player.username}
+                  </strong>
+
+                  <div className="number_of_wins_player mt-2 mb-2">
+                    <p className="mt-3">
+                      این بازیکن {player.number_of_wins} بار در بازی ها برده است
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
-      </div>
+      )}
     </main>
   );
 }
