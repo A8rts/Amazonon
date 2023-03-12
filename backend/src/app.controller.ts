@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Req, UseGuards , Res , Next } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Req,
+  UseGuards,
+  Res,
+  Next,
+  Session,
+} from '@nestjs/common';
 import { AppService } from '@/app.service';
 import { AuthenticatedGuard } from '@guards/authenticated.guard';
 import { LoginGuard } from '@guards/login.guard';
@@ -14,8 +23,10 @@ export class AppController {
 
   @UseGuards(LoginGuard)
   @Post('/login')
-  login(@Req() req) {
-    return req.body;
+  login(@Req() req, @Session() session: any) {
+    console.log({ session });
+
+    return session;
   }
 
   @UseGuards(AuthenticatedGuard)
