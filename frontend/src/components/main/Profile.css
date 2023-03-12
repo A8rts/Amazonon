@@ -110,6 +110,8 @@
   margin: auto;
   justify-content: center;
   display: flex;
+  margin-left: 0.7rem;
+  margin-right: 0.7rem;
 }
 
 .chart-txt {
@@ -149,4 +151,174 @@
   font-size: 1.7rem;
   margin: 0rem;
   color: #34495e;
+}
+
+@media screen and (max-width: 1669px) {
+  .profile-box {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 1514px) {
+  .profile-box {
+    width: 55%;
+  }
+}
+
+@media screen and (max-width: 1347px) {
+  .profile-box {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .profile-box {
+    width: 67%;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .profile-box {
+    width: 78%;
+  }
+}
+
+@media screen and (max-width: 903px) {
+  .profile-box {
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .profile-box {
+    width: 90%;
+  }
+
+  .profile-icon {
+    width: 16rem;
+    height: 16rem;
+  }
+
+  .profile-data {
+    font-size: 1.3rem;
+  }
+
+  .level-circle,
+  .level-circle-top {
+    font-size: 2.2rem;
+  }
+
+  .your-score {
+    font-size: 1.3rem;
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .profile-box {
+    width: 95%;
+  }
+}
+
+@media screen and (max-width: 615px) {
+  .profile-icon {
+    width: 13rem;
+    height: 13rem;
+  }
+
+  .profile-data {
+    font-size: 1.1rem;
+    padding: 0.6rem 0.8rem 0.6rem 0.8rem;
+    margin-right: 0.7rem;
+    margin-left: 0.7rem;
+  }
+
+  .level-circle,
+  .level-circle-top {
+    font-size: 2rem;
+    width: 25%;
+  }
+
+  .your-score {
+    font-size: 1.1rem;
+  }
+
+  .your-profile-txt {
+    font-size: 2.3rem;
+  }
+
+  .chart-txt {
+    font-size: 1.8rem;
+  }
+
+  .about-chart-txt {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 511px) {
+  .chart {
+    width: 60%;
+    height: 60%;
+  }
+
+  .profile-content,
+  .profile-content-2 {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .profile-data,
+  .p-d {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .your-score {
+    width: 80%;
+  }
+
+  .level-circle,
+  .level-circle-top {
+    width: 30%;
+  }
+
+  .about-score-txt {
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 454px) {
+  .chart {
+    width: 70%;
+    height: 70%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .chart {
+    width: 75%;
+    height: 75%;
+  }
+
+  .chart-txt {
+    font-size: 1.7rem;
+    margin: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 335px) {
+  .chart {
+    width: 80%;
+    height: 80%;
+  }
+
+  .level-circle,
+  .level-circle-top {
+    width: 40%;
+  }
 }
