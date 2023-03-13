@@ -35,6 +35,11 @@ export class GameController {
     return this.gameService.changeStart(req.body.key);
   }
 
+  @Post('/updateConsumedQuestions')
+  updateConsumedQuestions(@Req() req) {
+    return this.gameService.updateConsumedQuestions(req.body.question_id , req.body.gameKey);
+  }
+
   @Post('/changeBeads') // change choose_beads cloumn to true in database
   changeBeads(@Req() req) {
     return this.gameService.changeBeads(req.body.key);

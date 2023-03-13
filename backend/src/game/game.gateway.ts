@@ -72,6 +72,11 @@ export class GameGateway
       question_id: rand_question.id,
       beads: [],
     });
+    const consumed_questions = this.gameService.updateConsumedQuestions(
+      // to save the new questions id in consumed questions
+      rand_question.id,
+      client.handshake.query['gameKey'],
+    );
 
     this.server.emit(
       `start${client.handshake.query['gameKey']}`,

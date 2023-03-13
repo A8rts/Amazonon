@@ -212,7 +212,10 @@ function GamePage({
         <></>
       ) : show ? (
         userPublicProfile ? (
-          <PublicProfile username={publicProfilesUsername} showUserPublicProfile={showUserPublicProfile}/>
+          <PublicProfile
+            username={publicProfilesUsername}
+            showUserPublicProfile={showUserPublicProfile}
+          />
         ) : (
           <div>
             <button className="game-page-header" onClick={() => startGame()}>

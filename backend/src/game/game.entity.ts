@@ -46,4 +46,7 @@ export class Game {
 
   @Column()
   winner_is_setted: boolean;
+
+  @Column({ type: 'simple-array' })
+  consumed_questions: number[];
 }

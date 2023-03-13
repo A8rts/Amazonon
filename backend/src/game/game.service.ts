@@ -48,6 +48,7 @@ export class GameService {
     game.result_time = false;
     game.ended = false;
     game.winner_is_setted = false;
+    game.consumed_questions = [];
 
     this.gameRepository.save(game);
     return game;
@@ -92,6 +93,24 @@ export class GameService {
     gameTime.question_id = gameTimeData.question_id;
 
     this.gameTimesRepository.save(gameTime);
+  }
+
+  async updateConsumedQuestions(question_id: any, gameKey: string) {
+    const game = await this.gameRepository.findOneBy({ key: gameKey });
+    const consumed_questions = game.consumed_questions;
+    consumed_questions.push(question_id);
+
+    const new_consumed_questions: any = [];
+    for (let i = 0; i < consumed_questions.length; i++) {
+      new_consumed_questions.push(parseInt(String(consumed_questions[i])));
+    }
+
+    return this.gameRepository
+      .createQueryBuilder()
+      .update(Game)
+      .set({ consumed_questions: new_consumed_questions })
+      .where('key = :key', { key: gameKey })
+      .execute();
   }
 
   changeStart(key: any) {
