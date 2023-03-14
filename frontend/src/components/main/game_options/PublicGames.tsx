@@ -100,30 +100,34 @@ function PublicGames() {
         <div className="public-games-box mb-5">
           <p className="public-games-txt">بازی های عمومی</p>
           <div className="join-public-games mb-4">
-            {games.map((item) => (
-              <div className="p-game mt-3 mb-3" key={item.id}>
-                <div className="p-game-icon">
-                  <img
-                    src="../../../../public/gamepad.png"
-                    className="p-game-img"
-                  ></img>
+            {games.length > 0 ? (
+              games.map((item) => (
+                <div className="p-game mt-3 mb-3" key={item.id}>
+                  <div className="p-game-icon">
+                    <img
+                      src="../../../../public/gamepad.png"
+                      className="p-game-img"
+                    ></img>
+                  </div>
+                  <div className="p-game-butons">
+                    <button
+                      className="go-public-game-btn"
+                      onClick={() => joinPublicGame(item.key)}
+                    >
+                      برو بریم
+                    </button>
+                    <button
+                      className="about-public-game-btn"
+                      onClick={() => aboutGame(item)}
+                    >
+                      درباره بازی
+                    </button>
+                  </div>
                 </div>
-                <div className="p-game-butons">
-                  <button
-                    className="go-public-game-btn"
-                    onClick={() => joinPublicGame(item.key)}
-                  >
-                    برو بریم
-                  </button>
-                  <button
-                    className="about-public-game-btn"
-                    onClick={() => aboutGame(item)}
-                  >
-                    درباره بازی
-                  </button>
-                </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <p className="empty-public-games mt-3 mb-3">فعلا بازی عمومی فعال نداریم!</p>
+            )}
           </div>
           <button
             className="back-to-home mb-3"

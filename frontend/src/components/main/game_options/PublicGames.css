@@ -115,6 +115,15 @@
   justify-content: center;
 }
 
+.empty-public-games {
+  font-family: Lalezar Regular;
+  font-size: 1.3rem;
+  margin: auto;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
 @media screen and (max-width: 1669px) {
   .public-games-icon-box {
     width: 40%;
