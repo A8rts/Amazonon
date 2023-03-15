@@ -153,6 +153,14 @@
   color: #34495e;
 }
 
+.online {
+  font-family: Lalezar Regular;
+  margin: auto;
+  text-align: center;
+  font-size: 2.3rem;
+  color: green;
+}
+
 @media screen and (max-width: 1669px) {
   .profile-box {
     width: 50%;

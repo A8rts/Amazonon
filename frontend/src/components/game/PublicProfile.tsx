@@ -18,6 +18,7 @@ function PublicProfile({
     level: 0,
     score: 0,
     correct_answers_for_categories: "",
+    online: false,
   });
   const [emptyScore, setEmptyScore] = useState(false);
 
@@ -100,6 +101,12 @@ function PublicProfile({
           />
         ) : (
           <></>
+        )}
+
+        {userProfileData.online ? (
+          <p className="online">آنلاین</p>
+        ) : (
+          <p className="offline">آفلاین</p>
         )}
 
         <div className="profile-box mt-3">

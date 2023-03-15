@@ -23,6 +23,7 @@ function Profile({
     number_of_wins: 0,
     score: "",
     level: 0,
+    online: true,
   });
   const [admin, setAdmin] = useState(false);
   const [emptyScore, setEmptyScore] = useState(false);
@@ -106,6 +107,8 @@ function Profile({
         ) : (
           <></>
         )}
+
+        <p className="online mt-2">آنلاین</p>
 
         <div className="profile-box mt-3">
           <p className="your-profile-txt mb-3">پروفایل شما</p>

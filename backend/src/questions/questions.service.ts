@@ -72,8 +72,6 @@ export class QuestionsService {
         all_questions_with_subjects[x] != null &&
         all_questions_with_subjects[x] !== ''
       ) {
-        console.log(all_questions_with_subjects[x]);
-
         available_questions.push(all_questions_with_subjects[x]);
       }
     }

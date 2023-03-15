@@ -28,4 +28,7 @@ export class User {
 
   @Column('simple-array')
   correct_answers_for_categories: number[];
+
+  @Column()
+  online: boolean;
 }

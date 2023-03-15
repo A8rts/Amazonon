@@ -21,6 +21,14 @@
   text-align: center;
 }
 
+.offline {
+  font-family: Lalezar Regular;
+  margin: auto;
+  text-align: center;
+  font-size: 2.3rem;
+  color: #e74c3c;
+}
+
 @media screen and (max-width: 511px) {
   .p-d {
     display: flex;

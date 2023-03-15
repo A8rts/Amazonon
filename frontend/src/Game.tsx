@@ -8,11 +8,27 @@ import Play from "@game/Play";
 import About from "@main/About";
 import Admin from "@main/Admin";
 import BestPlayers from "@main/BestPlayers";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import io, { Socket } from "socket.io-client";
 
 function Game() {
   const [chartCorrectAnswersData, setChartCorrectAnswersData] = useState([]);
+  const [socket, setSocket] = useState<Socket>();
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/authorization", { withCredentials: true })
+      .then((res) => {
+        // make websocket connection to show users are online or offline
+        const usersSocket = io("http://localhost:8002", {
+          query: {
+            username: res.data.username,
+          },
+        });
+        setSocket(usersSocket);
+      });
+  }, [setSocket]);
 
   function getCorrectAnswersData() {
     if (window.location.pathname == "/profile") {

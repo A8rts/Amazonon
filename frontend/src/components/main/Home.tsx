@@ -20,7 +20,6 @@ function Home() {
       .get("http://localhost:3001/authorization", { withCredentials: true })
       .then((res) => {
         setName(res.data.username);
-
         if (res.data.type == "admin") {
           setAdmin(true); // when player is admin the game
         }
@@ -28,7 +27,7 @@ function Home() {
       .catch(() => {
         window.location.href = "/";
       });
-  });
+  }, []);
 
   function clickedButton(e: any) {
     const e_name = e.target.name;

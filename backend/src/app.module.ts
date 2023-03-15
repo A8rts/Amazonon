@@ -49,7 +49,7 @@ import { Winners } from './winners/winners.entity';
         AnswerTimes,
         Answers,
         PlayAgainTimes,
-        Winners
+        Winners,
       ],
       synchronize: true,
     }),
