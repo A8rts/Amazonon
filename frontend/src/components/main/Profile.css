@@ -161,6 +161,26 @@
   color: green;
 }
 
+.your-friends {
+  margin: auto;
+  align-items: center;
+  display: flex;
+  font-family: Lalezar Regular;
+  font-size: 1.5rem;
+  width: 15%;
+  text-align: center;
+  background-color: #2ecc71;
+  border: 2px dashed black;
+  border-radius: 10px;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.your-friends:hover {
+  border: 2px solid black;
+  border-radius: 20px;
+}
+
 @media screen and (max-width: 1669px) {
   .profile-box {
     width: 50%;
@@ -176,6 +196,10 @@
 @media screen and (max-width: 1347px) {
   .profile-box {
     width: 60%;
+  }
+
+  .your-friends {
+    width: 25%;
   }
 }
 
@@ -194,6 +218,10 @@
 @media screen and (max-width: 903px) {
   .profile-box {
     width: 85%;
+  }
+
+  .your-friends {
+    width: 30%;
   }
 }
 
@@ -218,6 +246,10 @@
 
   .your-score {
     font-size: 1.3rem;
+  }
+
+  .your-friends {
+    width: 35%;
   }
 }
 
@@ -266,6 +298,12 @@
 }
 
 @media screen and (max-width: 511px) {
+  .your-friends {
+    width: 45%;
+    font-size: 1.3rem;
+    padding: 0.4rem 0.4rem;
+  }
+
   .chart {
     width: 60%;
     height: 60%;
@@ -308,6 +346,11 @@
 }
 
 @media screen and (max-width: 400px) {
+  .your-friends {
+    width: 50%;
+    font-size: 1.3rem;
+  }
+
   .chart {
     width: 75%;
     height: 75%;
@@ -320,6 +363,11 @@
 }
 
 @media screen and (max-width: 335px) {
+  .your-friends {
+    width: 50%;
+    font-size: 1.2rem;
+  }
+
   .chart {
     width: 80%;
     height: 80%;
