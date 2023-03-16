@@ -27,7 +27,8 @@ import { PlayAgainTimesModule } from '@play_again/play_again_times.module';
 import { PlayAgainTimes } from '@play_again/play_again_times.entity';
 import { WinnersModule } from './winners/winners.module';
 import { Winners } from './winners/winners.entity';
-
+import { FriendRequestModule } from './friend_request/friend_request.module';
+import { FriendRequest } from './friend_request/friend_request.entity';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -50,6 +51,7 @@ import { Winners } from './winners/winners.entity';
         Answers,
         PlayAgainTimes,
         Winners,
+        FriendRequest,
       ],
       synchronize: true,
     }),
@@ -66,6 +68,7 @@ import { Winners } from './winners/winners.entity';
     AnswersModule,
     PlayAgainTimesModule,
     WinnersModule,
+    FriendRequestModule,
   ],
   controllers: [AppController],
   providers: [AppService],

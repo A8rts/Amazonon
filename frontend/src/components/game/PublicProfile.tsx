@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import "@game/styles/PublicProfile.css";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
+const MySwal = withReactContent(Swal);
 
 function PublicProfile({
   username,
@@ -23,6 +26,8 @@ function PublicProfile({
     online: false,
   });
   const [emptyScore, setEmptyScore] = useState(false);
+  const [canSendFriendRequest, setCanSendFriendRequest] = useState(true);
+  const [statusOfFriendRequest, setStatusOfFriendRequest] = useState("");
 
   ChartJS.register(ArcElement, Tooltip, Legend);
   ChartJS.defaults.font.family = "Vazirmatn";
@@ -44,6 +49,30 @@ function PublicProfile({
       })
       .catch(() => {
         alert("خطا! لطفا دوباره تلاش کنید یه مشکلی پی امده");
+      });
+
+    //check we can send friend request to this user or no
+    axios
+      .post("http://localhost:3001/friend-request/checkCanSendFriendRequest", {
+        from_username: myUserName,
+        to_username: username,
+      })
+      .then((res) => {
+        res.data == true
+          ? setCanSendFriendRequest(true)
+          : setCanSendFriendRequest(false);
+
+        res.data.status == "no_answer" ? (
+          setStatusOfFriendRequest("درخواست دوستی شما هنوز بدون پاسخ است!")
+        ) : res.data.status == "accepted" ? (
+          setStatusOfFriendRequest("شما با این بازیکن دوست هستید :)")
+        ) : res.data.status == "not_accepted" ? (
+          setStatusOfFriendRequest(
+            "این بازیکن درخواست دوستی شما را رد کرده است :("
+          )
+        ) : (
+          <></>
+        );
       });
 
     setTimeout(() => {
@@ -79,6 +108,42 @@ function PublicProfile({
     ],
   };
 
+  function sendFriendRequest(friendUsername: string) {
+    setCanSendFriendRequest(false)
+    setStatusOfFriendRequest("درخواست دوستی ارسال شد")
+
+    axios
+      .post("http://localhost:3001/friend-request/create", {
+        from: myUserName,
+        to: friendUsername,
+      })
+      .then((res) => {
+        res.data == "user-is-offline" ? (
+          MySwal.fire({
+            title: (
+              <strong style={{ fontFamily: "Vazirmatn" }}>
+                این بازیکن آفلاین شد!
+              </strong>
+            ),
+            html: (
+              <p style={{ fontFamily: "Vazirmatn" }}>
+                بازیکنی که میخواهید به آن درخواست دوستی بدهید آفلاین شد
+              </p>
+            ),
+            confirmButtonText: "باشه",
+            icon: "warning",
+          }).then(() => {
+            window.location.href = window.location.href;
+          })
+        ) : (
+          <></>
+        );
+      })
+      .catch((err) => {
+        alert("یه مشکلی به وجود امده است");
+      });
+  }
+
   return (
     <main className="mb-4 animate__animated animate__fadeIn">
       <header
@@ -109,9 +174,16 @@ function PublicProfile({
           <div>
             <p className="online">آنلاین</p>
             {username !== myUserName ? (
-              <button className="send-friend-request">
-                ارسال درخواست دوستی
-              </button>
+              canSendFriendRequest ? (
+                <button
+                  className="send-friend-request"
+                  onClick={() => sendFriendRequest(username)}
+                >
+                  ارسال درخواست دوستی
+                </button>
+              ) : (
+                <p className="status_of_friend_request">{statusOfFriendRequest}</p>
+              )
             ) : (
               <></>
             )}
