@@ -7,9 +7,11 @@ import "@game/styles/PublicProfile.css";
 function PublicProfile({
   username,
   showUserPublicProfile,
+  myUserName,
 }: {
   username: string;
   showUserPublicProfile: any;
+  myUserName: string;
 }) {
   const [userProfileData, setUserProfileData] = useState({
     username: "",
@@ -104,7 +106,16 @@ function PublicProfile({
         )}
 
         {userProfileData.online ? (
-          <p className="online">آنلاین</p>
+          <div>
+            <p className="online">آنلاین</p>
+            {username !== myUserName ? (
+              <button className="send-friend-request">
+                ارسال درخواست دوستی
+              </button>
+            ) : (
+              <></>
+            )}
+          </div>
         ) : (
           <p className="offline">آفلاین</p>
         )}

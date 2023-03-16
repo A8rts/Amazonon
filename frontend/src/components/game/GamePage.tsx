@@ -215,6 +215,7 @@ function GamePage({
           <PublicProfile
             username={publicProfilesUsername}
             showUserPublicProfile={showUserPublicProfile}
+            myUserName={userData.username}
           />
         ) : (
           <div>

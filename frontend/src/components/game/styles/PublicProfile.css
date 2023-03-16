@@ -29,6 +29,76 @@
   color: #e74c3c;
 }
 
+.send-friend-request {
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  background-color: #f1c40f;
+  border: dashed 2px black;
+  font-family: Lalezar Regular;
+  font-size: 1.5rem;
+  border-radius: 10px;
+  width: 15%;
+  padding: 0.5rem;
+}
+
+.send-friend-request:hover {
+  border: solid 2px black;
+}
+
+@media screen and (max-width: 1700px) {
+  .send-friend-request {
+    width: 20%;
+  }
+}
+
+@media screen and (max-width: 1242px) {
+  .send-friend-request {
+    width: 25%;
+  }
+}
+
+@media screen and (max-width: 1006px) {
+  .send-friend-request {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 840px) {
+  .send-friend-request {
+    width: 35%;
+  }
+}
+
+@media screen and (max-width: 709px) {
+  .send-friend-request {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 615px) {
+  .send-friend-request {
+    width: 45%;
+    font-size: 1.3rem;
+  }
+}
+
+@media screen and (max-width: 464px) {
+  .send-friend-request {
+    width: 55%;
+    font-size: 1.1rem;
+  }
+}
+
+@media screen and (max-width: 333px) {
+  .send-friend-request {
+    width: 70%;
+    padding: 0.4rem;
+  }
+}
+
 @media screen and (max-width: 511px) {
   .p-d {
     display: flex;

@@ -143,6 +143,7 @@ function BestPlayers() {
         <PublicProfile
           showUserPublicProfile={showUserPublicProfile}
           username={publicProfilesUsername}
+          myUserName={userData.username}
         />
       ) : (
         <div>
