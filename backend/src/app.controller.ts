@@ -35,9 +35,10 @@ export class AppController {
     return req.user;
   }
 
+  @UseGuards(AuthenticatedGuard)
   @Post('/logout')
   logOut(@Req() req, @Res() res, @Next() next) {
-    req.logout(function (err) {
+    req.logout({ keepSessionInfo: false }, function (err) {
       if (err) {
         return next(err);
       }
