@@ -31,4 +31,7 @@ export class User {
 
   @Column()
   online: boolean;
+
+  @Column()
+  in_game: boolean;
 }

@@ -14,6 +14,7 @@ function InviteOnlinePlayers({ gameKey }: { gameKey: string }) {
   const [searchUserName, setSearchUserName] = useState("");
   const [error, setError] = useState("");
   const [invitesSocket, setInvitesSocket] = useState<Socket>();
+  
 
   useEffect(() => {
     // get all online players
@@ -22,6 +23,9 @@ function InviteOnlinePlayers({ gameKey }: { gameKey: string }) {
       .then((res) => {
         setAvailablePlayersToInvite(res.data);
         setAllOnlinePlayers(res.data);
+        if(res.data.length == 0) {
+          setError("هیچ بازیکنی در دسترس نیست!")
+        }
       })
       .catch(() => alert("یه مشکلی به وجود آمده است!"));
   }, [setAvailablePlayersToInvite]);
@@ -58,7 +62,7 @@ function InviteOnlinePlayers({ gameKey }: { gameKey: string }) {
         username: username,
       })
       .then((res) => {
-        res.data.online == true
+        res.data.online == true && res.data.in_game == false
           ? axios
               .post(
                 "http://localhost:3001/invite-online-players/checkItIsFirstRequestToPlayer",
@@ -116,12 +120,12 @@ function InviteOnlinePlayers({ gameKey }: { gameKey: string }) {
           : MySwal.fire({
               title: (
                 <strong style={{ fontFamily: "Vazirmatn" }}>
-                  {username} آفلاین شد!
+                  بازیکن در دسترس نیست!
                 </strong>
               ),
               html: (
                 <p style={{ fontFamily: "Vazirmatn" }}>
-                  {username} به تازگی آفلاین شده است
+                  این بازیکن یا آفلاین شده است یا در بازی ای قرار دارد
                 </p>
               ),
               confirmButtonText: "باشه",

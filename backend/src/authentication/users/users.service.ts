@@ -21,6 +21,7 @@ export class UsersService {
     user.score = 0;
     user.level = 1;
     user.online = true;
+    user.in_game = false;
 
     //length 1 is for cinema , length 2 is for food , 3 is for religious , 4 is for history, 5 is for nature and 6 is for sport :)
     user.correct_answers_for_categories = [0, 0, 0, 0, 0, 0];
@@ -177,6 +178,17 @@ export class UsersService {
   }
 
   onlinePlayers() {
-    return this.usersRepository.findBy({ online: true });
+    return this.usersRepository.findBy({ online: true, in_game: false });
+  }
+
+  setInGame(status: boolean, username: any) {
+    return this.usersRepository
+      .createQueryBuilder()
+      .update(User)
+      .set({
+        in_game: status,
+      })
+      .where('username = :username', { username: username })
+      .execute();
   }
 }

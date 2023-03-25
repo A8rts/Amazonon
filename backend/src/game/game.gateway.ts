@@ -9,6 +9,7 @@ import {
 import { Socket } from 'socket.io';
 import { QuestionsService } from '@/questions/questions.service';
 import { GameService } from '@/game/game.service';
+import { UsersService } from '@/authentication/users/users.service';
 
 @WebSocketGateway(8001, { cors: '*' })
 export class GameGateway
@@ -17,6 +18,7 @@ export class GameGateway
   constructor(
     readonly questionsService: QuestionsService,
     readonly gameService: GameService,
+    readonly usersService: UsersService,
   ) {}
 
   @WebSocketServer()
@@ -39,6 +41,7 @@ export class GameGateway
     const newUsers = this.users.filter(
       (user) => user.gameKey == client.handshake.query['gameKey'],
     ); // to send users that are in the same game in terms of keys
+    this.usersService.setInGame(true, client.handshake.query['username']); // player is in the game
 
     this.server.emit(`${client.handshake.query['gameKey']}`, newUsers);
   }
@@ -49,6 +52,8 @@ export class GameGateway
       (user) => user.username !== client.handshake.query['username'],
     );
     this.users = newUsers;
+    this.usersService.setInGame(false, client.handshake.query['username']); // player is not in the game
+
     this.server.emit(`${client.handshake.query['gameKey']}`, this.users);
   }
 
