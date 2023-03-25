@@ -226,7 +226,7 @@ function GamePage({
             myUserName={userData.username}
           />
         ) : showInviteOnlinePlayersPage ? (
-          <InviteOnlinePlayers gameKey={gameKey}/>
+          <InviteOnlinePlayers gameKey={gameKey} inviteOnlinePlayersHandler={inviteOnlinePlayersHandler}/>
         ) : (
           <div>
             <button className="game-page-header" onClick={() => startGame()}>

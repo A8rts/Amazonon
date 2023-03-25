@@ -6,7 +6,13 @@ import Swal from "sweetalert2";
 const MySwal = withReactContent(Swal);
 import io, { Socket } from "socket.io-client";
 
-function InviteOnlinePlayers({ gameKey }: { gameKey: string }) {
+function InviteOnlinePlayers({
+  gameKey,
+  inviteOnlinePlayersHandler,
+}: {
+  gameKey: string;
+  inviteOnlinePlayersHandler: any;
+}) {
   const [allOnlinePlayers, setAllOnlinePlayers] = useState<any>([]);
   const [availablePlayersToInvite, setAvailablePlayersToInvite] = useState<any>(
     []
@@ -14,7 +20,6 @@ function InviteOnlinePlayers({ gameKey }: { gameKey: string }) {
   const [searchUserName, setSearchUserName] = useState("");
   const [error, setError] = useState("");
   const [invitesSocket, setInvitesSocket] = useState<Socket>();
-  
 
   useEffect(() => {
     // get all online players
@@ -23,8 +28,8 @@ function InviteOnlinePlayers({ gameKey }: { gameKey: string }) {
       .then((res) => {
         setAvailablePlayersToInvite(res.data);
         setAllOnlinePlayers(res.data);
-        if(res.data.length == 0) {
-          setError("هیچ بازیکنی در دسترس نیست!")
+        if (res.data.length == 0) {
+          setError("هیچ بازیکنی در دسترس نیست!");
         }
       })
       .catch(() => alert("یه مشکلی به وجود آمده است!"));
@@ -136,7 +141,10 @@ function InviteOnlinePlayers({ gameKey }: { gameKey: string }) {
 
   return (
     <div className="mb-5">
-      <header className="back-to-game invite-online-players-header">
+      <header
+        className="back-to-game invite-online-players-header"
+        onClick={() => inviteOnlinePlayersHandler(false)}
+      >
         برگرد به بازیم
       </header>
 
