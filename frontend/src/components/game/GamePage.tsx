@@ -7,6 +7,7 @@ import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 import Start from "@game/Start";
 import PublicProfile from "@game/PublicProfile";
+import InviteOnlinePlayers from "@game/InviteOnlinePlayers";
 const MySwal = withReactContent(Swal);
 
 function GamePage({
@@ -27,6 +28,8 @@ function GamePage({
   const [start, setStart] = useState(false);
   const [userPublicProfile, setUserPublicProfile] = useState(false);
   const [publicProfilesUsername, setPublicProfilesUsername] = useState("");
+  const [showInviteOnlinePlayersPage, setShowInviteOnlinePlayersPage] =
+    useState(false);
 
   useEffect(() => {
     setGameSubjects(gameData.subjects);
@@ -206,6 +209,11 @@ function GamePage({
       : setUserPublicProfile(false);
   }
 
+  function inviteOnlinePlayersHandler(show: boolean) {
+    // show the invite online players component
+    setShowInviteOnlinePlayersPage(show);
+  }
+
   return (
     <main>
       {gameData.start ? (
@@ -217,6 +225,8 @@ function GamePage({
             showUserPublicProfile={showUserPublicProfile}
             myUserName={userData.username}
           />
+        ) : showInviteOnlinePlayersPage ? (
+          <InviteOnlinePlayers gameKey={gameKey}/>
         ) : (
           <div>
             <button className="game-page-header" onClick={() => startGame()}>
@@ -229,6 +239,7 @@ function GamePage({
               userData={userData}
               socket={socket}
               showUserPublicProfile={showUserPublicProfile}
+              inviteOnlinePlayersHandler={inviteOnlinePlayersHandler}
             />
           </div>
         )

@@ -25,8 +25,10 @@ import { AnswersModule } from '@/answers/answers.module';
 import { Answers } from '@/answers/answers.entity';
 import { PlayAgainTimesModule } from '@play_again/play_again_times.module';
 import { PlayAgainTimes } from '@play_again/play_again_times.entity';
-import { WinnersModule } from './winners/winners.module';
-import { Winners } from './winners/winners.entity';
+import { Winners } from '@winners/winners.entity';
+import { InviteOnlinePlayers } from '@invite/invite_online_players.entity';
+import { WinnersModule } from '@winners/winners.module';
+import { InviteOnlinePlayersModule } from '@invite/invite_online_players.module';
 
 @Module({
   imports: [
@@ -50,6 +52,7 @@ import { Winners } from './winners/winners.entity';
         Answers,
         PlayAgainTimes,
         Winners,
+        InviteOnlinePlayers,
       ],
       synchronize: true,
     }),
@@ -66,6 +69,7 @@ import { Winners } from './winners/winners.entity';
     AnswersModule,
     PlayAgainTimesModule,
     WinnersModule,
+    InviteOnlinePlayersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

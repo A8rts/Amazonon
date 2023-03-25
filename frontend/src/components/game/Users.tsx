@@ -11,12 +11,14 @@ function Users({
   userData,
   socket,
   showUserPublicProfile,
+  inviteOnlinePlayersHandler,
 }: {
   users: Array<{ username: string; gender: string }>;
   gameData: any;
   userData: any;
   socket: any;
   showUserPublicProfile: any;
+  inviteOnlinePlayersHandler: any;
 }) {
   const [maxCoin, setMaxCoin] = useState<number>();
   const [isCreator, setIsCreator] = useState(false);
@@ -61,6 +63,10 @@ function Users({
     window.location.href = "/home"; // go to home when creator kicked me
   };
 
+  function showInviteOnlinePLayersPage() {
+    inviteOnlinePlayersHandler(true); // this function is in GamePage.tsx
+  }
+
   useEffect(() => {
     socket?.on(`kick${userData.username}`, kickOutPlayer);
     return () => {
@@ -79,9 +85,20 @@ function Users({
         </div>
         <div className="users-content-box">
           <div className="users-content">
+            {isCreator ? (
+              <div
+                className="invite-online-players-button mb-2"
+                onClick={() => showInviteOnlinePLayersPage()}
+              >
+                دعوت از بازیکنان آنلاین
+              </div>
+            ) : (
+              <></>
+            )}
+
             <p className="users-txt">بازیکن های این بازی</p>
             <button
-              className="game-key-copy "
+              className="game-key-copy"
               onClick={() => navigator.clipboard.writeText(gameData.key)}
             >
               کد الحاق به بازی : {gameData.key}
@@ -100,7 +117,9 @@ function Users({
                     >
                       <p
                         className="user-name"
-                        onClick={() => showUserPublicProfile(user.username , true)}
+                        onClick={() =>
+                          showUserPublicProfile(user.username, true)
+                        }
                       >
                         {user.username}
                       </p>
@@ -119,19 +138,25 @@ function Users({
                           <img
                             src="../../../public/crown.png"
                             className="man-user-icon"
-                            onClick={() => showUserPublicProfile(user.username , true)}
+                            onClick={() =>
+                              showUserPublicProfile(user.username, true)
+                            }
                           ></img>
                         ) : user.gender == "man" ? (
                           <img
                             src="../../../public/man.png"
                             className="man-user-icon"
-                            onClick={() => showUserPublicProfile(user.username , true)}
+                            onClick={() =>
+                              showUserPublicProfile(user.username, true)
+                            }
                           ></img>
                         ) : (
                           <img
                             src="../../../public/woman.png"
                             className="man-user-icon"
-                            onClick={() => showUserPublicProfile(user.username , true)}
+                            onClick={() =>
+                              showUserPublicProfile(user.username, true)
+                            }
                           ></img>
                         )}
                       </div>
@@ -154,7 +179,7 @@ function Users({
                   <div className="user-data mb-4 mt-3" key={user.username}>
                     <p
                       className="user-name"
-                      onClick={() => showUserPublicProfile(user.username , true)}
+                      onClick={() => showUserPublicProfile(user.username, true)}
                     >
                       {user.username}
                     </p>
@@ -163,19 +188,25 @@ function Users({
                         <img
                           src="../../../public/crown.png"
                           className="man-user-icon"
-                          onClick={() => showUserPublicProfile(user.username , true)}
+                          onClick={() =>
+                            showUserPublicProfile(user.username, true)
+                          }
                         ></img>
                       ) : user.gender == "man" ? (
                         <img
                           src="../../../public/man.png"
                           className="man-user-icon"
-                          onClick={() => showUserPublicProfile(user.username , true)}
+                          onClick={() =>
+                            showUserPublicProfile(user.username, true)
+                          }
                         ></img>
                       ) : (
                         <img
                           src="../../../public/woman.png"
                           className="man-user-icon"
-                          onClick={() => showUserPublicProfile(user.username , true)}
+                          onClick={() =>
+                            showUserPublicProfile(user.username, true)
+                          }
                         ></img>
                       )}
                     </div>

@@ -1,0 +1,121 @@
+.invite-box {
+  margin: auto;
+  background-color: #feac01;
+  width: 50%;
+  border-radius: 15px;
+  border: 3px solid black;
+}
+
+.invite-icon {
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 8rem;
+  height: 8rem;
+}
+
+.search-box {
+  display: flex;
+}
+
+.search-online-players-input {
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  background-color: #ffc312;
+  border: #fff200 solid 3px;
+  border-radius: 10px;
+  padding: 0.9rem;
+  font-family: Vazirmatn;
+}
+
+.search-btn {
+  width: 5rem;
+  height: 5rem;
+  margin-left: 2rem;
+  cursor: pointer;
+}
+
+.search-online-players-input::placeholder {
+  color: rgba(0, 0, 0, 0.534);
+  font-family: Vazirmatn;
+}
+
+.search-online-players-input:focus {
+  outline: none !important;
+  border: #fff200 dashed 3px;
+}
+
+.invite-hr {
+  border: 2px dashed #d35400;
+  opacity: 1;
+}
+
+.invite-to-online-players {
+  font-family: Lalezar Regular;
+  margin: auto;
+  text-align: center;
+  font-size: 2.2rem;
+}
+
+.online-players-box {
+  margin: auto;
+  width: 70%;
+  background-color: #ffc312;
+  border: 3px solid black;
+  max-height: 50vh;
+  overflow: auto;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.online-player {
+  width: 80%;
+  background-color: #ffd32a;
+  border: 3px dashed black;
+  margin: auto;
+  border-radius: 10px;
+  padding: 0.4rem;
+}
+
+.online-player-icon {
+  width: 5rem;
+  height: 5rem;
+}
+
+.online-player-username {
+  font-family: Lalezar Regular;
+  font-size: 1.5rem;
+  display: inline-block;
+  margin: 0.5rem;
+}
+
+.invite-btn {
+  float: left;
+  margin: 1.1rem;
+  background-color: #2ecc71;
+  font-size: 1.3rem;
+  font-family: Lalezar Regular;
+  border: 2px solid black;
+  width: 20%;
+  border-radius: 5px;
+  padding: 0.3rem;
+}
+
+.invite-btn:hover {
+  background-color: #27ae60;
+}
+
+.any-online-player {
+  font-family: Lalezar Regular;
+  font-size: 1.5rem;
+  margin: auto;
+  text-align: center;
+  margin: 2rem;
+  color: #e74c3c;
+}

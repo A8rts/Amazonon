@@ -175,4 +175,8 @@ export class UsersService {
           .where('username = :username', { username: username })
           .execute();
   }
+
+  onlinePlayers() {
+    return this.usersRepository.findBy({ online: true });
+  }
 }

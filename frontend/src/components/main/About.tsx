@@ -23,7 +23,7 @@ function About() {
 
   return (
     <main>
-      <Header authenticated={true} admin={admin} />
+      <Header authenticated={true} admin={admin} username={name}/>
       <div className="about">
         <p className="about-txt mt-4">خب بریم ببینیم این بازی چجوریه؟؟</p>
         <div className="about-icon-box">

@@ -147,7 +147,7 @@ function BestPlayers() {
         />
       ) : (
         <div>
-          <Header authenticated={true} admin={admin} />
+          <Header authenticated={true} admin={admin} username={userData.username}/>
 
           <div className="best-players-div mb-5">
             <strong className="best-players-game mt-4">

@@ -89,7 +89,7 @@ function Home() {
 
   return (
     <main className="home">
-      <Header authenticated={true} admin={admin} />
+      <Header authenticated={true} admin={admin} username={name}/>
       {create ? (
         <Create name={name} />
       ) : games ? (

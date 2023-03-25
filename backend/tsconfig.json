@@ -24,6 +24,8 @@
       "@auth/*" : ["src/authentication/auth/*"],
       "@guards/*" : ["src/authentication/guards/*"],
       "@play_again/*" : ["src/play_again_times/*"],
+      "@winners/*" : ["src/winners/*"],
+      "@invite/*" : ["src/invite_online_players/*"],
     }
   },
   "include": ["src"],

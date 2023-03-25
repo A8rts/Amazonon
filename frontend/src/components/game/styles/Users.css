@@ -61,6 +61,7 @@
   font-size: 1.3rem;
   border-radius: 5px;
   padding: 0.8rem;
+  border: 2px solid black;
 }
 
 .user-data {
@@ -114,6 +115,23 @@
   font-size: 1.3rem;
   text-align: center;
   margin: 0.5rem;
+}
+
+.invite-online-players-button {
+  font-family: Lalezar Regular;
+  width: 100%;
+  background-color: #1abc9c;
+  font-size: 1.7rem;
+  text-align: center;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom: 2px dashed black;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.invite-online-players-button:hover {
+  background-color: #16a085;
 }
 
 @media screen and (max-width: 1824px) {
@@ -287,6 +305,11 @@
 
   .users-box {
     width: 90%;
+  }
+
+  .invite-online-players-button {
+    font-size: 1.5rem;
+    padding: 0.4rem;
   }
 }
 

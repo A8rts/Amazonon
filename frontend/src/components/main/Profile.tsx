@@ -89,7 +89,7 @@ function Profile({
 
   return (
     <main className="mb-4">
-      <Header authenticated={true} admin={admin} />
+      <Header authenticated={true} admin={admin} username={userInfo.username} />
 
       <div>
         {userInfo.gender == "آقا" ? (

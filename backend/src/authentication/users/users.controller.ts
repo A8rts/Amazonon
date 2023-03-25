@@ -38,4 +38,9 @@ export class UsersController {
       req.body.gameKey,
     );
   }
+
+  @Get('onlinePlayers') // return all online players
+  onlinePlayers() {
+    return this.usersService.onlinePlayers();
+  }
 }
