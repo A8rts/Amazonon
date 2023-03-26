@@ -34,4 +34,7 @@ export class User {
 
   @Column()
   in_game: boolean;
+
+  @Column()
+  invite_me: boolean;
 }

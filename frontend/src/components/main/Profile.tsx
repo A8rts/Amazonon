@@ -24,6 +24,7 @@ function Profile({
     score: "",
     level: 0,
     online: true,
+    invite_me: true,
   });
   const [admin, setAdmin] = useState(false);
   const [emptyScore, setEmptyScore] = useState(false);
@@ -87,6 +88,22 @@ function Profile({
     ],
   };
 
+  function changeCanPlayersInviteMeToTheirGames() {
+    userInfo.invite_me
+      ? axios
+          .post("http://localhost:3001/users/setInviteMe", {
+            set_to: false,
+            username: userInfo.username,
+          })
+          .then(() => (window.location.href = "/profile"))
+      : axios
+          .post("http://localhost:3001/users/setInviteMe", {
+            set_to: true,
+            username: userInfo.username,
+          })
+          .then(() => (window.location.href = "/profile"));
+  }
+
   return (
     <main className="mb-4">
       <Header authenticated={true} admin={admin} username={userInfo.username} />
@@ -118,6 +135,22 @@ function Profile({
             <p className="profile-data">شمارتون : {userInfo.phonenumber}</p>
             <p className="profile-data">جنسیت : {userInfo.gender}</p>
           </div>
+
+          {userInfo.invite_me ? (
+            <button
+              className="can-invite-me-to-games mb-4"
+              onClick={() => changeCanPlayersInviteMeToTheirGames()}
+            >
+              بازیکنان می توانند من را به بازی خود دعوت کنند: بله
+            </button>
+          ) : (
+            <button
+              className="can-invite-me-to-games can-not mb-4"
+              onClick={() => changeCanPlayersInviteMeToTheirGames()}
+            >
+              بازیکنان می توانند من را به بازی خود دعوت کنند: خیر
+            </button>
+          )}
 
           <hr className="profile-hr" />
           {userInfo.level > 25 ? (

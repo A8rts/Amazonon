@@ -181,9 +181,36 @@
   border-radius: 20px;
 }
 
+.can-invite-me-to-games {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  font-family: Lalezar Regular;
+  background-color: #2ecc71;
+  border-radius: 50px;
+  border: 3px dashed black;
+  width: 50%;
+  justify-content: center;
+  padding: 1rem;
+  font-size: 1.3rem;
+}
+
+.can-not {
+  background-color: #e74c3c;
+}
+
+.can-invite-me-to-games:hover {
+  border: 3px solid black;
+}
+
 @media screen and (max-width: 1669px) {
   .profile-box {
     width: 50%;
+  }
+
+  .can-invite-me-to-games {
+    width: 60%;
   }
 }
 
@@ -226,6 +253,12 @@
 }
 
 @media screen and (max-width: 800px) {
+  .can-invite-me-to-games {
+    width: 70%;
+    font-size: 1.2rem;
+    padding: 0.8rem;
+  }
+
   .profile-box {
     width: 90%;
   }
@@ -260,6 +293,12 @@
 }
 
 @media screen and (max-width: 615px) {
+  .can-invite-me-to-games {
+    width: 80%;
+    font-size: 1.1rem;
+    padding: 0.7rem;
+  }
+
   .profile-icon {
     width: 13rem;
     height: 13rem;
@@ -298,6 +337,12 @@
 }
 
 @media screen and (max-width: 511px) {
+  .can-invite-me-to-games {
+    width: 94%;
+    font-size: 1.1rem;
+    padding: 0.6rem 0.6rem;
+  }
+
   .your-friends {
     width: 45%;
     font-size: 1.3rem;

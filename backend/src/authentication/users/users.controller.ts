@@ -43,4 +43,9 @@ export class UsersController {
   onlinePlayers() {
     return this.usersService.onlinePlayers();
   }
+
+  @Post('setInviteMe') // return all online players
+  setInviteMe(@Req() req) {
+    return this.usersService.setInviteMe(req.body.set_to , req.body.username);
+  }
 }
