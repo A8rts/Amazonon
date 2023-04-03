@@ -6,7 +6,7 @@ import { GameController } from '@/game/game.controller';
 import { GameGateway } from '@/game/game.gateway';
 import { QuestionsModule } from '@/questions/questions.module';
 import { GameTimes } from '@/game_times/game_times.entity';
-import { UsersModule } from '@/authentication/users/users.module';
+import { UsersModule } from '@users/users.module';
 
 @Module({
   imports: [QuestionsModule, TypeOrmModule.forFeature([Game, GameTimes]) , UsersModule],

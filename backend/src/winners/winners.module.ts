@@ -1,4 +1,4 @@
-import { User } from '@/authentication/users/users.entity';
+import { User } from '@users/users.entity';
 import { Game } from '@/game/game.entity';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';

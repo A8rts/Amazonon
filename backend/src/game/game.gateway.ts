@@ -9,7 +9,7 @@ import {
 import { Socket } from 'socket.io';
 import { QuestionsService } from '@/questions/questions.service';
 import { GameService } from '@/game/game.service';
-import { UsersService } from '@/authentication/users/users.service';
+import { UsersService } from '@users/users.service';
 
 @WebSocketGateway(8001, { cors: '*' })
 export class GameGateway
