@@ -8,6 +8,7 @@ import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 import VerifyCode from "@auth/VerifyCode";
 const MySwal = withReactContent(Swal);
+import Cookies from "js-cookie";
 
 function Login() {
   const [register, setRegister] = useState(false);
@@ -38,8 +39,69 @@ function Login() {
             </p>
           ),
         }).then(() => (window.location.href = "/home"));
+      })
+      .catch(() => {
+        const ls_account = Cookies.get("ls_account");
+        const is_authenticated = Cookies.get("is_authenticated");
+
+        is_authenticated && ls_account
+          ? receiveUser(ls_account, Number(is_authenticated))
+          : null;
       });
   });
+
+  function receiveUser(hashedUsername: string, userId: number) {
+    // get user data with user id(now we compare hashedUsername with this post request response)
+    axios
+      .post("http://localhost:3001/users/getUserDataWithId", { id: userId })
+      .then((res) => {
+        let username = res.data.username;
+        let phonenumber = res.data.phonenumber; // we get user data
+
+        res.data
+          ? axios
+              .post("http://localhost:3001/checkHashedData", {
+                hash: hashedUsername,
+                username: res.data.username,
+              })
+              .then((res) => {
+                // we check if the hasehd username is equal to response username log in again the user :D
+                res.data[0]
+                  ? axios
+                      .post(
+                        "http://localhost:3001/login",
+                        {
+                          username: username,
+                          phonenumber: phonenumber,
+                        },
+                        { withCredentials: true }
+                      )
+                      .then(() => {
+                        MySwal.fire({
+                          title: (
+                            <strong style={{ fontFamily: "Vazirmatn" }}>
+                              ما شما رو میشناسیم!
+                            </strong>
+                          ),
+                          html: (
+                            <p style={{ fontFamily: "Vazirmatn" }}>
+                              بروید به خانه {username} عزیز
+                            </p>
+                          ),
+                          icon: "success",
+                          confirmButtonText: "برو بریم",
+                        }).then(() => {
+                          window.location.href = "/home";
+                        });
+                      })
+                  : alert("کوکی های شما به هم نمیخواند!");
+              })
+          : null;
+      })
+      .catch(() => {
+        alert("مشکل در بازیابی کاربر!");
+      });
+  }
 
   function loginUser(e: any) {
     e.preventDefault();
@@ -99,7 +161,7 @@ function Login() {
 
   return (
     <main>
-      <Header authenticated={false} admin={false} />
+      <Header authenticated={false} admin={false} username="null" />
       {register ? (
         <Register />
       ) : (

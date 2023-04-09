@@ -94,6 +94,10 @@ export class UsersService {
     return this.usersRepository.findOneBy({ username: username });
   }
 
+  getUserDataWithId(id: number) {
+    return this.usersRepository.findOneBy({ id: id });
+  }
+
   async updateCorrectAnswersForCategories(
     subject: string,
     list: any,

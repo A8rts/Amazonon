@@ -30,6 +30,11 @@ export class UsersController {
     return this.usersService.getUserData(req.body.username);
   }
 
+  @Post('getUserDataWithId')
+  getUserDataWithId(@Req() req) {
+    return this.usersService.getUserDataWithId(req.body.id);
+  }
+
   @Post('updateCorrectAnswersForCategories')
   updateCorrectAnswersForCategories(@Req() req) {
     return this.usersService.updateCorrectAnswersForCategories(
@@ -46,6 +51,6 @@ export class UsersController {
 
   @Post('setInviteMe') // return all online players
   setInviteMe(@Req() req) {
-    return this.usersService.setInviteMe(req.body.set_to , req.body.username);
+    return this.usersService.setInviteMe(req.body.set_to, req.body.username);
   }
 }

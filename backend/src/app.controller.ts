@@ -68,4 +68,13 @@ export class AppController {
       res.redirect('/');
     });
   }
+
+  @Post('checkHashedData')
+  checkHashedData(@Req() req) {
+    const result = [];
+    result.push(bcrypt.compareSync(req.body.username, req.body.hash));
+    result.push(req.body.username);
+
+    return result;
+  }
 }
