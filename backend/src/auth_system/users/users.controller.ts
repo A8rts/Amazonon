@@ -27,7 +27,7 @@ export class UsersController {
 
   @Post('getNumberOfWins')
   getNumberOfWins(@Req() req) {
-    return this.usersService.getNumberOfWins(req.body.username);
+    return this.usersService.getUserData(req.body.username);
   }
 
   @Post('updateCorrectAnswersForCategories')

@@ -90,7 +90,7 @@ export class UsersService {
     return user;
   }
 
-  getNumberOfWins(username: string) {
+  getUserData(username: string) {
     return this.usersRepository.findOneBy({ username: username });
   }
 
