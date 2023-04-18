@@ -5,7 +5,7 @@
 }
 
 .notfound-txt {
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   display: flex;
   margin: auto;
   justify-content: center;
@@ -18,13 +18,13 @@
   display: flex;
   margin: auto;
   justify-content: center;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   color: #e74c3c;
   font-size: 5rem;
 }
 
 .home-link-go {
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   display: flex;
   margin: auto;
   justify-content: center;

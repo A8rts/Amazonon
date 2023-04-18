@@ -1,5 +1,5 @@
 .about-txt {
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,7 +44,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   font-size: 1.5rem;
 }
 
@@ -125,7 +125,7 @@
 
 @media screen and (max-width: 793px) {
   .about-txt {
-    font-family: Lalezar Regular;
+    font-family: 'Lalezar', cursive;
     display: flex;
     align-items: center;
     justify-content: center;

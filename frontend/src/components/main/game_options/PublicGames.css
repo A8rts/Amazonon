@@ -17,7 +17,7 @@
 }
 
 .public-games-txt {
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   font-size: 2.6rem;
   display: flex;
   align-items: center;
@@ -78,7 +78,7 @@
   align-items: center;
   justify-content: center;
   display: flex;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
 }
 
 .go-public-game-btn {
@@ -102,7 +102,7 @@
 .back-to-home {
   margin: auto;
   display: flex;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   background-color: #2980b9;
   color: white;
   border-radius: 15px;
@@ -116,7 +116,7 @@
 }
 
 .empty-public-games {
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   font-size: 1.3rem;
   margin: auto;
   align-items: center;

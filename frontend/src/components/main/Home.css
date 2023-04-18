@@ -41,12 +41,12 @@
 }
 
 .room-box-txt {
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   font-size: 2.7rem;
 }
 
 .find-game-button {
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   background-color: #ffcf00;
   border-radius: 10px;
   border: 2px solid black;
@@ -128,7 +128,7 @@
   }
 
   .find-game-button {
-    font-family: Lalezar Regular;
+    font-family: 'Lalezar', cursive;
     background-color: #ffcf00;
     border-radius: 10px;
     border: 2px solid black;
@@ -155,7 +155,7 @@
   }
 
   .find-game-button {
-    font-family: Lalezar Regular;
+    font-family: 'Lalezar', cursive;
     background-color: #ffcf00;
     border-radius: 10px;
     border: 2px solid black;

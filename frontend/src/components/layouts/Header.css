@@ -13,7 +13,7 @@
 
 .not-authenticated-header p {
   font-size: 1.9rem;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   padding: 0rem;
   margin: 0rem;
 }
@@ -39,7 +39,7 @@
 .header-lables {
   margin-right: 2rem;
   display: inline-block;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
 }
 
 .header-lable {

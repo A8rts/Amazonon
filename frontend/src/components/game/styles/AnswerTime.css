@@ -20,7 +20,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   font-size: 2.5rem;
 }
 
@@ -50,7 +50,7 @@
 }
 
 .guidance-txt {
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   text-align: center;
   font-size: 2rem;
 }
@@ -89,7 +89,7 @@
 .answer-timer {
   margin: auto;
   text-align: center;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   font-size: 1.7rem;
 }
 

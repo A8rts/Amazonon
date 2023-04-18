@@ -19,7 +19,7 @@
   text-align: center;
   align-items: center;
   justify-content: center;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
 }
 
 @media screen and (max-width: 600px) {

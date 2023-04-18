@@ -1,6 +1,6 @@
 .winner-header {
   width: 100%;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   background-color: #239954;
   padding: 2rem;
   font-size: 2.7rem;
@@ -10,7 +10,7 @@
 
 .loser-header {
   width: 100%;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   background-color: #e74c3c;
   padding: 2rem;
   font-size: 2.5rem;
@@ -46,7 +46,7 @@
   background-color: #fed330;
   margin: 2rem;
   width: 100%;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   font-size: 1.8rem;
   padding: 1rem;
   border: 4px dashed black;
@@ -54,14 +54,14 @@
 }
 
 .winners-txt {
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   margin: auto;
   text-align: center;
   font-size: 2.2rem;
 }
 
 .end-txt {
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   margin: auto;
   text-align: center;
   font-size: 1.5rem;
@@ -90,7 +90,7 @@
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   text-align: center;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   color: white;
   font-size: 2rem;
   padding: 1rem;
@@ -106,7 +106,7 @@
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   border: none;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   background-color: #e74c3c;
   color: white;
   font-size: 2rem;

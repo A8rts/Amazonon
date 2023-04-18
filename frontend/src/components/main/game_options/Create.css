@@ -20,7 +20,7 @@
 }
 
 .create-box-txt {
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   font-size: 2.6rem;
   display: flex;
   align-items: center;
@@ -54,7 +54,7 @@
   list-style: none;
   display: flex;
   text-align: center;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
 }
 
 .q-buttons {
@@ -100,7 +100,7 @@
   list-style: none;
   display: flex;
   text-align: center;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
 }
 
 .q-buttons {
@@ -136,7 +136,7 @@
   list-style: none;
   display: flex;
   text-align: center;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
 }
 
 .q-buttons {
@@ -178,7 +178,7 @@
   list-style: none;
   display: flex;
   text-align: center;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
 }
 
 .inp-max-score {
@@ -192,7 +192,7 @@
 }
 
 .create-game-btn {
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   padding: 0.8rem 2rem 0.8rem 2rem;
   border-radius: 5px;
   font-size: 1.3rem;
@@ -214,7 +214,7 @@
 .about-radio-group {
   display: flex;
   justify-content: center;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   font-size: 1.1rem;
 }
 

@@ -55,7 +55,7 @@
 }
 
 .invite-to-online-players {
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   margin: auto;
   text-align: center;
   font-size: 2.2rem;
@@ -89,7 +89,7 @@
 }
 
 .online-player-username {
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   font-size: 1.5rem;
   display: inline-block;
   margin: 0.5rem;
@@ -100,7 +100,7 @@
   margin: 1.1rem;
   background-color: #2ecc71;
   font-size: 1.3rem;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   border: 2px solid black;
   width: 20%;
   border-radius: 5px;
@@ -112,7 +112,7 @@
 }
 
 .any-online-player {
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   font-size: 1.5rem;
   margin: auto;
   text-align: center;

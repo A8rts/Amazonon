@@ -18,7 +18,7 @@
 }
 
 .users-txt {
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   font-size: 2.6rem;
   display: flex;
   align-items: center;
@@ -27,7 +27,7 @@
 }
 
 .count-users {
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   font-size: 1.3rem;
   display: flex;
   align-items: center;
@@ -57,7 +57,7 @@
   background-color: #3498db;
   color: white;
   width: 30%;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   font-size: 1.3rem;
   border-radius: 5px;
   padding: 0.8rem;
@@ -92,7 +92,7 @@
 }
 
 .user-name {
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   font-size: 1.5rem;
   float: left;
   margin-top: 1.3rem;
@@ -111,14 +111,14 @@
 
 .max-coin-txt {
   color: black;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   font-size: 1.3rem;
   text-align: center;
   margin: 0.5rem;
 }
 
 .invite-online-players-button {
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   width: 100%;
   background-color: #1abc9c;
   font-size: 1.7rem;

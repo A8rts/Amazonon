@@ -1,5 +1,5 @@
 .best-players-game {
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   font-size: 2.7rem;
   display: flex;
   align-items: center;
@@ -48,7 +48,7 @@
 
 .about-me {
   width: 100%;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   border: none;
   background-color: #8e44ad;
   color: white;
@@ -87,7 +87,7 @@
 }
 
 .name-best-player {
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   font-size: 1.7rem;
   text-align: center;
   margin: auto;
@@ -109,14 +109,14 @@
   border-radius: 50px;
   align-items: center;
   justify-content: center;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   font-size: 1.3rem;
 }
 
 .count-of-best-players {
   float: right;
   font-size: 3.5rem;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   margin-right: 2rem;
 }
 

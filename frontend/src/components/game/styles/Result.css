@@ -3,14 +3,14 @@
   justify-content: center;
   text-align: center;
   font-size: 2.3rem;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
 }
 
 .result-table {
   margin: auto;
   text-align: center;
   width: 90%;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   background-color: #feac01;
   border-collapse: collapse;
   border-radius: 10px;
@@ -44,7 +44,7 @@
   width: 100%;
   background-color: #298bcc;
   color: white;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   text-align: center;
   font-size: 2.2rem;
   padding: 1.7rem;
@@ -54,7 +54,7 @@
   display: flex;
   justify-content: center;
   font-size: 2rem;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   background-color: #009432;
   width: 25%;
   margin: auto;
@@ -67,7 +67,7 @@
   justify-content: center;
   color: white;
   font-size: 1.8rem;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   background-color: #232523;
   width: 15%;
   margin: auto;
@@ -79,7 +79,7 @@
   display: flex;
   margin: auto;
   justify-content: center;
-  font-family: Lalezar Regular;
+  font-family: 'Lalezar', cursive;
   font-size: 1.5rem;
   background-color: #8e44ad;
   color: white;
