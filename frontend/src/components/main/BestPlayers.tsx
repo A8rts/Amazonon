@@ -30,7 +30,7 @@ function BestPlayers() {
     axios
       .get("http://localhost:3001/authorization", { withCredentials: true })
       .then((res) => {
-        if (res.data.type == "admin") {
+        if (res.data.role == "admin") {
           setAdmin(true);
         }
       })

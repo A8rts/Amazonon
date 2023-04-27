@@ -15,7 +15,7 @@ export class User {
   gender: string;
 
   @Column()
-  type: string;
+  role: string;
 
   @Column()
   number_of_wins: number; // this feild should every time / 3 when you want to know really number of wins players because...

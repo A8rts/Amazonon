@@ -27,9 +27,9 @@ export class UsersService {
     //length 1 is for cinema , length 2 is for food , 3 is for religious , 4 is for history, 5 is for nature and 6 is for sport :)
     user.correct_answers_for_categories = [0, 0, 0, 0, 0, 0];
     if (userData.username == 'آرتا' || userData.username == 'حمید') {
-      user.type = 'admin';
+      user.role = 'admin';
     } else {
-      user.type = 'player';
+      user.role = 'player';
     }
 
     this.usersRepository.save(user);

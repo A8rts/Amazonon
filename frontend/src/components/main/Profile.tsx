@@ -35,7 +35,7 @@ function Profile({
       .get("http://localhost:3001/authorization", { withCredentials: true })
       .then((res) => {
         const name = res.data.username;
-        res.data.type == "admin" ? setAdmin(true) : null;
+        res.data.role == "admin" ? setAdmin(true) : null;
 
         getCorrectAnswersData(); // this func is in the Game.tsx
         axios
