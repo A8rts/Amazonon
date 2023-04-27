@@ -148,7 +148,7 @@ function Login() {
       })
       .then((res) => {
         if (res.data[0] !== "notOk") {
-          setUserData(res.data); // userData on useState is just for VerifyCode Component!
+          setUserData(res.data[1]); // userData on useState is just for VerifyCode Component!
           setCodeSended(true);
         } else {
           setError(`بعد از ${30 - res.data[1]} ثانیه دگر درخواست کد دهید!`);

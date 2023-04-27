@@ -45,7 +45,7 @@ function Register() {
             })
             .then((res) => {
               if (res.data[0] !== "notOk") {
-                setUserData(res.data); // userData on useState is just for VerifyCode Component!
+                setUserData(res.data[1]); // userData on useState is just for VerifyCode Component!
                 setCodeSended(true);
               } else {
                 setError(

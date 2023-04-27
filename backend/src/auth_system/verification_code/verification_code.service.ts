@@ -38,7 +38,6 @@ export class VerificationCodeService {
     const prevVerificationCodes = await this.verificationCodeRepository.findBy({
       username: username,
     });
-    console.log(prevVerificationCodes);
 
     const lastLength = prevVerificationCodes.length - 1;
     if (prevVerificationCodes.length > 0) {
@@ -47,7 +46,6 @@ export class VerificationCodeService {
 
       const diffTime = nowTime.getTime() - lastTime.getTime();
       const totalSeconds = parseInt(String(Math.floor(diffTime / 1000)));
-      console.log(totalSeconds);
 
       if (totalSeconds < 30) {
         return totalSeconds;
