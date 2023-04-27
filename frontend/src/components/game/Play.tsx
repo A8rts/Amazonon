@@ -7,6 +7,8 @@ import GamePage from "@game/GamePage";
 const MySwal = withReactContent(Swal);
 
 function Play() {
+  // ==> this component is the main component in the game <==
+
   const { key } = useParams(); // this is game key
   const [userData, setUserData] = useState([]);
   const [gameData, setGameData] = useState([]);

@@ -58,7 +58,7 @@ function Admin() {
     <>
       {admin ? (
         <main>
-          <Header authenticated={true} admin={admin} />
+          <Header authenticated={true} admin={admin} username={name} />
           <div>
             <p className="hello-admin mt-4">سلام مدیر :)</p>
             <form onSubmit={(e) => sendQuestion(e)}>

@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "@auth/Login";
+import Login from "@comp/auth/Login";
 import "@/assets/fonts/Lalezar-Regular.woff";
 import Home from "@main/Home";
 import NotFound from "@comp/NotFound";

@@ -1,7 +1,7 @@
 import "@main/game_options/Create.css"; // this component style set in Create.css file
 
 function SetMaxScore({ updateMaximumCoin }: { updateMaximumCoin: any }) {
-  // to find out when to finish the game
+  // to know when we should stop the game and announced winners
 
   function setMaxCoin(e: any) {
     if (e.target.value) {

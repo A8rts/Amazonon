@@ -20,7 +20,7 @@
 }
 
 .login-txt {
-  font-family: 'Lalezar', cursive;
+  font-family: "Lalezar", cursive;
   font-size: 3.1rem;
   display: block;
 }
@@ -87,6 +87,11 @@
   border: #016b25 dashed 3px;
 }
 
+.time-error {
+  color: red;
+  font-family: "Vazirmatn";
+}
+
 @media screen and (max-width: 1669px) {
   .login-from {
     width: 38%;
@@ -143,6 +148,10 @@
 }
 
 @media screen and (max-width: 544px) {
+  .time-error {
+    font-size: 0.9rem;
+  }
+
   .login-from {
     width: 90%;
   }

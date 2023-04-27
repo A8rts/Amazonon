@@ -18,7 +18,7 @@ function PublicGames() {
         }
       }
 
-      setGames(publigGames);
+      setGames(publigGames.reverse());
     });
   }, []);
 
@@ -126,7 +126,9 @@ function PublicGames() {
                 </div>
               ))
             ) : (
-              <p className="empty-public-games mt-3 mb-3">فعلا بازی عمومی فعال نداریم!</p>
+              <p className="empty-public-games mt-3 mb-3">
+                فعلا بازی عمومی فعال نداریم!
+              </p>
             )}
           </div>
           <button

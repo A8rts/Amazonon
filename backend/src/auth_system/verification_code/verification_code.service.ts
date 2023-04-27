@@ -10,20 +10,52 @@ export class VerificationCodeService {
     private verificationCodeRepository: Repository<VerificationCode>,
   ) {}
 
-  create(userData: any) {
-    const verification_code = new VerificationCode();
-
-    verification_code.code = Math.floor(
-      Math.random() * (99999 - 10000 + 1) + 10000,
+  async create(userData: any) {
+    let canContinue = await this.checkPrevVerificationCodeTime(
+      userData.username,
     );
-    verification_code.username = userData.username;
-    verification_code.phonenumber = userData.phonenumber;
-    verification_code.gender = userData.gender;
-    verification_code.date = new Date();
+    if (canContinue == true) {
+      const verification_code = new VerificationCode();
 
-    this.verificationCodeRepository.save(verification_code);
+      verification_code.code = Math.floor(
+        Math.random() * (99999 - 10000 + 1) + 10000,
+      );
+      verification_code.username = userData.username;
+      verification_code.phonenumber = userData.phonenumber;
+      verification_code.gender = userData.gender;
+      verification_code.date = new Date();
 
-    return verification_code;
+      this.verificationCodeRepository.save(verification_code);
+
+      return ['ok', verification_code];
+    } else {
+      return ['notOk', canContinue];
+    }
+  }
+
+  async checkPrevVerificationCodeTime(username: string) {
+    // to avoid requesting verification code after verification code
+    const prevVerificationCodes = await this.verificationCodeRepository.findBy({
+      username: username,
+    });
+    console.log(prevVerificationCodes);
+
+    const lastLength = prevVerificationCodes.length - 1;
+    if (prevVerificationCodes.length > 0) {
+      const lastTime = prevVerificationCodes[lastLength].date;
+      const nowTime = new Date();
+
+      const diffTime = nowTime.getTime() - lastTime.getTime();
+      const totalSeconds = parseInt(String(Math.floor(diffTime / 1000)));
+      console.log(totalSeconds);
+
+      if (totalSeconds < 30) {
+        return totalSeconds;
+      }
+      return true;
+    } else {
+      return true;
+    }
   }
 
   async deleteVerifyCode(code: number) {

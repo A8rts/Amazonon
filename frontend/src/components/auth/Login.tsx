@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import Header from "@comp/layouts/Header";
 import "@auth/Login.css";
-import Register from "@auth/Register";
+import Register from "@comp/auth/Register";
 import "animate.css";
 import axios from "axios";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
-import VerifyCode from "@auth/VerifyCode";
+import VerifyCode from "@comp/auth/VerifyCode";
 const MySwal = withReactContent(Swal);
 import Cookies from "js-cookie";
 
@@ -14,6 +14,7 @@ function Login() {
   const [register, setRegister] = useState(false);
   const [codeSended, setCodeSended] = useState(false);
   const [userData, setUserData] = useState<any>([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     axios
@@ -94,12 +95,16 @@ function Login() {
                           window.location.href = "/home";
                         });
                       })
-                  : alert("کوکی های شما به هم نمیخواند!");
+                  : alert(
+                      "کوکی های شما به هم نمیخواند! لطفا دوباره خودتان وارد شوید!"
+                    );
               })
-          : null;
+          : alert("کوکی های شما به هم نمیخواند! لطفا دوباره خودتان وارد شوید!");
       })
       .catch(() => {
-        alert("مشکل در بازیابی کاربر!");
+        alert(
+          "مشکل در بازیابی کاربر! اگر این مشکل بعد از چند بار تلاش درست نشد دوباره خودتان وارد شوید"
+        );
       });
   }
 
@@ -142,7 +147,12 @@ function Login() {
         userData: userDataForCreateVerifyCode,
       })
       .then((res) => {
-        setUserData(res.data); // userData on useState is just for VerifyCode Component!
+        if (res.data[0] !== "notOk") {
+          setUserData(res.data); // userData on useState is just for VerifyCode Component!
+          setCodeSended(true);
+        } else {
+          setError(`بعد از ${30 - res.data[1]} ثانیه دگر درخواست کد دهید!`);
+        }
       })
       .catch(() => {
         MySwal.fire({
@@ -156,7 +166,6 @@ function Login() {
           confirmButtonText: "باشه",
         });
       });
-    setCodeSended(true);
   }
 
   return (
@@ -186,6 +195,7 @@ function Login() {
                       name="phonenumber"
                     />
                   </div>
+                  <p className="time-error">{error}</p>
                   <button className="login-btn" type="submit">
                     <strong>ورود</strong>
                   </button>

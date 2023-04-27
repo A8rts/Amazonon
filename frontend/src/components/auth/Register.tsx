@@ -1,7 +1,7 @@
 import "@auth/Register.css";
 import "animate.css";
 import { useState } from "react";
-import VerifyCode from "@auth/VerifyCode";
+import VerifyCode from "@comp/auth/VerifyCode";
 import withReactContent from "sweetalert2-react-content";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -44,7 +44,14 @@ function Register() {
               userData: userData,
             })
             .then((res) => {
-              setUserData(res.data);
+              if (res.data[0] !== "notOk") {
+                setUserData(res.data); // userData on useState is just for VerifyCode Component!
+                setCodeSended(true);
+              } else {
+                setError(
+                  `بعد از ${30 - res.data[1]} ثانیه دگر درخواست کد دهید!`
+                );
+              }
             })
             .catch(() => {
               MySwal.fire({
@@ -58,7 +65,6 @@ function Register() {
                 confirmButtonText: "باشه",
               });
             });
-          setCodeSended(true);
         }
       })
       .catch((err) => {
