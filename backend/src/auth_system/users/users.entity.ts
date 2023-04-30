@@ -15,6 +15,9 @@ export class User {
   gender: string;
 
   @Column()
+  bio: string;
+
+  @Column()
   role: string;
 
   @Column()
@@ -36,5 +39,5 @@ export class User {
   in_game: boolean;
 
   @Column()
-  invite_me: boolean;
+  invite_me: boolean; // if it's value is true mean others can be invite user into their game!
 }

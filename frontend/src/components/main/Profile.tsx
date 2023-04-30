@@ -4,7 +4,9 @@ import Header from "@comp/layouts/Header";
 import "@main/Profile.css";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
+const MySwal = withReactContent(Swal);
 //register the chartjs to the component
 ChartJS.register(ArcElement, Tooltip, Legend);
 ChartJS.defaults.font.family = "Vazirmatn";
@@ -25,6 +27,7 @@ function Profile({
     level: 0,
     online: true,
     invite_me: true,
+    bio: "",
   });
   const [admin, setAdmin] = useState(false);
   const [emptyScore, setEmptyScore] = useState(false);
@@ -104,6 +107,55 @@ function Profile({
           .then(() => (window.location.href = "/profile"));
   }
 
+  function editBio() {
+    // to edit user bio
+    MySwal.fire({
+      title: (
+        <strong style={{ fontFamily: "Vazirmatn" }}>تغییر بیوگرافی</strong>
+      ),
+      html: (
+        <p
+          style={{
+            fontFamily: "Vazirmatn",
+            fontSize: "1rem",
+          }}
+        >
+          لطفا بیوگرافی جدید خود را وارد کنید
+        </p>
+      ),
+      input: "text",
+      confirmButtonText: "باشه",
+    }).then((value) => {
+      value.value
+        ? value.value.length < 48
+          ? axios
+              .post("http://localhost:3001/users/editBio", {
+                username: userInfo.username,
+                bio: value.value,
+              })
+              .then(() => {
+                window.location.href = window.location.href;
+              })
+          : MySwal.fire({
+              title: <strong style={{ fontFamily: "Vazirmatn" }}>خطا</strong>,
+              html: (
+                <p
+                  style={{
+                    fontFamily: "Vazirmatn",
+                    fontSize: "1rem",
+                    fontWeight: "bold",
+                  }}
+                >
+                  بیوگرافی نمیتواند بیشتر از 48 کاراکتر باشد!
+                </p>
+              ),
+              icon: "error",
+              confirmButtonText: "باشه",
+            })
+        : null;
+    });
+  }
+
   return (
     <main className="mb-4">
       <Header authenticated={true} admin={admin} username={userInfo.username} />
@@ -127,6 +179,13 @@ function Profile({
 
         <p className="online mt-2">آنلاین</p>
 
+        <div className="bio">
+          <p className="ss">{userInfo.bio}</p>
+        </div>
+
+        <button className="edit-bio mt-2" onClick={() => editBio()}>
+          تغییر بیوگرافی
+        </button>
         <div className="profile-box mt-3">
           <p className="your-profile-txt mb-3">پروفایل شما</p>
 

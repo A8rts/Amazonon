@@ -3,9 +3,6 @@ import { useEffect, useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import "@game/styles/PublicProfile.css";
-import withReactContent from "sweetalert2-react-content";
-import Swal from "sweetalert2";
-const MySwal = withReactContent(Swal);
 
 function PublicProfile({
   username,
@@ -24,6 +21,7 @@ function PublicProfile({
     score: 0,
     correct_answers_for_categories: "",
     online: false,
+    bio: "",
   });
   const [emptyScore, setEmptyScore] = useState(false);
 
@@ -115,6 +113,7 @@ function PublicProfile({
         ) : (
           <p className="offline">آفلاین</p>
         )}
+        <p className="bio">{userProfileData.bio}</p>
 
         <div className="profile-box mt-3">
           <p className="your-profile-txt mb-3">

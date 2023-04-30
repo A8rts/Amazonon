@@ -23,6 +23,7 @@ export class UsersService {
     user.online = true;
     user.in_game = false;
     user.invite_me = true;
+    user.bio = `سلام من ${userData.username} هستم :)`;
 
     //length 1 is for cinema , length 2 is for food , 3 is for religious , 4 is for history, 5 is for nature and 6 is for sport :)
     user.correct_answers_for_categories = [0, 0, 0, 0, 0, 0];
@@ -207,6 +208,17 @@ export class UsersService {
       .update(User)
       .set({
         invite_me: set_to,
+      })
+      .where('username = :username', { username: username })
+      .execute();
+  }
+
+  editBio(username: string, bio: string) {
+    return this.usersRepository
+      .createQueryBuilder()
+      .update(User)
+      .set({
+        bio: bio,
       })
       .where('username = :username', { username: username })
       .execute();

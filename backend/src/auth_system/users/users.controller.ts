@@ -25,6 +25,11 @@ export class UsersController {
     return this.usersService.findUserName(req.body.phonenumber);
   }
 
+  @Post('editBio')
+  editBio(@Req() req) {
+    return this.usersService.editBio(req.body.username , req.body.bio);
+  }
+
   @Post('getNumberOfWins')
   getNumberOfWins(@Req() req) {
     return this.usersService.getUserData(req.body.username);
