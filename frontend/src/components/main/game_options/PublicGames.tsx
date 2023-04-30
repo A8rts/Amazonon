@@ -99,6 +99,9 @@ function PublicGames() {
         </div>
         <div className="public-games-box mb-5">
           <p className="public-games-txt">بازی های عمومی</p>
+          <p className="count-public-games">
+            ما {games.length} تا بازی برای شما پیدا کرده ایم :)
+          </p>
           <div className="join-public-games mb-4">
             {games.length > 0 ? (
               games.map((item) => (
